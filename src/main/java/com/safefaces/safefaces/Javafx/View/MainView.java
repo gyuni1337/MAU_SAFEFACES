@@ -20,7 +20,7 @@ public class MainView extends Application {
         @Override
         public void start(Stage stage) throws IOException {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/safefaces/safefaces/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/safefaces/safefaces/LoginView.fxml"));
             Parent root = loader.load();
             UserViewController controller = loader.getController();
 //            controller.setUser(
@@ -32,9 +32,10 @@ public class MainView extends Application {
            // FXMLLoader fxmlLoader = new FXMLLoader(url);
 
 
-            Scene scene = new Scene(root, 400, 700);
+            Scene scene = new Scene(root, 400, 640);
             stage.setTitle("SafeFaces");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         }
 

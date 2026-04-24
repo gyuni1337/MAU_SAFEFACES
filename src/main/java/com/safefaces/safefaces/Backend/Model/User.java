@@ -8,6 +8,8 @@ public class User {
     public String lastName;
     public int age;
     public RoleType role;
+    public String pinHash;
+    public String imagePath;
 
     public User() {
 

@@ -9,7 +9,7 @@ public class DatabaseConnection {
     private static final String PORT = "55432";
     private static final String DATABASE = "ar5278";
     private static final String USER = "ar5278";
-    private static final String PASSWORD = "";  //OK då det som finns i tabellerna är testdata
+    private static final String PASSWORD = "43h3y67g";  //OK då det som finns i tabellerna är testdata
     private static final String URL = "jdbc:postgresql://" + HOST + ":" + PORT + "/" + DATABASE;
 
     private DatabaseConnection() {

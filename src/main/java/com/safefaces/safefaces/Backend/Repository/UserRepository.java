@@ -15,11 +15,12 @@ public class UserRepository {
     public User getUserByUsername(String username) throws SQLException {
         String sql = "SELECT * FROM users WHERE username = ?";
 
-        try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        Connection conn = DatabaseConnection.getConnection();
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
-            stmt.setString(1, username);
-            ResultSet rs = stmt.executeQuery();
+//            stmt.setString(1, username);
+//            ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 User user = new User();
@@ -27,6 +28,7 @@ public class UserRepository {
                 user.firstName = rs.getString("name");
                 user.age = rs.getInt("age");
                 user.pinHash = rs.getString("pin_hash");
+                user.imagePath = rs.getString("image_path");
                 user.role = RoleType.valueOf(rs.getString("role").toUpperCase());
 
                 return user;
@@ -44,12 +46,12 @@ public class UserRepository {
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 User user = new User();
-                user.id        = rs.getInt("id");
+                user.id = rs.getInt("id");
                 user.firstName = rs.getString("name");
-                user.age       = rs.getInt("age");
-                user.pinHash   = rs.getString("pin_hash");
+                user.age = rs.getInt("age");
+                user.pinHash = rs.getString("pin_hash");
                 user.imagePath = rs.getString("image_path");
-                user.role      = RoleType.valueOf(rs.getString("role").toUpperCase());
+                user.role = RoleType.valueOf(rs.getString("role").toUpperCase());
                 return user;
             }
         }

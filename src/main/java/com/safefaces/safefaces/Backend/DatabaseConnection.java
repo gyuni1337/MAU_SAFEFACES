@@ -13,9 +13,9 @@ public class DatabaseConnection {
     private static final String URL = "jdbc:postgresql://" + HOST
             + ":" + PORT + "/"
             + DATABASE + "?currentSchema=safefaces"
-            + "&socketTimeout=30"
-            + "&connectTimeout=10"
-            + "&options=-c%20idle_in_transaction_session_timeout%3D30000";
+            + "&socketTimeout=30000" // 30 sek
+            + "&connectTimeout=10000"; // 10 sek
+//            + "&options=-c%20idle_in_transaction_session_timeout%3D30000";
 
     private static Connection connection;
 

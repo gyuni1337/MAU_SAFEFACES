@@ -49,7 +49,7 @@ public class AuthenticationController {
         String pin = pinField.getText();
 
         try {
-            User user = new com.safefaces.safefaces.Backend.Repository.UserRepository().getPatientUser();
+            User user =  authService.faceIdLogin();
 
             if (user != null) {
                 String hashedInput = AuthService.hashPin(pin);

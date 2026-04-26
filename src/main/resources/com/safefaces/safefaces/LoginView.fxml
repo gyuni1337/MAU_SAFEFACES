@@ -28,9 +28,14 @@
             </Label>
 
             <!-- Fake FaceID-bild -->
-            <ImageView fitWidth="160" fitHeight="160" preserveRatio="true">
-                <image><Image url="@images/oldmanexample.jpg"/></image>
-            </ImageView>
+            <VBox alignment="CENTER" spacing="8"
+                  style="-fx-background-color: #e0e0e0; -fx-background-radius: 20;"
+                  prefWidth="160" prefHeight="160" maxWidth="160" maxHeight="160">
+
+                <ImageView fitWidth="160" fitHeight="160" preserveRatio="true">
+                    <image><Image url="@images/face_id_simulation.png"/></image>
+                </ImageView>
+            </VBox>
 
             <!-- Status-text: "Scanning face..." eller felmeddelande -->
             <Label fx:id="statusLabel" text="Scanning face..."

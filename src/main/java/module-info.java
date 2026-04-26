@@ -8,6 +8,8 @@ module com.safefaces.safefaces {
     requires java.desktop;
     requires java.sql;
 
+    requires org.postgresql.jdbc;
+
     opens com.safefaces.safefaces to javafx.fxml;
     exports com.safefaces.safefaces.Javafx.Model;
     opens com.safefaces.safefaces.Javafx.Model to javafx.fxml;
@@ -19,4 +21,10 @@ module com.safefaces.safefaces {
     opens com.safefaces.safefaces.Javafx.App to javafx.fxml;
     exports com.safefaces.safefaces.Backend;
     opens com.safefaces.safefaces.Backend to javafx.fxml;
+
+    //kopplat till repositories and databas
+    exports com.safefaces.safefaces.Backend.Repository;
+    opens com.safefaces.safefaces.Backend.Repository to javafx.fxml;
+    exports com.safefaces.safefaces.Backend.Service;
+    opens com.safefaces.safefaces.Backend.Service to javafx.fxml;
 }

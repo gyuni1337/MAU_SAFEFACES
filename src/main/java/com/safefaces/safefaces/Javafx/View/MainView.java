@@ -1,8 +1,6 @@
 package com.safefaces.safefaces.Javafx.View;
 
 import com.safefaces.safefaces.Javafx.Controller.UserViewController;
-import com.safefaces.safefaces.Javafx.Model.Role;
-import com.safefaces.safefaces.Javafx.Model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

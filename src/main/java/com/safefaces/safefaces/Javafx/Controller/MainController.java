@@ -1,8 +1,7 @@
 package com.safefaces.safefaces.Javafx.Controller;
 
 import com.safefaces.safefaces.Javafx.Model.Contact;
-import com.safefaces.safefaces.Javafx.Model.Role;
-import com.safefaces.safefaces.Javafx.Model.User;
+import com.safefaces.safefaces.Javafx.Service.ContactService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,8 +14,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-
 public class MainController {
 
     @FXML
@@ -25,49 +22,54 @@ public class MainController {
     @FXML private Label outputLabel;
     @FXML private ListView<String> contactListView;
 
-
-    private Contact contact= new Contact();
-
-
+    private ContactService contactService;
 
     @FXML
     public void initialize(){
-        contact.addContact("Lisa", "0701", Role.RELATIVE);
-        contact.addContact("Aisha","0702",Role.CAREGIVER);
-        contact.addContact("John","0703",Role.RELATIVE);
-        contact.addContact("Bart","0704",Role.CAREGIVER);
+        contactService = new ContactService();
+
+        contactService.addContact(new Contact("Lisa", "0701", null, null));
+        contactService.addContact(new Contact("Aisha", "0702", null, null));
+        contactService.addContact(new Contact("John", "0703", null, null));
+        contactService.addContact(new Contact("Bart", "0704", null, null));
     }
+
     @FXML
-private void handleAddContact(){
+    private void handleAddContact() {
+
         String name = nameField.getText();
         String phone = phoneField.getText();
 
-        if(name.isEmpty() || phone.isEmpty()){
-            outputLabel.setText(" fill in name and phone number please");
+        if (name.isEmpty() || phone.isEmpty()) {
+            outputLabel.setText("Fill in name and phone number please");
             return;
         }
-        contact.addContact(name,phone, Role.USER);
-        outputLabel.setText( name +" has been registered");
+
+        Contact newContact = new Contact(name, phone, null, null);
+        contactService.addContact(newContact);
+
+        outputLabel.setText(name + " has been registered");
+
         nameField.clear();
         phoneField.clear();
-}
-
-
+    }
 
     @FXML
     protected void handleContacts() {
-        HashMap<String,String> contacts = contact.getAllContactList();
-        ObservableList<String>items = FXCollections.observableArrayList();
-        for(var entry : contacts.entrySet()){
-            String name = entry.getKey();
-            String phone = entry.getValue();
-            Role role =contact.getRole(name);
-            String displayText = name + ":" + phone +"("+role + ")";
+
+        ObservableList<String> items = FXCollections.observableArrayList();
+
+        for (Contact contact : contactService.getAllContacts().values()) {
+
+            String displayText =
+                    contact.getName() + ": " +
+                            contact.getPhoneNumber();
+
             items.add(displayText);
         }
 
-       contactListView.setItems(items);
-        outputLabel.setText("Contact listed");
+        contactListView.setItems(items);
+        outputLabel.setText("Contacts listed");
     }
 
     @FXML

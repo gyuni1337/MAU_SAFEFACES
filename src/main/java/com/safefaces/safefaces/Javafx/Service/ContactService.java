@@ -5,6 +5,7 @@ import com.safefaces.safefaces.Javafx.Model.Contact;
 
 import java.util.HashMap;
 
+//logik, validering,
 public class ContactService {
 
     private HashMap<String, Contact> contacts = new HashMap<>();

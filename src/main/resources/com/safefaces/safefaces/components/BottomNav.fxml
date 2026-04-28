@@ -8,6 +8,7 @@
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.safefaces.safefaces.Javafx.Controller.BottomNavController"
+      fx:id="navBar"
       alignment="CENTER"
       prefHeight="78.0"
       spacing="85.0"

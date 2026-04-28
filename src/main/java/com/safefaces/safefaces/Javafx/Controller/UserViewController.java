@@ -17,11 +17,9 @@ import javafx.stage.Stage;
 import java.util.Objects;
 
 public class UserViewController {
-
     @FXML private Label profileNameLabel;
     @FXML private ImageView profileImage;
     @FXML private VBox contactListBox;
-
     private User activeUser;
 
 //    public void setUser(User user) {
@@ -90,7 +88,7 @@ public class UserViewController {
      @FXML
     private void openPhoneBook(){
         try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/safefaces/safefaces/main-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/safefaces/safefaces/mainView.fxml"));
             Parent root = loader.load();
 
             Stage stage =(Stage) profileNameLabel.getScene().getWindow();

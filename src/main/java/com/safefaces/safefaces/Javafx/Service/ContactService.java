@@ -1,4 +1,5 @@
 package com.safefaces.safefaces.Javafx.Service;
+import com.safefaces.safefaces.Javafx.Model.Contact;
 
 import com.safefaces.safefaces.Javafx.Model.Contact;
 

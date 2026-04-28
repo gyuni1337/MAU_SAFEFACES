@@ -14,6 +14,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
+
 public class MainController {
 
     @FXML
@@ -22,16 +24,19 @@ public class MainController {
     @FXML private Label outputLabel;
     @FXML private ListView<String> contactListView;
 
-    private ContactService contactService;
+
+    private Contact contact= new Contact();
+
+
 
     @FXML
-    public void initialize(){
-        contactService = new ContactService();
+    public void handelContacts(){
+        contact.addContact("Lisa", "0701", Role.RELATIVE);
+        contact.addContact("Aisha","0702",Role.CAREGIVER);
+        contact.addContact("John","0703",Role.RELATIVE);
+        contact.addContact("Bart","0704",Role.CAREGIVER);
 
-        contactService.addContact(new Contact("Lisa", "0701", null, null));
-        contactService.addContact(new Contact("Aisha", "0702", null, null));
-        contactService.addContact(new Contact("John", "0703", null, null));
-        contactService.addContact(new Contact("Bart", "0704", null, null));
+        handleContacts();
     }
 
     @FXML
@@ -52,7 +57,12 @@ public class MainController {
 
         nameField.clear();
         phoneField.clear();
+
+        handleContacts();
+}
     }
+
+
 
     @FXML
     protected void handleContacts() {

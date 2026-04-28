@@ -1,3 +1,4 @@
+<?import javafx.scene.control.ListView?>
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
@@ -16,6 +17,7 @@
     <Button onAction="#handleAddContact" text="Add contact" />
     <Button onAction="#handleContacts" text=" Contact list" />
     <Label fx:id="outputLabel" />
+    <ListView fx:id="contactListView" prefHeight="300" prefWidth="300"/>
     <Button onAction="#openUserView" text="Open User View" />
 
 </VBox>

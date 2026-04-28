@@ -13,8 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.util.HashMap;
+import javax.management.relation.Role;
 
 public class MainController {
 
@@ -25,16 +24,14 @@ public class MainController {
     @FXML private ListView<String> contactListView;
 
 
-    private Contact contact= new Contact();
-
-
+    private ContactService contactService = new ContactService();
 
     @FXML
-    public void handelContacts(){
-        contact.addContact("Lisa", "0701", Role.RELATIVE);
-        contact.addContact("Aisha","0702",Role.CAREGIVER);
-        contact.addContact("John","0703",Role.RELATIVE);
-        contact.addContact("Bart","0704",Role.CAREGIVER);
+    public void handleContacts(){
+        contactService.addContact(new Contact("Lisa", "0701", null, null));
+        contactService.addContact(new Contact("Aisha","0702", null, null));
+        contactService.addContact(new Contact("John","0703", null, null));
+        contactService.addContact(new Contact("Bart","0704", null, null));
 
         handleContacts();
     }
@@ -47,10 +44,12 @@ public class MainController {
 
         if (name.isEmpty() || phone.isEmpty()) {
             outputLabel.setText("Fill in name and phone number please");
+
             return;
         }
 
         Contact newContact = new Contact(name, phone, null, null);
+
         contactService.addContact(newContact);
 
         outputLabel.setText(name + " has been registered");
@@ -59,39 +58,34 @@ public class MainController {
         phoneField.clear();
 
         handleContacts();
-}
     }
 
-
-
-    @FXML
-    protected void handleContacts() {
-
-        ObservableList<String> items = FXCollections.observableArrayList();
-
-        for (Contact contact : contactService.getAllContacts().values()) {
-
-            String displayText =
-                    contact.getName() + ": " +
-                            contact.getPhoneNumber();
-
-            items.add(displayText);
-        }
-
-        contactListView.setItems(items);
-        outputLabel.setText("Contacts listed");
-    }
+//    @FXML
+//    protected void handleContacts() {
+//
+//        ObservableList<String> items = FXCollections.observableArrayList();
+//
+//        for (Contact contact : contactService.getAllContacts().values()) {
+//
+//            String displayText =
+//                    contact.getName() + ": " +
+//                            contact.getPhoneNumber();
+//
+//            items.add(displayText);
+//        }
+//
+//        contactListView.setItems(items);
+//        outputLabel.setText("Contacts listed");
+//    }
 
     @FXML
     private void openUserView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/safefaces/safefaces/HomeView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    "/com/safefaces/safefaces/ContactView.fxml"));
             Parent root = loader.load();
 
             UserViewController controller = loader.getController();
-//            controller.setUser(
-//                    new User(1, "Henry", "oldmanexample.jpg", "henry1", "password", Role.USER)
-//            );
 
             Stage stage = (Stage) nameField.getScene().getWindow();
             stage.setScene(new Scene(root));

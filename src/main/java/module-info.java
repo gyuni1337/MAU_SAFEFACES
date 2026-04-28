@@ -7,6 +7,7 @@ module com.safefaces.safefaces {
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
     requires java.sql;
+    requires java.management;
 
     opens com.safefaces.safefaces to javafx.fxml;
     exports com.safefaces.safefaces.Javafx.Model;

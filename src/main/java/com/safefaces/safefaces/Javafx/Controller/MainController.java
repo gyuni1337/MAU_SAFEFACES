@@ -1,99 +1,149 @@
 package com.safefaces.safefaces.Javafx.Controller;
 
+import com.safefaces.safefaces.Javafx.App.SessionManager;
 import com.safefaces.safefaces.Javafx.Model.Contact;
 import com.safefaces.safefaces.Javafx.Service.ContactService;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javax.management.relation.Role;
+import javafx.scene.shape.Circle;
+
+import java.util.List;
+import java.util.Objects;
 
 public class MainController {
+    @FXML private VBox contactListBox;
+    private final ContactService contactService = new ContactService();
 
     @FXML
-    private TextField nameField;
-    @FXML private TextField phoneField;
-    @FXML private Label outputLabel;
-    @FXML private ListView<String> contactListView;
-
-
-    private ContactService contactService = new ContactService();
-
-    @FXML
-    public void handleContacts(){
-        contactService.addContact(new Contact("Lisa", "0701", null, null));
-        contactService.addContact(new Contact("Aisha","0702", null, null));
-        contactService.addContact(new Contact("John","0703", null, null));
-        contactService.addContact(new Contact("Bart","0704", null, null));
-
-        handleContacts();
+    public void initialize() {
+        buildContactList();
     }
 
-    @FXML
-    private void handleAddContact() {
+    private void buildContactList() {
+        if (contactListBox == null)
+            return;
 
-        String name = nameField.getText();
-        String phone = phoneField.getText();
+        contactListBox.getChildren().clear();
 
-        if (name.isEmpty() || phone.isEmpty()) {
-            outputLabel.setText("Fill in name and phone number please");
+        List<Contact> contacts = contactService.getContactList();
 
+        if (contacts.isEmpty()) {
+            Label empty = new Label("No contacts registered.");
+            empty.setStyle("-fx-font-size:16; -fx-text-fill:#888; -fx-padding:20;");
+            contactListBox.getChildren().add(empty);
             return;
         }
 
-        Contact newContact = new Contact(name, phone, null, null);
-
-        contactService.addContact(newContact);
-
-        outputLabel.setText(name + " has been registered");
-
-        nameField.clear();
-        phoneField.clear();
-
-        handleContacts();
+        for (Contact contact : contacts) {
+            contactListBox.getChildren().add(buildRow(contact));
+        }
     }
 
-//    @FXML
-//    protected void handleContacts() {
-//
-//        ObservableList<String> items = FXCollections.observableArrayList();
-//
-//        for (Contact contact : contactService.getAllContacts().values()) {
-//
-//            String displayText =
-//                    contact.getName() + ": " +
-//                            contact.getPhoneNumber();
-//
-//            items.add(displayText);
-//        }
-//
-//        contactListView.setItems(items);
-//        outputLabel.setText("Contacts listed");
-//    }
+    private HBox buildRow(Contact contact) {
+        HBox row = new HBox(16);
+        row.setStyle("-fx-background-color:white; -fx-background-radius:16; -fx-padding:14;");
+        row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(56);
+        imageView.setFitHeight(56);
+        imageView.setPreserveRatio(true);
+
+        Circle clip = new Circle(28, 28, 28);
+        imageView.setClip(clip);
+
+        String imageName = contact.getImagePath() != null
+                ? contact.getImagePath() : "emptyavatar.jpg";
+
+        try {
+            Image img = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream(
+                            "/com/safefaces/safefaces/images/" + imageName)));
+            imageView.setImage(img);
+        } catch (Exception e) {
+            try {
+                Image fallback = new Image(Objects.requireNonNull(
+                        getClass().getResourceAsStream(
+                                "/com/safefaces/safefaces/images/emptyavatar.jpg")));
+                imageView.setImage(fallback);
+            } catch (Exception ignored) {}
+        }
+
+        VBox nameBox = new VBox(4);
+        HBox.setHgrow(nameBox, Priority.ALWAYS);
+
+        Label nameLabel = new Label(contact.getName());
+        nameLabel.setStyle("-fx-font-size:18; -fx-font-weight:bold;");
+        Label relationLabel = new Label(contact.getRelation());
+        relationLabel.setStyle("-fx-font-size:13; -fx-text-fill:#888;");
+        nameBox.getChildren().addAll(nameLabel, relationLabel);
+
+        Region spacer = new Region();
+
+        Button callBtn = new Button("📞");
+        callBtn.setStyle("-fx-font-size:20; -fx-background-color:#e8f5e9; " +
+                "-fx-background-radius:50; -fx-min-width:48; -fx-min-height:48;");
+        callBtn.setUserData(contact.getName());
+        callBtn.setOnAction(this::handleCall);
+
+        Button voiceBtn = new Button("▶");
+        voiceBtn.setStyle("-fx-font-size:16; -fx-background-color:#3a3a3a; " +
+                "-fx-text-fill:white; -fx-background-radius:50; " +
+                "-fx-min-width:48; -fx-min-height:48;");
+        voiceBtn.setUserData(contact.getName());
+        voiceBtn.setOnAction(this::handleVoiceMessage);
+
+        row.getChildren().addAll(imageView, nameBox, spacer, callBtn, voiceBtn);
+        return row;
+    }
+
+    @FXML
+    private void handleCall(javafx.event.ActionEvent event) {
+        SessionManager.beginSession();
+        Button btn = (Button) event.getSource();
+        String contactName = (String) btn.getUserData();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Calling...");
+        alert.setHeaderText("Ringing " + contactName);
+        alert.setContentText("In call with " + contactName
+                + ".\nPress ok to end call.");
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void handleVoiceMessage(javafx.event.ActionEvent event) {
+        SessionManager.beginSession();
+        Button btn = (Button) event.getSource();
+        String contactName = (String) btn.getUserData();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Voicememo");
+        alert.setHeaderText("Playing voicememo from " + contactName);
+        alert.setContentText("[Här behöver vi implementera de förinspelade memon]");
+        alert.showAndWait();
+    }
 
     @FXML
     private void openUserView() {
+        SessionManager.beginSession();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                    "/com/safefaces/safefaces/ContactView.fxml"));
-            Parent root = loader.load();
-
-            UserViewController controller = loader.getController();
-
-            Stage stage = (Stage) nameField.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/MainView.fxml"));
+            javafx.scene.Parent root = loader.load();
+            javafx.stage.Stage stage = SessionManager.getStage();
+            if (stage != null) {
+                stage.setScene(new javafx.scene.Scene(root, 400, 640));
+                stage.show();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-

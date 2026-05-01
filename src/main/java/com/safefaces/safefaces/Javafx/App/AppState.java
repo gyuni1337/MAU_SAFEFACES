@@ -5,16 +5,18 @@ import com.safefaces.safefaces.Backend.Model.User;
 public class AppState {
     private static AppState instance;
 
+    private AppState() {
+    }
+
     public static AppState getInstance() {
         if (instance == null) {
             instance = new AppState();
-        } return instance;
+        }
+
+        return instance;
     }
 
     private User currentUser;
-
-    public AppState() {
-    }
 
     public User getCurrentUser() {
         return currentUser;

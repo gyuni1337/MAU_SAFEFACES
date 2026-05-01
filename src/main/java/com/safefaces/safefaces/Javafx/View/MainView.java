@@ -20,8 +20,9 @@ public class MainView extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        long startTime = System.currentTimeMillis();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/safefaces/safefaces/ContactView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/safefaces/safefaces/LoginView.fxml"));
 //        FXMLLoader loader = new FXMLLoader(
 //                getClass().getResource("/com/safefaces/safefaces/LoginView.fxml"));
         Parent root = loader.load();
@@ -37,20 +38,28 @@ public class MainView extends Application {
 
         Scene scene = new Scene(root, 400, 640);
         stage.setTitle("SafeFaces");
-        stage.setScene(scene);
         stage.setResizable(false);
+        stage.setScene(scene);
         stage.show();
-    }
 
-//    public static void main(String[] args) {
-//        launch();
+        long elapsed = System.currentTimeMillis() - startTime;
 
-        @Override
-        public void stop() {
+        stage.setOnCloseRequest(e -> {
             DatabaseConnection.closeConnection();
-        }
-
-        public static void main (String[]args){
-            launch();
-        }
+            System.out.println("DB-conncetion closed.");
+        });
     }
+
+    public static void main(String[] args) {
+        launch();
+
+//        @Override
+//        public void stop() {
+//            DatabaseConnection.closeConnection();
+//        }
+//
+//        public static void main (String[]args){
+//            launch();
+//        }
+    }
+}

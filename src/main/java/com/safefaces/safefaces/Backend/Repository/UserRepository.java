@@ -18,9 +18,7 @@ public class UserRepository {
         Connection conn = DatabaseConnection.getConnection();
         try (PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
-
-//            stmt.setString(1, username);
-//            ResultSet rs = stmt.executeQuery();
+            stmt.setString(1, username);
 
             if (rs.next()) {
                 User user = new User();

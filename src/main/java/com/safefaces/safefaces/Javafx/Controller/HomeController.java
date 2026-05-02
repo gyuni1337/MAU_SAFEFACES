@@ -18,7 +18,7 @@ import javafx.scene.shape.Circle;
 import java.util.List;
 import java.util.Objects;
 
-public class MainController {
+public class HomeController {
     @FXML private VBox contactListBox;
     private final ContactService contactService = new ContactService();
 

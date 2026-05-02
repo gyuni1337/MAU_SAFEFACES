@@ -16,9 +16,9 @@
 
 
     <children>
-        <ImageView onMouseClicked="#goContacts"  fitHeight="46.0" fitWidth="48.0" preserveRatio="true">
+        <ImageView onMouseClicked="#goReminders"  fitHeight="46.0" fitWidth="48.0" preserveRatio="true">
             <image>
-                <Image url="@../images/contacts.png" />
+                <Image url="@../images/reminder.png" />
             </image>
         </ImageView>
 
@@ -28,9 +28,9 @@
             </image>
         </ImageView>
 
-        <ImageView  onMouseClicked="#goUser" fitHeight="46.0" fitWidth="48.0" preserveRatio="true">
+        <ImageView  onMouseClicked="#goProfile" fitHeight="46.0" fitWidth="48.0" preserveRatio="true">
             <image>
-                <Image url="@../images/user.png" />
+                <Image url="@../images/profile.png" />
             </image>
         </ImageView>
     </children>

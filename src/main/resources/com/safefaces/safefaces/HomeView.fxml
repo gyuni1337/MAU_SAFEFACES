@@ -15,11 +15,14 @@
             style="-fx-background-color: #f4f4f4;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.safefaces.safefaces.Javafx.Controller.MainController">
+            fx:controller="com.safefaces.safefaces.Javafx.Controller.HomeController">
     <children>
         <BorderPane prefHeight="800.0" prefWidth="400.0"
                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+
+
             <center>
                 <VBox alignment="TOP_CENTER" spacing="16.0">
                     <padding>
@@ -48,6 +51,10 @@
                     </ScrollPane>
                 </VBox>
             </center>
+
+
+
+
             <bottom>
                 <fx:include source="components/BottomNav.fxml"/>
             </bottom>

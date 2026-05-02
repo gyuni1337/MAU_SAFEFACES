@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class AuthenticationController {
+public class LoginController {
 
     @FXML private Label statusLabel;
     @FXML private VBox fingerprintBox;
@@ -118,7 +118,7 @@ public class AuthenticationController {
     private void navigateToHome() {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/safefaces/safefaces/ContactView.fxml"));
+                    getClass().getResource("/com/safefaces/safefaces/HomeView.fxml"));
             Parent root = loader.load();
             Stage stage = getStage();
             if (stage == null) {

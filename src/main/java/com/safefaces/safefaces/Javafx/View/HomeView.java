@@ -3,10 +3,10 @@ package com.safefaces.safefaces.Javafx.View;
  import javafx.scene.Parent;
  import java.io.IOException;
 
-public class ContactView {
+public class HomeView {
 
     public Parent getView() throws IOException{
-        FXMLLoader loader = new FXMLLoader( getClass().getResource("com/safefaces/safefaces/View/ContactView.java")
+        FXMLLoader loader = new FXMLLoader( getClass().getResource("com/safefaces/safefaces/View/HomeView.java")
         );
         return loader.load();
     }

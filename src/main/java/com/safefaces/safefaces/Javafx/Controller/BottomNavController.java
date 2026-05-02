@@ -10,32 +10,18 @@ import javafx.stage.Stage;
 public class BottomNavController {
     @FXML private HBox navBar;
 
-    private void navigateTo(String fxmlPath) {
-
-        try{
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/safefaces/safefaces/" + fxmlPath));
-            Parent root = loader.load();
-            Stage stage = (Stage) navBar.getScene().getWindow();
-            stage.setScene(new Scene(root, 400, 700));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @FXML
     private void goHome() {
         System.out.println("home");
     }
 
     @FXML
-    private void goContacts() {
-        System.out.println("contacts");
+    private void goReminders() {
+        System.out.println("reminders");
     }
 
     @FXML
-    private void goUser() {
+    private void goProfile() {
         System.out.println("user");
     }
 }

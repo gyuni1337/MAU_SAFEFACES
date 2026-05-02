@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
@@ -11,28 +11,38 @@
       fx:id="navBar"
       alignment="CENTER"
       prefHeight="78.0"
-      spacing="85.0"
       style="-fx-background-color: #efefef; -fx-border-color: #dddddd transparent transparent transparent; -fx-border-width: 1 0 0 0;">
 
-
     <children>
-        <ImageView onMouseClicked="#goReminders"  fitHeight="46.0" fitWidth="48.0" preserveRatio="true">
-            <image>
-                <Image url="@../images/reminder.png" />
-            </image>
-        </ImageView>
+        <StackPane onMouseClicked="#goReminders"
+                   HBox.hgrow="ALWAYS"
+                   prefHeight="78.0"
+                   alignment="CENTER"
+                   style="-fx-cursor: hand;">
+            <ImageView fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
+                <image><Image url="@../images/reminder.png"/></image>
+            </ImageView>
+        </StackPane>
 
-        <ImageView onMouseClicked="#goHome" fitHeight="46.0" fitWidth="48.0" preserveRatio="true">
-            <image>
-                <Image url="@../images/home.png" />
-            </image>
-        </ImageView>
+        <StackPane onMouseClicked="#goHome"
+                   HBox.hgrow="ALWAYS"
+                   prefHeight="78.0"
+                   alignment="CENTER"
+                   style="-fx-cursor: hand;">
+            <ImageView fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
+                <image><Image url="@../images/home.png"/></image>
+            </ImageView>
+        </StackPane>
 
-        <ImageView  onMouseClicked="#goProfile" fitHeight="46.0" fitWidth="48.0" preserveRatio="true">
-            <image>
-                <Image url="@../images/profile.png" />
-            </image>
-        </ImageView>
+        <StackPane onMouseClicked="#goProfile"
+                   HBox.hgrow="ALWAYS"
+                   prefHeight="78.0"
+                   alignment="CENTER"
+                   style="-fx-cursor: hand;">
+            <ImageView fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
+                <image><Image url="@../images/profile.png"/></image>
+            </ImageView>
+        </StackPane>
     </children>
 
 </HBox>

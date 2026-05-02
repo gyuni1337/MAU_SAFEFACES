@@ -18,10 +18,11 @@ import javafx.scene.shape.Circle;
 import java.util.List;
 import java.util.Objects;
 
-public class HomeController {
-    @FXML private VBox contactListBox;
-    private final ContactService contactService = new ContactService();
+public class ContactController {
 
+    @FXML private VBox contactListBox;
+
+    private final ContactService contactService = new ContactService();
     @FXML
     public void initialize() {
         buildContactList();
@@ -130,20 +131,4 @@ public class HomeController {
         alert.showAndWait();
     }
 
-    @FXML
-    private void openUserView() {
-        SessionManager.beginSession();
-        try {
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(
-                    getClass().getResource("/com/safefaces/safefaces/MainView.fxml"));
-            javafx.scene.Parent root = loader.load();
-            javafx.stage.Stage stage = SessionManager.getStage();
-            if (stage != null) {
-                stage.setScene(new javafx.scene.Scene(root, 400, 640));
-                stage.show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

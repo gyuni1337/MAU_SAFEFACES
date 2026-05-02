@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Font?>
+
+<HBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      alignment="CENTER"
+      spacing="15.0"
+      style="-fx-background-color: transparent;">
+
+    <children>
+        <Label text="SafeFaces" style="-fx-text-fill: #3a3a3a;">
+            <font>
+                <Font name="System Bold" size="18.0"/>
+            </font>
+        </Label>
+
+        <ImageView fitHeight="24.0" fitWidth="21.0" preserveRatio="true">
+            <image>
+                <Image url="@../images/logo.png"/>
+            </image>
+        </ImageView>
+    </children>
+
+</HBox>

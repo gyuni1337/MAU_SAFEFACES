@@ -4,22 +4,33 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.control.ScrollPane?>
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      alignment="CENTER"
-      spacing="16.0">
+      fx:controller="com.safefaces.safefaces.Javafx.Controller.ReminderController"
+      spacing="0"
+      style ="-fx-background-color:#f5f6fa;">
+<VBox style="-fx-background-color: white;-fx-padding: 24 24 16 24;">
+    <Label text="Påminnelser"
+           style="-fx-font-size:26;-fx-font-weight:bold;"/>
+    <Label text="Dina aktiva påminnelser"
+           style="-fx-font-size:13;-fx-text-fill:#888;"/>
+</VBox>
 
-    <padding>
-        <Insets top="40" bottom="16" left="24" right="24"/>
-    </padding>
+    <ScrollPane fitToWidth="true"
+                style="-fx-background-color:transparent;-fx-background-color: transparent;"
+                VBox.vgrow="ALWAYS">
+        <VBox fx:id="reminderListBox"
+              spacing="12"
+              style="-fx-background-color:#f5f6fa;">
+             <padding>
+                 <Insets top="16"
+                    bottom="80"
+                    left="16"
+                    right="16"/>
+             </padding>
+        </VBox>
 
-    <Label text="📋"
-           style="-fx-font-size:64;"/>
-
-    <Label text="Reminders"
-           style="-fx-font-size:28; -fx-font-weight:bold;"/>
-
-    <Label text="Your reminders will show up here."
-           style="-fx-font-size:14; -fx-text-fill:#888;"/>
+    </ScrollPane>
 
 </VBox>

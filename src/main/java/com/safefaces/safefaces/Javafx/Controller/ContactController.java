@@ -1,5 +1,4 @@
 package com.safefaces.safefaces.Javafx.Controller;
-
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import com.safefaces.safefaces.Javafx.Model.Contact;
 import com.safefaces.safefaces.Javafx.Service.ContactService;
@@ -13,6 +12,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class ContactController {
     @FXML private VBox contactListBox;
 
     private final ContactService contactService = new ContactService();
+    private MediaPlayer currentPlayer;
     @FXML
     public void initialize() {
         buildContactList();
@@ -100,7 +102,7 @@ public class ContactController {
                 "-fx-text-fill:white; -fx-background-radius:50; " +
                 "-fx-min-width:48; -fx-min-height:48;");
         voiceBtn.setUserData(contact.getName());
-        voiceBtn.setOnAction(this::handleVoiceMessage);
+        voiceBtn.setOnAction(e->handleVoiceMessage(contact,voiceBtn));
 
         row.getChildren().addAll(imageView, nameBox, spacer, callBtn, voiceBtn);
         return row;
@@ -120,15 +122,29 @@ public class ContactController {
     }
 
     @FXML
-    private void handleVoiceMessage(javafx.event.ActionEvent event) {
+    private void handleVoiceMessage(Contact contact,Button btn) {
         SessionManager.beginSession();
-        Button btn = (Button) event.getSource();
-        String contactName = (String) btn.getUserData();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Voicememo");
-        alert.setHeaderText("Playing voicememo from " + contactName);
-        alert.setContentText("[Här behöver vi implementera de förinspelade memon]");
-        alert.showAndWait();
+
+       String audioPath ="/com/safefaces/safefaces/audio/Audio1.mp3";
+        var url =getClass().getResource(audioPath);
+        if(url == null){
+            System.out.println("Hittar inte ljudfilden: " +audioPath);
+            return;
+        }
+        System.out.println("Hittar filen splar upp ");
+
+
+        new MediaPlayer((new Media(url.toExternalForm()))).play();
+        
+
     }
+    private void stopCurrentPlayer(){
+        if(currentPlayer !=null){
+            currentPlayer.stop();
+            currentPlayer.dispose();
+            currentPlayer =null;
+        }
+    }
+
 
 }

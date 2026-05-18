@@ -8,6 +8,7 @@ module com.safefaces.safefaces {
     requires java.desktop;
     requires java.sql;
     requires java.management;
+    requires  javafx.media;
 
     requires org.postgresql.jdbc;
 

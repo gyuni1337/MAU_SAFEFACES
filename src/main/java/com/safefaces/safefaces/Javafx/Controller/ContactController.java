@@ -19,17 +19,43 @@ import javafx.scene.shape.Circle;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Controller class responsible for managing the contact view.
+ * Displays a list of contacts and handles user interactions such as
+ * calling a contact or playing a voice message.
+ *
+ * This class interacts with the ContactService to retrieve data and
+ * updates the JavaFX UI dynamically.
+ *
+ * @author Gyundyuz Sadulov
+ * @author Noor Nabi
+ * @author Hamdi Ahmed
+ * @author Emma Yousif
+ */
 public class ContactController {
 
+    /** Container for displaying the list of contacts. */
     @FXML private VBox contactListBox;
 
+    /** Service used to fetch contact data. */
     private final ContactService contactService = new ContactService();
+
+    /** Media player used for playing voice messages. */
     private MediaPlayer currentPlayer;
+
+    /**
+     * Initializes the controller after the FXML file has been loaded.
+     * Builds and displays the contact list.
+     */
     @FXML
     public void initialize() {
         buildContactList();
     }
 
+    /**
+     * Builds the contact list UI by fetching contacts
+     * and creating UI elements for each contact.
+     */
     private void buildContactList() {
         if (contactListBox == null)
             return;
@@ -50,6 +76,12 @@ public class ContactController {
         }
     }
 
+    /**
+     * Creates a UI row for a specific contact.
+     *
+     * @param contact the contact to display
+     * @return an {@link HBox} containing UI components for the contact
+     */
     private HBox buildRow(Contact contact) {
         HBox row = new HBox(16);
         row.setStyle("-fx-background-color:white; -fx-background-radius:16; -fx-padding:14;");
@@ -108,6 +140,11 @@ public class ContactController {
         return row;
     }
 
+    /**
+     * Handles the call action when a user presses the call button.
+     *
+     * @param event the action event triggered by the button
+     */
     @FXML
     private void handleCall(javafx.event.ActionEvent event) {
         SessionManager.beginSession();
@@ -121,6 +158,12 @@ public class ContactController {
         alert.showAndWait();
     }
 
+    /**
+     * Handles playback of a contact's voice message.
+     *
+     * @param contact the contact whose voice message should be played
+     * @param btn the button that triggered the action
+     */
     @FXML
     private void handleVoiceMessage(Contact contact,Button btn) {
         SessionManager.beginSession();
@@ -128,16 +171,22 @@ public class ContactController {
        String audioPath ="/com/safefaces/safefaces/audio/Audio1.mp3";
         var url =getClass().getResource(audioPath);
         if(url == null){
-            System.out.println("Hittar inte ljudfilden: " +audioPath);
+            System.out.println("Hittar inte ljudfilen: " +audioPath);
             return;
         }
-        System.out.println("Hittar filen splar upp ");
 
+        stopCurrentPlayer();
 
-        new MediaPlayer((new Media(url.toExternalForm()))).play();
-        
+        currentPlayer = new MediaPlayer(new Media(url.toExternalForm()));
 
+        currentPlayer.play();
+
+        System.out.println("Hittar filen spelar upp ");
     }
+
+    /**
+     * Stops and disposes the current media player if active.
+     */
     private void stopCurrentPlayer(){
         if(currentPlayer !=null){
             currentPlayer.stop();
@@ -145,6 +194,4 @@ public class ContactController {
             currentPlayer =null;
         }
     }
-
-
 }

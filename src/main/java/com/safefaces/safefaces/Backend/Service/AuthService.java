@@ -9,10 +9,25 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Base64;
 
+/**
+ * Service class responsible for handling authentication logic.
+ * Provides methods for user login via PIN and Face ID, as well as
+ * hashing functionality for secure PIN handling.
+ *
+ * @author Noor Nabi
+ * @author Gyundyuz Sadulov
+ */
 public class AuthService {
     private final UserRepository userRepository = new UserRepository();
 
-    //felhantering för användare
+    /**
+     * Attempts to authenticate a user using a username and PIN code.
+     *
+     * @param username the username of the user
+     * @param pin the plain-text PIN code entered by the user
+     * @return a {@link User} object if authentication is successful;
+     *         otherwise {@code null}
+     */
     public User login(String username, String pin) {
 
         try {
@@ -26,7 +41,13 @@ public class AuthService {
         } return null;
     }
 
-    //felhantering för faceId
+    /**
+     * Attempts to authenticate a user using Face ID.
+     * Currently retrieves a default user with role "user".
+     *
+     * @return a {@link User} if authentication is successful;
+     *         otherwise {@code null}
+     */
     public User faceIdLogin() {
 
         try {
@@ -37,9 +58,13 @@ public class AuthService {
         }
     }
 
-    //SHA är en digest algoritm, som felhanterar pinkod osv..
-    //Digest kommer från klassbiblioteket MessageDigest
-    //klassen "digestar" pinkod
+    /**
+     * Hashes a PIN code using the SHA-256 algorithm.
+     *
+     * @param pin the plain-text PIN code
+     * @return a Base64-encoded hash of the PIN
+     * @throws RuntimeException if the SHA-256 algorithm is not available
+     */
     public static String hashPin(String pin) {
 
         try {

@@ -9,9 +9,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-//spara användaren med hjälp av databasen
+
+/**
+ * Repository class responsible for retrieving user data from the database.
+ * Provides methods to fetch users by username or by role.
+ *
+ * @author Noor Nabi
+ * @author Gyundyuz Sadulov
+ */
 public class UserRepository {
 
+
+    /**
+     * Retrieves a user from the database based on the provided username.
+     *
+     * @param username the username used to search for the user
+     * @return a {@link User} object if a matching user is found;
+     *         otherwise {@code null}
+     * @throws SQLException if a database access error occurs
+     */
     public User getUserByUsername(String username) throws SQLException {
         String sql = "SELECT * FROM users WHERE username = ?";
 
@@ -36,6 +52,14 @@ public class UserRepository {
         return null;
     }
 
+    /**
+     * Retrieves a single user with the role "user" from the database.
+     * This method is typically used to fetch a patient or default user.
+     *
+     * @return a {@link User} with the role "user" if found;
+     *         otherwise {@code null}
+     * @throws SQLException if a database access error occurs
+     */
     public User getPatientUser() throws SQLException {
         String sql = "SELECT * FROM users WHERE role = 'user' LIMIT 1";
         try (Connection conn = DatabaseConnection.getConnection();

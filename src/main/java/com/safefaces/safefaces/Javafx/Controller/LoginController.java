@@ -18,6 +18,17 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * Controller class responsible for handling user authentication UI logic.
+ * Supports login via Face ID, fingerprint, and PIN code.
+ *
+ * This class coordinates between the UI and the {@link AuthService},
+ * manages asynchronous login operations, and handles navigation
+ * after successful authentication.
+ *
+ * @author Noor Nabi
+ * @author Gyundyuz Sadulov
+ */
 public class LoginController {
 
     @FXML private Label statusLabel;
@@ -26,9 +37,16 @@ public class LoginController {
     @FXML private VBox pinBox;
     @FXML private PasswordField pinField;
 
+    /** Service used for authentication logic. */
     private final AuthService authService = new AuthService();
+
+    /** Timestamp used to measure initialization time. */
     private final long initTime = System.currentTimeMillis();
 
+    /**
+     * Initializes the login view after the FXML is loaded.
+     * Sets up the UI and starts the simulated Face ID process.
+     */
     @FXML
     public void initialize() {
         if (fingerprintBox != null) fingerprintBox.setVisible(false);
@@ -45,8 +63,12 @@ public class LoginController {
         pause.play();
     }
 
+    /**
+     * Fetches user data asynchronously to simulate Face ID authentication.
+     * Avoids blocking the JavaFX UI thread.
+     */
     private void fetchUserInBackground() {
-        setStatus("Verifying...");
+        setStatus("Verifierar...");
 
         Thread dbThread = new Thread(() -> {
             User user = authService.faceIdLogin();
@@ -65,6 +87,10 @@ public class LoginController {
         dbThread.start();
     }
 
+    /**
+     * Handles fingerprint login action triggered by the user.
+     * Simulates scanning and then performs authentication.
+     */
     @FXML
     private void handleFingerprintLogin() {
         setStatus("Scanning fingerprint...");
@@ -75,6 +101,10 @@ public class LoginController {
         pause.play();
     }
 
+    /**
+     * Handles login using a PIN code entered by the user.
+     * Validates input and checks the hashed PIN against stored data.
+     */
     @FXML
     private void handlePinLogin() {
         if (pinField == null) return;
@@ -91,7 +121,7 @@ public class LoginController {
                     if ("1234".equals(pin)) {
                         loginSuccessful(createDemoUser());
                     } else {
-                        setStatus("Wrong pin code. Try again.");
+                        setStatus("Felaktig PIN-kod. Vänligen försök igen.");
                         pinField.clear();
                     }
                     return;
@@ -109,12 +139,22 @@ public class LoginController {
         dbThread.start();
     }
 
+    /**
+     * Handles successful login by storing the user in the application state
+     * and navigating to the home view.
+     *
+     * @param user the authenticated {@link User}
+     */
     private void loginSuccessful(User user) {
         AppState.getInstance().setCurrentUser(user);
         long elapsed = System.currentTimeMillis() - initTime;
         navigateToHome();
     }
 
+    /**
+     * Navigates to the home view after successful login.
+     * Initializes the session manager for inactivity tracking.
+     */
     private void navigateToHome() {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -134,6 +174,11 @@ public class LoginController {
         }
     }
 
+    /**
+     * Retrieves the current application stage from available UI components.
+     *
+     * @return the current {@link Stage}, or {@code null} if not available
+     */
     private Stage getStage() {
         if (statusLabel != null && statusLabel.getScene() != null)
             return (Stage) statusLabel.getScene().getWindow();
@@ -147,11 +192,21 @@ public class LoginController {
         return null;
     }
 
+    /**
+     * Updates the status label in the UI and logs the message.
+     *
+     * @param msg the message to display
+     */
     private void setStatus(String msg) {
         if (statusLabel != null) statusLabel.setText(msg);
         System.out.println("Status: " + msg);
     }
 
+    /**
+     * Creates a demo user used when no user is returned from the database.
+     *
+     * @return a mock {@link User} object
+     */
     private User createDemoUser() {
         User demo = new User();
         demo.id        = 1;

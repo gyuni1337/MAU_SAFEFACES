@@ -7,23 +7,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class imports reminders from the reminder table at safefaces database.
+ * Repository class responsible for retrieving reminder data from the database.
+ * Provides methods to access active reminders for a specific user.
+ *
+ * @author Hamdi Ahmed
  */
-
-
 public class ReminderRepository {
 
-
+    /** The ID of the user whose reminders are being accessed. */
     private final int userId;
 
+
+    /**
+     * Creates a new ReminderRepository for a specific user.
+     *
+     * @param userId the unique identifier of the user
+     */
     public ReminderRepository(int userId){
         this.userId = userId;
     }
-    /**
-     * Collects all the active reminders for the user
-     * sorted after time
-     */
 
+
+    /**
+     * Retrieves all active reminders for the user from the database,
+     * sorted by reminder time in ascending order.
+     *
+     * @return a list of active {@link Reminder} objects;
+     *         returns an empty list if no reminders are found or an error occurs
+     */
     public List<Reminder> getActiveReminders(){
         List<Reminder> list = new ArrayList<>();
 
@@ -51,6 +62,4 @@ public class ReminderRepository {
         }
         return list;
     }
-
-
 }

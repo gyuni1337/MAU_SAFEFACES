@@ -11,20 +11,40 @@ import javafx.scene.layout.VBox;
 
 import java.util.List;
 
-
+/**
+ * Controller class responsible for managing the reminders view.
+ * Retrieves active reminders from the backend and dynamically
+ * displays them in the UI.
+ *
+ * This class interacts with {@link ReminderService} to access data
+ * and constructs JavaFX components for each reminder.
+ *
+ * @author Hamdi Ahmed
+ */
 public class ReminderController {
+
+    /** Container for displaying the list of reminders. */
     @FXML private VBox reminderListBox;
 
+    /** Service used to fetch reminder data. */
     private ReminderService reminderService;
 
+    /**
+     * Initializes the controller after the FXML file has been loaded.
+     * Retrieves the current user and populates the reminder list.
+     */
     @FXML
     public void initialize(){
         int userId = AppState.getInstance().getCurrentUser().getId();
 
         reminderService = new ReminderService(userId);
         buildReminderList();
-
     }
+
+    /**
+     * Builds the reminder list UI by fetching active reminders
+     * and creating visual rows for each entry.
+     */
     private void buildReminderList(){
         if(reminderListBox == null)
             return;
@@ -43,8 +63,14 @@ public class ReminderController {
         for(Reminder reminder : reminders){
             reminderListBox.getChildren().add(buildRow(reminder));
         }
-
     }
+
+    /**
+     * Creates a UI row representing a single reminder.
+     *
+     * @param reminder the reminder to display
+     * @return an {@link HBox} containing the formatted reminder information
+     */
     private HBox buildRow(Reminder reminder){
         HBox row = new HBox(16);
         row.setStyle("""
@@ -76,7 +102,5 @@ public class ReminderController {
         textBox.getChildren().addAll(titelLabel,descLabel,timeLabel);
         row.getChildren().addAll(icon,textBox);
         return row;
-
     }
-
 }

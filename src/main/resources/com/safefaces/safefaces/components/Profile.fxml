@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Imports for layout and UI components -->
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
+<!--
+    Profile view layout.
+    Displays information about the currently logged-in user,
+    including profile image, name, age, and additional details.
+
+    Also includes a toggleable section for displaying medications.
+    Controlled by ProfileController.
+-->
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.safefaces.safefaces.Javafx.Controller.ProfileController"
@@ -16,47 +25,46 @@
         <Insets top="30" bottom="20" left="24" right="24"/>
     </padding>
 
-    <!-- Profilbild -->
+    <!-- Profile image of the user (set dynamically in controller) -->
     <ImageView fx:id="profileImage"
                fitWidth="120"
                fitHeight="120"
                preserveRatio="true" />
 
-    <!-- Namn -->
+    <!-- User's full name -->
     <Label fx:id="nameLabel"
            text="Namn"
            style="-fx-font-size: 26px; -fx-font-weight: bold;" />
 
-    <!-- Ålder -->
+    <!-- User's age -->
     <Label fx:id="ageLabel"
            text="Ålder"
            style="-fx-font-size: 18px; -fx-text-fill: #555;" />
 
-    <!-- Ev info -->
+    <!-- Additional information section label -->
     <Label text="Information"
            style="-fx-font-size: 16px; -fx-text-fill: #888;" />
 
-
-    <!-- Rubrik för medicin -->
+    <!-- Clickable header for medication section -->
     <Label fx:id="medsLabel"
            onMouseClicked="#toggleMeds"
            style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;">
         Mediciner ◀
     </Label>
 
-    <!-- Medicinlistan som är dold från början -->
+    <!-- Hidden container for medications, toggled dynamically -->
     <VBox fx:id="medsBox"
           spacing="10"
           visible="false"
           managed="false"
           style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
 
-        <!-- Tillfällig text, ersätts senare med riktiga mediciner -->
+        <!-- Placeholder content, replaced dynamically later -->
         <Label text="Här listas dina mediciner"
                style="-fx-font-size: 16px;" />
     </VBox>
 
-    <!-- Minne/hjälptext, ersätts senare -->
+    <!-- Informational or memory aid text -->
     <Label text="Du är hemma i Malmö"
            wrapText="true"
            style="-fx-font-size: 18px;" />

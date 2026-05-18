@@ -4,11 +4,30 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+
+/**
+ * Main controller responsible for managing the primary application layout.
+ * Handles dynamic view loading and coordinates navigation between different
+ * sections such as Home, Reminders, and Profile.
+ *
+ * This controller acts as a central hub for switching views inside the content area
+ * and initializing shared UI components like the bottom navigation bar.
+ *
+ * @author Gyundyuz Sadulov
+ */
 public class MainController {
 
+    /** Container where views are dynamically loaded. */
     @FXML private AnchorPane contentArea;
+
+    /** Container for the bottom navigation bar. */
     @FXML private AnchorPane bottomContainer;
 
+    /**
+     * Loads a specified FXML view into the content area.
+     *
+     * @param fxml the path to the FXML file to be loaded
+     */
     public void loadView(String fxml) {
         try {
             FXMLLoader loader = new FXMLLoader(
@@ -27,18 +46,33 @@ public class MainController {
         }
     }
 
+    /**
+     * Displays the home view.
+     */
     public void showHome() {
         loadView("/com/safefaces/safefaces/components/Contact.fxml");
     }
 
+    /**
+     * Displays the reminders view.
+     */
     public void showReminders() {
         loadView("/com/safefaces/safefaces/components/Reminders.fxml");
     }
 
+    /**
+     * Displays the profile view.
+     */
     public void showProfile() {
         loadView("/com/safefaces/safefaces/components/Profile.fxml");
     }
 
+    /**
+     * Initializes the main layout after the FXML has been loaded.
+     * Loads the bottom navigation bar and sets up communication
+     * between this controller and the {@link BottomNavController}.
+     * Also loads the default view (home).
+     */
     @FXML
     public void initialize() {
         try {

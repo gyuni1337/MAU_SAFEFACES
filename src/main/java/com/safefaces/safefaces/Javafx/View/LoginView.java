@@ -1,7 +1,6 @@
 package com.safefaces.safefaces.Javafx.View;
 
 import com.safefaces.safefaces.Backend.DatabaseConnection;
-import com.safefaces.safefaces.Javafx.Model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,12 +9,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static javafx.application.Application.launch;
-
-
-
+/**
+ * JavaFX application entry point for the SafeFaces system.
+ * Responsible for initializing and displaying the login view.
+ *
+ * This class loads the FXML layout, sets up the main stage,
+ * and ensures proper cleanup of resources when the application closes.
+ *
+ * @author Noor Nabi
+ * @author Hamdi Ahmed
+ * @author Gyundyuz Sadulov
+ */
 public class LoginView extends Application {
 
+    /**
+     * Starts the JavaFX application by loading the login view
+     * and displaying it on the primary stage.
+     *
+     * @param stage the primary stage provided by JavaFX
+     * @throws IOException if the FXML file cannot be loaded
+     */
     @Override
     public void start(Stage stage) throws IOException {
         long startTime = System.currentTimeMillis();
@@ -29,7 +42,7 @@ public class LoginView extends Application {
         stage.setScene(scene);
         stage.show();
 
-        long elapsed = System.currentTimeMillis() - startTime;
+        //long elapsed = System.currentTimeMillis() - startTime;
 
         stage.setOnCloseRequest(e -> {
             DatabaseConnection.closeConnection();
@@ -37,8 +50,13 @@ public class LoginView extends Application {
         });
     }
 
+    /**
+     * Main method used to launch the JavaFX application.
+     *
+     * @param args command-line arguments
+     */
     public static void main(String[] args) {
-        launch();
+        launch(args);
 
         //        @Override
         //        public void stop() {

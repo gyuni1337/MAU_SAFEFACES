@@ -1,15 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- Imports for layout and UI components -->
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
-
 <?import javafx.scene.control.ScrollPane?>
+
+<!--
+    Reminder view layout.
+    Displays a list of active reminders for the current user.
+
+    The reminder list is populated dynamically by ReminderController
+    using the VBox with fx:id "reminderListBox".
+-->
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.safefaces.safefaces.Javafx.Controller.ReminderController"
       spacing="0"
       style ="-fx-background-color:#f5f6fa;">
+
+    <!-- Header section with title and subtitle -->
 <VBox style="-fx-background-color: white;-fx-padding: 24 24 16 24;">
     <Label text="Påminnelser"
            style="-fx-font-size:26;-fx-font-weight:bold;"/>
@@ -17,13 +27,16 @@
            style="-fx-font-size:13;-fx-text-fill:#888;"/>
 </VBox>
 
+    <!-- Scrollable container for reminder list -->
     <ScrollPane fitToWidth="true"
                 style="-fx-background-color:transparent;-fx-background-color: transparent;"
                 VBox.vgrow="ALWAYS">
+        <!-- Container where reminders are dynamically added -->
         <VBox fx:id="reminderListBox"
               spacing="12"
               style="-fx-background-color:#f5f6fa;">
              <padding>
+                 <!-- Extra bottom padding to avoid overlap with navigation bar -->
                  <Insets top="16"
                     bottom="80"
                     left="16"

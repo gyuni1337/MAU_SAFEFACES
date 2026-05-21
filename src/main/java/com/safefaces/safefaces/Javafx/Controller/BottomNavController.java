@@ -46,7 +46,7 @@ public class BottomNavController {
      * Triggered by user interaction in the UI.
      */
     @FXML
-    private void goProfile() {
-        mainController.showProfile();
+    private void goJournal() {
+        mainController.showJournal();
     }
 }

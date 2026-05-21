@@ -1,6 +1,6 @@
 package com.safefaces.safefaces.Javafx.View;
 
-import com.safefaces.safefaces.Backend.DatabaseConnection;
+import com.safefaces.safefaces.Core.DatabaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

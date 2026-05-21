@@ -1,4 +1,6 @@
 package com.safefaces.safefaces.Javafx.Controller;
+import com.safefaces.safefaces.Core.Model.Enums.RoleType;
+import com.safefaces.safefaces.Javafx.App.AppState;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -54,17 +56,23 @@ public class MainController {
     }
 
     /**
-     * Displays the reminders view.
+     * Displays the reminders view for regular users,
+     * or the caregiver view for users with the CAREGIVER role.
      */
     public void showReminders() {
-        loadView("/com/safefaces/safefaces/components/Reminders.fxml");
+        var user = AppState.getInstance().getCurrentUser();
+        if (user != null && user.role == RoleType.CAREGIVER) {
+            loadView("/com/safefaces/safefaces/components/CaregiverView.fxml");
+        } else {
+            loadView("/com/safefaces/safefaces/components/Reminders.fxml");
+        }
     }
 
     /**
      * Displays the profile view.
      */
-    public void showProfile() {
-        loadView("/com/safefaces/safefaces/components/Profile.fxml");
+    public void showJournal() {
+        loadView("/com/safefaces/safefaces/components/Journal.fxml");
     }
 
     /**

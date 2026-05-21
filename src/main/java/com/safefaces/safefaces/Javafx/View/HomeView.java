@@ -21,8 +21,8 @@ public class HomeView {
      * @throws IOException if the FXML file cannot be loaded
      */
     public Parent getView() throws IOException{
-        FXMLLoader loader = new FXMLLoader( getClass().getResource("com/safefaces/safefaces/View/HomeView.fxml")
-        );
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/com/safefaces/safefaces/HomeView.fxml"));
         return loader.load();
     }
 }

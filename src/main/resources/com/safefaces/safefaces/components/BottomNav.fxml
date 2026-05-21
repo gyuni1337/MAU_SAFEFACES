@@ -47,13 +47,13 @@
         </StackPane>
 
         <!-- Profile button -->
-        <StackPane onMouseClicked="#goProfile"
+        <StackPane onMouseClicked="#goJournal"
                    HBox.hgrow="ALWAYS"
                    prefHeight="78.0"
                    alignment="CENTER"
                    style="-fx-cursor: hand;">
             <ImageView fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
-                <image><Image url="@../images/profile.png"/></image>
+                <image><Image url="@../images/journal.png"/></image>
             </ImageView>
         </StackPane>
     </children>

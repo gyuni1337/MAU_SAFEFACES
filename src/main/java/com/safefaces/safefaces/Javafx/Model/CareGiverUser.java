@@ -9,7 +9,7 @@ package com.safefaces.safefaces.Javafx.Model;
  *
  * @author Emma Yousif
  */
-public class CareGiverUser extends User {
+public class CareGiverUser extends UserViewModel {
 
     /**
      * Sets up the UI view associated with a caregiver user.

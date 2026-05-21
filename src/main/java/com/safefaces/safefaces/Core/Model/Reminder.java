@@ -10,6 +10,9 @@ import java.sql.Time;
  */
 public class Reminder {
 
+    /** The unique identifier of the reminder. */
+    public int id;
+
     /** The title of the reminder. */
     public String title;
 
@@ -21,4 +24,7 @@ public class Reminder {
 
     /** The end time of the reminder. */
     public Time endTime;
+
+    /** The type of reminder (PERSONAL, CAREGIVER, MEDICATION). */
+    public String reminderType;
 }

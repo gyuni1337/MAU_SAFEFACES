@@ -38,10 +38,22 @@ public class LoginController {
         System.out.println(AuthService.hashPin("1234"));
     }
 
-    /** Logs in immediately as the demo user. */
+    /** Logs in as the patient user fetched from the database. */
     @FXML
     private void handleUserLogin() {
-        loginSuccessful(authService.getDemoUser());
+        setStatus("Loggar in...");
+        Thread thread = new Thread(() -> {
+            var user = authService.faceIdLogin();
+            javafx.application.Platform.runLater(() -> {
+                if (user == null) {
+                    setStatus("Kunde inte hämta användare från databasen.");
+                } else {
+                    loginSuccessful(user);
+                }
+            });
+        });
+        thread.setDaemon(true);
+        thread.start();
     }
 
     /** Toggles the caregiver login form. */

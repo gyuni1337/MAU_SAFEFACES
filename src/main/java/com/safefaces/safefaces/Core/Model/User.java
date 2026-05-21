@@ -33,6 +33,9 @@ public class User {
     /** The file path to the user's profile image. */
     public String imagePath;
 
+    /** The user's home location (e.g. city). */
+    public String location;
+
     /**
      * Default constructor for creating an empty User object.
      */

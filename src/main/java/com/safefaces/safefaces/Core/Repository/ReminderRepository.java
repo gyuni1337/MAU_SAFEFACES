@@ -39,11 +39,10 @@ public class ReminderRepository {
         List<Reminder> list = new ArrayList<>();
 
         String sql = """
-                
-                SELECT title, description, reminder_time, reminder_type
+                SELECT title, description, start_time, end_time, reminder_type
                 FROM safefaces.reminders
                 WHERE user_id = ? AND is_active = true
-                ORDER BY reminder_time ASC
+                ORDER BY start_time ASC
                 """;
         try(Connection conn = DatabaseConnection.getConnection();
         PreparedStatement stmt = conn.prepareStatement(sql)){
@@ -52,9 +51,10 @@ public class ReminderRepository {
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
             Reminder r = new Reminder();
-            r.title = rs.getString("title");
+            r.title       = rs.getString("title");
             r.description = rs.getString("description");
-            r.startTime = rs.getTime("reminder_time");
+            r.startTime   = rs.getTime("start_time");
+            r.endTime     = rs.getTime("end_time");
             list.add(r);
             }
         } catch (SQLException e) {

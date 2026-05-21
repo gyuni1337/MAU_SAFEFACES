@@ -38,11 +38,13 @@ public class UserRepository {
                 if (rs.next()) {
                     User user = new User();
                     user.id        = rs.getInt("id");
-                    user.firstName = rs.getString("name");
+                    user.firstName = rs.getString("first_name");
+                    user.lastName  = rs.getString("last_name");
                     user.age       = rs.getInt("age");
                     user.pinHash   = rs.getString("pin_hash");
                     user.imagePath = rs.getString("image_path");
                     user.role      = RoleType.valueOf(rs.getString("role").toUpperCase());
+                    user.location  = rs.getString("location");
                     return user;
                 }
             }
@@ -59,19 +61,21 @@ public class UserRepository {
      * @throws SQLException if a database access error occurs
      */
     public User getPatientUser() throws SQLException {
-        String sql = "SELECT * FROM users WHERE role = 'user' LIMIT 1";
+        String sql = "SELECT * FROM safefaces.users WHERE UPPER(role) = 'USER' LIMIT 1";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 User user = new User();
-                user.id = rs.getInt("id");
-                user.firstName = rs.getString("name");
+                user.id        = rs.getInt("id");
+                user.firstName = rs.getString("first_name");
+                user.lastName  = rs.getString("last_name");
                 user.age       = rs.getInt("age");
                 user.pinHash   = rs.getString("pin_hash");
                 user.imagePath = rs.getString("image_path");
                 user.role      = RoleType.valueOf(rs.getString("role").toUpperCase());
+                user.location  = rs.getString("location");
                 return user;
             }
         }

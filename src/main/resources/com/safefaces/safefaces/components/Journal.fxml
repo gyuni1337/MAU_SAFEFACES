@@ -64,8 +64,8 @@
                style="-fx-font-size: 16px;" />
     </VBox>
 
-    <!-- Informational or memory aid text -->
-    <Label text="Du är hemma i Malmö"
+    <!-- User's home location -->
+    <Label fx:id="locationLabel"
            wrapText="true"
            style="-fx-font-size: 18px;" />
 </VBox>

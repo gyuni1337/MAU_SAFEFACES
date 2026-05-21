@@ -35342,21 +35342,21 @@ true posixrules
     <table id="6655" parent="890" name="medications">
       <DetailsLevel>2</DetailsLevel>
       <ObjectId>547816</ObjectId>
-      <StateNumber>107171</StateNumber>
+      <StateNumber>553850</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>ar5278</OwnerName>
     </table>
     <table id="6656" parent="890" name="reminders">
       <DetailsLevel>2</DetailsLevel>
       <ObjectId>547846</ObjectId>
-      <StateNumber>107174</StateNumber>
+      <StateNumber>553855</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>ar5278</OwnerName>
     </table>
     <table id="6657" parent="890" name="users">
       <DetailsLevel>2</DetailsLevel>
       <ObjectId>547785</ObjectId>
-      <StateNumber>107170</StateNumber>
+      <StateNumber>553858</StateNumber>
       <AccessMethodId>2</AccessMethodId>
       <OwnerName>ar5278</OwnerName>
     </table>
@@ -80245,19 +80245,13 @@ end_date</ColNames>
       <StateNumber>107170</StateNumber>
       <UnderlyingIndexId>547808</UnderlyingIndexId>
     </key>
-    <check id="18716" parent="6655" name="medications_status_check">
-      <ColNames>status</ColNames>
-      <ObjectId>547823</ObjectId>
-      <Predicate>(status)::text = ANY ((ARRAY[&apos;PENDING&apos;::character varying, &apos;TAKEN&apos;::character varying, &apos;SKIPPED&apos;::character varying])::text[])</Predicate>
-      <StateNumber>107171</StateNumber>
-    </check>
-    <check id="18717" parent="6655" name="medications_time_of_day_check">
+    <check id="18716" parent="6655" name="medications_time_of_day_check">
       <ColNames>time_of_day</ColNames>
       <ObjectId>547822</ObjectId>
       <Predicate>(time_of_day)::text = ANY ((ARRAY[&apos;MORNING&apos;::character varying, &apos;NOON&apos;::character varying, &apos;EVENING&apos;::character varying, &apos;NIGHT&apos;::character varying, &apos;AS_NEEDED&apos;::character varying])::text[])</Predicate>
       <StateNumber>107171</StateNumber>
     </check>
-    <column id="18718" parent="6655" name="id">
+    <column id="18717" parent="6655" name="id">
       <DefaultExpression>nextval(&apos;safefaces.medications_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -80266,47 +80260,47 @@ end_date</ColNames>
       <SequenceId>547815</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="18719" parent="6655" name="user_id">
+    <column id="18718" parent="6655" name="user_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>107171</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="18720" parent="6655" name="name">
+    <column id="18719" parent="6655" name="name">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>107171</StateNumber>
       <StoredType>varchar(200)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="18721" parent="6655" name="dose">
+    <column id="18720" parent="6655" name="dose">
       <Position>4</Position>
       <StateNumber>107171</StateNumber>
       <StoredType>varchar(100)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="18722" parent="6655" name="time_of_day">
+    <column id="18721" parent="6655" name="time_of_day">
       <Position>5</Position>
       <StateNumber>107171</StateNumber>
       <StoredType>varchar(50)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="18723" parent="6655" name="status">
-      <DefaultExpression>&apos;PENDING&apos;::character varying</DefaultExpression>
+    <column id="18722" parent="6655" name="is_active">
+      <DefaultExpression>true</DefaultExpression>
       <Position>6</Position>
-      <StateNumber>107171</StateNumber>
-      <StoredType>varchar(20)|0s</StoredType>
-      <TypeId>1043</TypeId>
+      <StateNumber>553851</StateNumber>
+      <StoredType>boolean|0s</StoredType>
+      <TypeId>16</TypeId>
     </column>
-    <column id="18724" parent="6655" name="created_at">
+    <column id="18723" parent="6655" name="created_at">
       <DefaultExpression>now()</DefaultExpression>
       <Position>7</Position>
       <StateNumber>107171</StateNumber>
       <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <foreign-key id="18725" parent="6655" name="medications_user_id_fkey">
+    <foreign-key id="18724" parent="6655" name="medications_user_id_fkey">
       <ColNames>user_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547826</ObjectId>
@@ -80315,29 +80309,29 @@ end_date</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>547785</RefTableId>
     </foreign-key>
-    <index id="18726" parent="6655" name="medications_pkey">
+    <index id="18725" parent="6655" name="medications_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547824</ObjectId>
       <Primary>1</Primary>
-      <StateNumber>107171</StateNumber>
+      <StateNumber>553850</StateNumber>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="18727" parent="6655" name="medications_pkey">
+    <key id="18726" parent="6655" name="medications_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547825</ObjectId>
       <Primary>1</Primary>
       <StateNumber>107171</StateNumber>
       <UnderlyingIndexId>547824</UnderlyingIndexId>
     </key>
-    <check id="18728" parent="6656" name="reminders_reminder_type_check">
+    <check id="18727" parent="6656" name="reminders_reminder_type_check">
       <ColNames>reminder_type</ColNames>
       <ObjectId>547853</ObjectId>
       <Predicate>(reminder_type)::text = ANY ((ARRAY[&apos;PERSONAL&apos;::character varying, &apos;MEDICATION&apos;::character varying, &apos;CAREGIVER&apos;::character varying])::text[])</Predicate>
       <StateNumber>107174</StateNumber>
     </check>
-    <column id="18729" parent="6656" name="id">
+    <column id="18728" parent="6656" name="id">
       <DefaultExpression>nextval(&apos;safefaces.reminders_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -80346,53 +80340,59 @@ end_date</ColNames>
       <SequenceId>547845</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="18730" parent="6656" name="user_id">
+    <column id="18729" parent="6656" name="user_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>107174</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="18731" parent="6656" name="title">
+    <column id="18730" parent="6656" name="title">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>107174</StateNumber>
       <StoredType>varchar(200)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="18732" parent="6656" name="description">
+    <column id="18731" parent="6656" name="description">
       <Position>4</Position>
       <StateNumber>107174</StateNumber>
       <StoredType>text|0s</StoredType>
       <TypeId>25</TypeId>
     </column>
-    <column id="18733" parent="6656" name="reminder_type">
+    <column id="18732" parent="6656" name="reminder_type">
       <DefaultExpression>&apos;personal&apos;::character varying</DefaultExpression>
       <Position>5</Position>
       <StateNumber>107174</StateNumber>
       <StoredType>varchar(20)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="18734" parent="6656" name="reminder_time">
+    <column id="18733" parent="6656" name="start_time">
       <NotNull>1</NotNull>
       <Position>6</Position>
-      <StateNumber>107174</StateNumber>
+      <StateNumber>553854</StateNumber>
       <StoredType>time|0s</StoredType>
       <TypeId>1083</TypeId>
     </column>
-    <column id="18735" parent="6656" name="is_active">
+    <column id="18734" parent="6656" name="is_active">
       <DefaultExpression>true</DefaultExpression>
       <Position>7</Position>
       <StateNumber>107174</StateNumber>
       <StoredType>boolean|0s</StoredType>
       <TypeId>16</TypeId>
     </column>
-    <column id="18736" parent="6656" name="created_at">
+    <column id="18735" parent="6656" name="created_at">
       <DefaultExpression>now()</DefaultExpression>
       <Position>8</Position>
       <StateNumber>107174</StateNumber>
       <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
+    </column>
+    <column id="18736" parent="6656" name="end_time">
+      <Position>9</Position>
+      <StateNumber>553855</StateNumber>
+      <StoredType>time|0s</StoredType>
+      <TypeId>1083</TypeId>
     </column>
     <foreign-key id="18737" parent="6656" name="reminders_user_id_fkey">
       <ColNames>user_id</ColNames>
@@ -80434,10 +80434,10 @@ end_date</ColNames>
       <SequenceId>547784</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="18742" parent="6657" name="name">
+    <column id="18742" parent="6657" name="first_name">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StateNumber>107167</StateNumber>
+      <StateNumber>553828</StateNumber>
       <StoredType>varchar(100)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
@@ -80468,27 +80468,33 @@ end_date</ColNames>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="18747" parent="6657" name="medications">
-      <Position>7</Position>
-      <StateNumber>107167</StateNumber>
-      <StoredType>text|0s</StoredType>
-      <TypeId>25</TypeId>
-    </column>
-    <column id="18748" parent="6657" name="role">
+    <column id="18747" parent="6657" name="role">
       <DefaultExpression>&apos;user&apos;::character varying</DefaultExpression>
       <Position>8</Position>
       <StateNumber>107167</StateNumber>
       <StoredType>varchar(20)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="18749" parent="6657" name="created_at">
+    <column id="18748" parent="6657" name="created_at">
       <DefaultExpression>now()</DefaultExpression>
       <Position>9</Position>
       <StateNumber>107167</StateNumber>
       <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <index id="18750" parent="6657" name="users_pkey">
+    <column id="18749" parent="6657" name="last_name">
+      <Position>10</Position>
+      <StateNumber>553829</StateNumber>
+      <StoredType>varchar|0s</StoredType>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="18750" parent="6657" name="location">
+      <Position>11</Position>
+      <StateNumber>553862</StateNumber>
+      <StoredType>varchar|0s</StoredType>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="18751" parent="6657" name="users_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547795</ObjectId>
@@ -80497,7 +80503,7 @@ end_date</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <index id="18751" parent="6657" name="users_username_key">
+    <index id="18752" parent="6657" name="users_username_key">
       <ColNames>username</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547797</ObjectId>
@@ -80508,20 +80514,20 @@ end_date</ColNames>
       <CollationIds>100</CollationIds>
       <CollationParentNames>pg_catalog</CollationParentNames>
     </index>
-    <key id="18752" parent="6657" name="users_pkey">
+    <key id="18753" parent="6657" name="users_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547796</ObjectId>
       <Primary>1</Primary>
       <StateNumber>107167</StateNumber>
       <UnderlyingIndexId>547795</UnderlyingIndexId>
     </key>
-    <key id="18753" parent="6657" name="users_username_key">
+    <key id="18754" parent="6657" name="users_username_key">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547798</ObjectId>
       <StateNumber>107167</StateNumber>
       <UnderlyingIndexId>547797</UnderlyingIndexId>
     </key>
-    <column id="18754" parent="6658" name="id">
+    <column id="18755" parent="6658" name="id">
       <DefaultExpression>nextval(&apos;safefaces.voice_messages_id_seq&apos;::regclass)</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -80530,34 +80536,34 @@ end_date</ColNames>
       <SequenceId>547831</SequenceId>
       <TypeId>23</TypeId>
     </column>
-    <column id="18755" parent="6658" name="contact_id">
+    <column id="18756" parent="6658" name="contact_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
       <StateNumber>107172</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="18756" parent="6658" name="file_path">
+    <column id="18757" parent="6658" name="file_path">
       <NotNull>1</NotNull>
       <Position>3</Position>
       <StateNumber>107172</StateNumber>
       <StoredType>varchar(300)|0s</StoredType>
       <TypeId>1043</TypeId>
     </column>
-    <column id="18757" parent="6658" name="duration_sec">
+    <column id="18758" parent="6658" name="duration_sec">
       <Position>4</Position>
       <StateNumber>107172</StateNumber>
       <StoredType>integer|0s</StoredType>
       <TypeId>23</TypeId>
     </column>
-    <column id="18758" parent="6658" name="created_at">
+    <column id="18759" parent="6658" name="created_at">
       <DefaultExpression>now()</DefaultExpression>
       <Position>5</Position>
       <StateNumber>107172</StateNumber>
       <StoredType>timestamp|0s</StoredType>
       <TypeId>1114</TypeId>
     </column>
-    <foreign-key id="18759" parent="6658" name="voice_messages_contact_id_fkey">
+    <foreign-key id="18760" parent="6658" name="voice_messages_contact_id_fkey">
       <ColNames>contact_id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547839</ObjectId>
@@ -80566,7 +80572,7 @@ end_date</ColNames>
       <RefKeyColPositions>1</RefKeyColPositions>
       <RefTableId>547800</RefTableId>
     </foreign-key>
-    <index id="18760" parent="6658" name="voice_messages_pkey">
+    <index id="18761" parent="6658" name="voice_messages_pkey">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547837</ObjectId>
@@ -80575,7 +80581,7 @@ end_date</ColNames>
       <Unique>1</Unique>
       <AccessMethodId>403</AccessMethodId>
     </index>
-    <key id="18761" parent="6658" name="voice_messages_pkey">
+    <key id="18762" parent="6658" name="voice_messages_pkey">
       <NameSurrogate>1</NameSurrogate>
       <ObjectId>547838</ObjectId>
       <Primary>1</Primary>

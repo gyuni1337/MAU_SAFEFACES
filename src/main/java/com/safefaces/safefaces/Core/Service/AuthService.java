@@ -1,6 +1,5 @@
 package com.safefaces.safefaces.Core.Service;
 
-import com.safefaces.safefaces.Core.Model.Enums.RoleType;
 import com.safefaces.safefaces.Core.Model.User;
 import com.safefaces.safefaces.Core.Repository.UserRepository;
 import org.mindrot.jbcrypt.BCrypt;
@@ -73,14 +72,4 @@ public class AuthService {
         return BCrypt.hashpw(pin, BCrypt.gensalt());
     }
 
-    /** Returns the fallback demo user used when the DB is unavailable. */
-    public User getDemoUser() {
-        User demo = new User();
-        demo.id        = 1;
-        demo.firstName = "Henry";
-        demo.imagePath = "oldmanexample.jpg";
-        demo.role      = RoleType.USER;
-        demo.pinHash   = "";
-        return demo;
-    }
 }

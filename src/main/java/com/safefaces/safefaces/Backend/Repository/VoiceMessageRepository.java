@@ -53,27 +53,21 @@ public class VoiceMessageRepository {
     public int save(int contactId, String filePath,int durationSec) {
         String sql =
                 """
-                INSERT INTO safefaces.
-                (contact_id, file_path, duration_se
-                VALUES
-                 """;
+                INSERT INTO safefaces.voice_messages (contact_id, file_path, duration_sec)
+                VALUES (?, ?, ?) RETURNING id
+                """;
 
-        try(Connection conn = DatabaseConnection.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)){
-            stmt.setInt(1,contactId);
-            stmt.setString(2 ,filePath);
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, contactId);
+            stmt.setString(2, filePath);
             stmt.setInt(3, durationSec);
-            ResultSet rs = stmt.executeQuery() ;
-            if(rs.next()) return rs.getInt("id");
-
-
-    }catch (SQLException e){
-            System.out.println(" Error in save: " + e.getMessage(
-
-        ));
-
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error in save: " + e.getMessage());
+        }
+        return -1;
     }
-     return -1;
-
-  }
 }

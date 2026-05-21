@@ -10,7 +10,7 @@ package com.safefaces.safefaces.Javafx.Model;
  *
  * @author Emma Yousif
  */
-public class RelativeUser extends User {
+public class RelativeUser extends UserViewModel {
 
     /**
      * Sets up the UI view associated with a relative user.

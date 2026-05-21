@@ -63,8 +63,8 @@ public class MainController {
     /**
      * Displays the profile view.
      */
-    public void showProfile() {
-        loadView("/com/safefaces/safefaces/components/Profile.fxml");
+    public void showJournal() {
+        loadView("/com/safefaces/safefaces/components/Journal.fxml");
     }
 
     /**

@@ -24,7 +24,8 @@ module com.safefaces.safefaces {
     exports com.safefaces.safefaces.Backend;
     opens com.safefaces.safefaces.Backend to javafx.fxml;
 
-    //kopplat till repositories and databas
+    exports com.safefaces.safefaces.Backend.Model;
+    opens com.safefaces.safefaces.Backend.Model to javafx.fxml;
     exports com.safefaces.safefaces.Backend.Repository;
     opens com.safefaces.safefaces.Backend.Repository to javafx.fxml;
     exports com.safefaces.safefaces.Backend.Service;

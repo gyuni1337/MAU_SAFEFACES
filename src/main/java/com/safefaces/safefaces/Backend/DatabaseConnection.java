@@ -1,61 +1,63 @@
 package com.safefaces.safefaces.Backend;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
- * Utility class responsible for managing the database connection.
- * Provides methods to establish and close a connection to the PostgreSQL database.
- *
- * This class uses a singleton-like approach to reuse a single connection instance.
+ * Utility class that manages the PostgreSQL database connection.
+ * Credentials and connection parameters are loaded from
+ * {@code /Encrypted_data/config.properties} on the classpath.
  *
  * @author Noor Nabi
  * @author Gyundyuz Sadulov
  */
 public class DatabaseConnection {
 
-    /** Database host address. */
-    private static final String HOST = "postgres.mau.se";
+    private static final String URL;
+    private static final String USER;
+    private static final String PASSWORD;
 
-    /** Database port number. */
-    private static final String PORT = "55432";
+    static {
+        Properties props = new Properties();
+        try (InputStream in = DatabaseConnection.class
+                .getResourceAsStream("/Encrypted_data/config.properties")) {
+            if (in == null) {
+                throw new ExceptionInInitializerError(
+                        "config.properties not found on classpath");
+            }
+            props.load(in);
+        } catch (IOException e) {
+            throw new ExceptionInInitializerError(
+                    "Cannot load database config: " + e.getMessage());
+        }
 
-    /** Database name. */
-    private static final String DATABASE = "ar5278";
-
-    /** Database username. */
-    private static final String USER = "ar5278";
-
-    /** Database password. */
-    private static final String PASSWORD = "43h3y67g";  //OK då det som finns i tabellerna är testdata
-
-    /** Complete JDBC connection URL. */
-    private static final String URL = "jdbc:postgresql://" + HOST
-            + ":" + PORT + "/"
-            + DATABASE + "?currentSchema=safefaces"
-            + "&socketTimeout=30000" // 30 sek
-            + "&connectTimeout=10000"; // 10 sek
-//            + "&options=-c%20idle_in_transaction_session_timeout%3D30000";
-
-    /** Cached connection instance. */
-    private static Connection connection;
-
-    /**
-     * Private constructor to prevent instantiation of this utility class.
-     */
-    private DatabaseConnection() {
+        String host     = props.getProperty("db.host");
+        String port     = props.getProperty("db.port");
+        String database = props.getProperty("db.database");
+        String schema   = props.getProperty("db.schema");
+        USER     = props.getProperty("db.username");
+        PASSWORD = props.getProperty("db.password");
+        URL = "jdbc:postgresql://" + host + ":" + port + "/" + database
+                + "?currentSchema=" + schema
+                + "&socketTimeout=30000"
+                + "&connectTimeout=10000";
     }
 
+    private static Connection connection;
+
+    private DatabaseConnection() {}
+
     /**
-     * Returns an active database connection.
-     * If no connection exists or if it has been closed, a new connection is created.
+     * Returns an active database connection, creating one if needed.
      *
      * @return a valid {@link Connection} to the database
      * @throws SQLException if a database access error occurs
      */
     public static Connection getConnection() throws SQLException {
-
         if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
         }
@@ -63,8 +65,7 @@ public class DatabaseConnection {
     }
 
     /**
-     * Closes the current database connection if it exists.
-     * Prints an error message if the connection cannot be closed.
+     * Closes the current database connection if open.
      */
     public static void closeConnection() {
         if (connection != null) {

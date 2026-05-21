@@ -1,8 +1,8 @@
 package com.safefaces.safefaces.Javafx.Controller;
 
-import com.safefaces.safefaces.Backend.Model.Enums.RoleType;
-import com.safefaces.safefaces.Backend.Model.User;
-import com.safefaces.safefaces.Backend.Service.AuthService;
+import com.safefaces.safefaces.Core.Model.Enums.RoleType;
+import com.safefaces.safefaces.Core.Model.User;
+import com.safefaces.safefaces.Core.Service.AuthService;
 import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import javafx.animation.PauseTransition;
@@ -76,7 +76,7 @@ public class LoginController {
             Platform.runLater(() -> {
                 if (user == null) {
                     System.out.println("DB returned null. Demo user in use.");
-                    loginSuccessful(createDemoUser());
+                    loginSuccessful(authService.getDemoUser());
                 } else {
                     loginSuccessful(user);
                 }
@@ -118,16 +118,14 @@ public class LoginController {
             User user = authService.faceIdLogin();
             Platform.runLater(() -> {
                 if (user == null) {
-                    if ("1234".equals(pin)) {
-                        loginSuccessful(createDemoUser());
-                    } else {
+                    if (authService.verifyPin(authService.getDemoUser(), pin)) { loginSuccessful(authService.getDemoUser()); }
+                     else {
                         setStatus("Felaktig PIN-kod. Vänligen försök igen.");
                         pinField.clear();
                     }
                     return;
                 }
-                String hashedInput = AuthService.hashPin(pin);
-                if (hashedInput.equals(user.pinHash)) {
+            if (authService.verifyPin(user, pin)) {
                     loginSuccessful(user);
                 } else {
                     setStatus("Wrong pin code. Try again.");
@@ -202,18 +200,4 @@ public class LoginController {
         System.out.println("Status: " + msg);
     }
 
-    /**
-     * Creates a demo user used when no user is returned from the database.
-     *
-     * @return a mock {@link User} object
-     */
-    private User createDemoUser() {
-        User demo = new User();
-        demo.id        = 1;
-        demo.firstName = "Henry";
-        demo.imagePath = "oldmanexample.jpg";
-        demo.role      = RoleType.USER;
-        demo.pinHash   = "";
-        return demo;
-    }
 }

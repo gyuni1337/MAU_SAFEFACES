@@ -1,7 +1,7 @@
 package com.safefaces.safefaces.Javafx.Controller;
 
 import com.safefaces.safefaces.Javafx.App.AppState;
-import com.safefaces.safefaces.Backend.Model.User;
+import com.safefaces.safefaces.Core.Model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

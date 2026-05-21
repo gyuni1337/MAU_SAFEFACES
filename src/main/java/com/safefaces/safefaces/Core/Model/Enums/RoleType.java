@@ -1,4 +1,4 @@
-package com.safefaces.safefaces.Backend.Model.Enums;
+package com.safefaces.safefaces.Core.Model.Enums;
 
 public enum RoleType {
     USER,

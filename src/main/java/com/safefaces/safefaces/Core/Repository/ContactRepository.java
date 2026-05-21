@@ -1,7 +1,7 @@
-package com.safefaces.safefaces.Backend.Repository;
+package com.safefaces.safefaces.Core.Repository;
 
-import com.safefaces.safefaces.Backend.DatabaseConnection;
-import com.safefaces.safefaces.Backend.Model.Contact;
+import com.safefaces.safefaces.Core.DatabaseConnection;
+import com.safefaces.safefaces.Core.Model.Contact;
 
 import java.sql.*;
 import java.util.ArrayList;

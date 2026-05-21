@@ -1,5 +1,5 @@
-package com.safefaces.safefaces.Backend.Repository;
-import com.safefaces.safefaces.Backend.DatabaseConnection;
+package com.safefaces.safefaces.Core.Repository;
+import com.safefaces.safefaces.Core.DatabaseConnection;
 
 import java.sql.*;
 

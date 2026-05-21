@@ -1,6 +1,6 @@
-package com.safefaces.safefaces.Backend.Service;
-import com.safefaces.safefaces.Backend.Model.Reminder;
-import com.safefaces.safefaces.Backend.Repository.ReminderRepository;
+package com.safefaces.safefaces.Core.Service;
+import com.safefaces.safefaces.Core.Model.Reminder;
+import com.safefaces.safefaces.Core.Repository.ReminderRepository;
 import java.util.List;
 
 /**

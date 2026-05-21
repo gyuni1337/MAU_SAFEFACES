@@ -1,4 +1,4 @@
-package com.safefaces.safefaces.Backend;
+package com.safefaces.safefaces.Core;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,14 +17,19 @@ import java.util.Properties;
  */
 public class DatabaseConnection {
 
+
     private static final String URL;
     private static final String USER;
     private static final String PASSWORD;
 
+    private static Connection connection;
+
+    private DatabaseConnection() {}
+
     static {
         Properties props = new Properties();
         try (InputStream in = DatabaseConnection.class
-                .getResourceAsStream("/Encrypted_data/config.properties")) {
+                .getResourceAsStream("/dbdata/config.properties")) {
             if (in == null) {
                 throw new ExceptionInInitializerError(
                         "config.properties not found on classpath");
@@ -47,9 +52,6 @@ public class DatabaseConnection {
                 + "&connectTimeout=10000";
     }
 
-    private static Connection connection;
-
-    private DatabaseConnection() {}
 
     /**
      * Returns an active database connection, creating one if needed.

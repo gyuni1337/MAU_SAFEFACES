@@ -1,6 +1,6 @@
-package com.safefaces.safefaces.Backend.Model;
+package com.safefaces.safefaces.Core.Model;
 
-import com.safefaces.safefaces.Backend.Model.Enums.RoleType;
+import com.safefaces.safefaces.Core.Model.Enums.RoleType;
 
 /**
  * Represents a user within the system.

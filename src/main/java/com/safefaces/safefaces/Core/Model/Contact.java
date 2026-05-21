@@ -1,4 +1,4 @@
-package com.safefaces.safefaces.Backend.Model;
+package com.safefaces.safefaces.Core.Model;
 
 /**
  * Represents a contact in the application.

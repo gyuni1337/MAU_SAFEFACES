@@ -1,6 +1,6 @@
-package com.safefaces.safefaces.Backend.Repository;
-import com.safefaces.safefaces.Backend.Model.Reminder;
-import com.safefaces.safefaces.Backend.DatabaseConnection;
+package com.safefaces.safefaces.Core.Repository;
+import com.safefaces.safefaces.Core.Model.Reminder;
+import com.safefaces.safefaces.Core.DatabaseConnection;
 import java.sql.*;
 import java.util.AbstractList;
 import java.util.ArrayList;

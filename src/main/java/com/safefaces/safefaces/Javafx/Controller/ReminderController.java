@@ -1,6 +1,6 @@
 package com.safefaces.safefaces.Javafx.Controller;
-import com.safefaces.safefaces.Backend.Model.Reminder;
-import com.safefaces.safefaces.Backend.Service.ReminderService;
+import com.safefaces.safefaces.Core.Model.Reminder;
+import com.safefaces.safefaces.Core.Service.ReminderService;
 import com.safefaces.safefaces.Javafx.App.AppState;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;

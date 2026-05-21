@@ -1,4 +1,4 @@
-package com.safefaces.safefaces.Backend.Model;
+package com.safefaces.safefaces.Core.Model;
 
 import java.sql.Time;
 

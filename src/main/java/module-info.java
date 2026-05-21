@@ -21,13 +21,13 @@ module com.safefaces.safefaces {
     opens com.safefaces.safefaces.Javafx.View to javafx.fxml;
     exports com.safefaces.safefaces.Javafx.App;
     opens com.safefaces.safefaces.Javafx.App to javafx.fxml;
-    exports com.safefaces.safefaces.Backend;
-    opens com.safefaces.safefaces.Backend to javafx.fxml;
+    exports com.safefaces.safefaces.Core;
+    opens com.safefaces.safefaces.Core to javafx.fxml;
 
-    exports com.safefaces.safefaces.Backend.Model;
-    opens com.safefaces.safefaces.Backend.Model to javafx.fxml;
-    exports com.safefaces.safefaces.Backend.Repository;
-    opens com.safefaces.safefaces.Backend.Repository to javafx.fxml;
-    exports com.safefaces.safefaces.Backend.Service;
-    opens com.safefaces.safefaces.Backend.Service to javafx.fxml;
+    exports com.safefaces.safefaces.Core.Model;
+    opens com.safefaces.safefaces.Core.Model to javafx.fxml;
+    exports com.safefaces.safefaces.Core.Repository;
+    opens com.safefaces.safefaces.Core.Repository to javafx.fxml;
+    exports com.safefaces.safefaces.Core.Service;
+    opens com.safefaces.safefaces.Core.Service to javafx.fxml;
 }

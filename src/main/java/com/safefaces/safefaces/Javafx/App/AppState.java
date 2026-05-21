@@ -1,6 +1,6 @@
 package com.safefaces.safefaces.Javafx.App;
 
-import com.safefaces.safefaces.Backend.Model.User;
+import com.safefaces.safefaces.Core.Model.User;
 
 /**
  * Singleton class that manages the global application state.

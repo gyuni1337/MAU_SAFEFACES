@@ -1,6 +1,6 @@
 package com.safefaces.safefaces.Javafx.Controller;
-import com.safefaces.safefaces.Backend.Model.Contact;
-import com.safefaces.safefaces.Backend.Service.ContactService;
+import com.safefaces.safefaces.Core.Model.Contact;
+import com.safefaces.safefaces.Core.Service.ContactService;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;

@@ -1,7 +1,8 @@
-package com.safefaces.safefaces.Backend.Service;
+package com.safefaces.safefaces.Core.Service;
 
-import com.safefaces.safefaces.Backend.Model.User;
-import com.safefaces.safefaces.Backend.Repository.UserRepository;
+import com.safefaces.safefaces.Core.Model.Enums.RoleType;
+import com.safefaces.safefaces.Core.Model.User;
+import com.safefaces.safefaces.Core.Repository.UserRepository;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -74,5 +75,20 @@ public class AuthService {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("SHA-256 saknas", e);
         }
+    }
+
+
+    public boolean verifyPin(User user, String pin) {
+        return hashPin(pin).equals(user.pinHash);
+    }
+
+    public User getDemoUser() {
+        User demo = new User();
+        demo.id        = 1;
+        demo.firstName = "Henry";
+        demo.imagePath = "oldmanexample.jpg";
+        demo.role      = RoleType.USER;
+        demo.pinHash   = "";
+        return demo;
     }
 }

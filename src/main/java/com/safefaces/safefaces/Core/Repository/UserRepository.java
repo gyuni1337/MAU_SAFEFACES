@@ -1,8 +1,8 @@
-package com.safefaces.safefaces.Backend.Repository;
+package com.safefaces.safefaces.Core.Repository;
 
-import com.safefaces.safefaces.Backend.DatabaseConnection;
-import com.safefaces.safefaces.Backend.Model.Enums.RoleType;
-import com.safefaces.safefaces.Backend.Model.User;
+import com.safefaces.safefaces.Core.DatabaseConnection;
+import com.safefaces.safefaces.Core.Model.Enums.RoleType;
+import com.safefaces.safefaces.Core.Model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

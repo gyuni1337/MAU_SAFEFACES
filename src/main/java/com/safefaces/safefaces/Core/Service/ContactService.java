@@ -1,7 +1,7 @@
-package com.safefaces.safefaces.Backend.Service;
+package com.safefaces.safefaces.Core.Service;
 
-import com.safefaces.safefaces.Backend.Model.Contact;
-import com.safefaces.safefaces.Backend.Repository.ContactRepository;
+import com.safefaces.safefaces.Core.Model.Contact;
+import com.safefaces.safefaces.Core.Repository.ContactRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

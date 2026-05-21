@@ -32,21 +32,19 @@ public class UserRepository {
         String sql = "SELECT * FROM users WHERE username = ?";
 
         Connection conn = DatabaseConnection.getConnection();
-        try (PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
-
-            if (rs.next()) {
-                User user = new User();
-                user.id = rs.getInt("id");
-                user.firstName = rs.getString("name");
-                user.age = rs.getInt("age");
-                user.pinHash = rs.getString("pin_hash");
-                user.imagePath = rs.getString("image_path");
-                user.role = RoleType.valueOf(rs.getString("role").toUpperCase());
-
-                return user;
-
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    User user = new User();
+                    user.id        = rs.getInt("id");
+                    user.firstName = rs.getString("name");
+                    user.age       = rs.getInt("age");
+                    user.pinHash   = rs.getString("pin_hash");
+                    user.imagePath = rs.getString("image_path");
+                    user.role      = RoleType.valueOf(rs.getString("role").toUpperCase());
+                    return user;
+                }
             }
         }
         return null;
@@ -70,10 +68,10 @@ public class UserRepository {
                 User user = new User();
                 user.id = rs.getInt("id");
                 user.firstName = rs.getString("name");
-                user.age = rs.getInt("age");
-                user.pinHash = rs.getString("pin_hash");
+                user.age       = rs.getInt("age");
+                user.pinHash   = rs.getString("pin_hash");
                 user.imagePath = rs.getString("image_path");
-                user.role = RoleType.valueOf(rs.getString("role").toUpperCase());
+                user.role      = RoleType.valueOf(rs.getString("role").toUpperCase());
                 return user;
             }
         }

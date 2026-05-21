@@ -1,6 +1,7 @@
 package com.safefaces.safefaces.Javafx.Controller;
 import com.safefaces.safefaces.Core.Model.Contact;
 import com.safefaces.safefaces.Core.Service.ContactService;
+import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -34,7 +35,7 @@ import java.util.Objects;
  */
 public class ContactController {
 
-    /** Container for displaying the list of contacts. */
+    @FXML private Label greetingLabel;
     @FXML private VBox contactListBox;
 
     /** Service used to fetch contact data. */
@@ -49,6 +50,8 @@ public class ContactController {
      */
     @FXML
     public void initialize() {
+        var user = AppState.getInstance().getCurrentUser();
+        if (user != null) greetingLabel.setText("Hej, " + user.firstName + "!");
         buildContactList();
     }
 

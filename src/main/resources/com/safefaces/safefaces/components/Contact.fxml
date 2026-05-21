@@ -24,7 +24,7 @@
     </padding>
 
     <!-- Greeting message displayed at the top -->
-    <Label text="Hej, Henry!"
+    <Label fx:id="greetingLabel"
            style="-fx-font-size:28; -fx-font-weight:bold;"/>
 
     <!-- Section title for the contact list -->

@@ -11,6 +11,7 @@ module com.safefaces.safefaces {
     requires  javafx.media;
 
     requires org.postgresql.jdbc;
+    requires org.mindrot.jbcrypt;
 
     opens com.safefaces.safefaces to javafx.fxml;
     exports com.safefaces.safefaces.Javafx.Model;

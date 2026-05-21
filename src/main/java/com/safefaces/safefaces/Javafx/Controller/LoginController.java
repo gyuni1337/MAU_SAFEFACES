@@ -1,30 +1,23 @@
 package com.safefaces.safefaces.Javafx.Controller;
 
-import com.safefaces.safefaces.Core.Model.Enums.RoleType;
 import com.safefaces.safefaces.Core.Model.User;
 import com.safefaces.safefaces.Core.Service.AuthService;
 import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
-import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /**
- * Controller class responsible for handling user authentication UI logic.
- * Supports login via Face ID, fingerprint, and PIN code.
- *
- * This class coordinates between the UI and the {@link AuthService},
- * manages asynchronous login operations, and handles navigation
- * after successful authentication.
+ * Controller for the login screen.
+ * Handles login as demo User and login as Vårdgivare (username + PIN).
  *
  * @author Noor Nabi
  * @author Gyundyuz Sadulov
@@ -32,172 +25,92 @@ import javafx.util.Duration;
 public class LoginController {
 
     @FXML private Label statusLabel;
-    @FXML private VBox fingerprintBox;
-    @FXML private Button fingerprintBtn;
-    @FXML private VBox pinBox;
+    @FXML private VBox caregiverBox;
+    @FXML private TextField usernameField;
     @FXML private PasswordField pinField;
 
-    /** Service used for authentication logic. */
     private final AuthService authService = new AuthService();
 
-    /** Timestamp used to measure initialization time. */
-    private final long initTime = System.currentTimeMillis();
-
-    /**
-     * Initializes the login view after the FXML is loaded.
-     * Sets up the UI and starts the simulated Face ID process.
-     */
     @FXML
     public void initialize() {
-        if (fingerprintBox != null) fingerprintBox.setVisible(false);
-        if (fingerprintBtn != null) {
-            fingerprintBtn.setVisible(false);
-            fingerprintBtn.setMinWidth(48);
-            fingerprintBtn.setMinHeight(48);
-        }
-        if (pinBox != null) pinBox.setVisible(false);
+        // nothing to auto-start — user picks login method
 
-        setStatus("Scanning face...");
-        PauseTransition pause = new PauseTransition(Duration.seconds(2));
-        pause.setOnFinished(event -> fetchUserInBackground());
-        pause.play();
+        System.out.println(AuthService.hashPin("1234"));
     }
 
-    /**
-     * Fetches user data asynchronously to simulate Face ID authentication.
-     * Avoids blocking the JavaFX UI thread.
-     */
-    private void fetchUserInBackground() {
-        setStatus("Verifierar...");
-
-        Thread dbThread = new Thread(() -> {
-            User user = authService.faceIdLogin();
-
-            Platform.runLater(() -> {
-                if (user == null) {
-                    System.out.println("DB returned null. Demo user in use.");
-                    loginSuccessful(authService.getDemoUser());
-                } else {
-                    loginSuccessful(user);
-                }
-            });
-        });
-
-        dbThread.setDaemon(true);
-        dbThread.start();
-    }
-
-    /**
-     * Handles fingerprint login action triggered by the user.
-     * Simulates scanning and then performs authentication.
-     */
+    /** Logs in immediately as the demo user. */
     @FXML
-    private void handleFingerprintLogin() {
-        setStatus("Scanning fingerprint...");
-        if (fingerprintBtn != null) fingerprintBtn.setDisable(true);
-        PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
-        pause.setOnFinished(event ->
-                fetchUserInBackground());
-        pause.play();
+    private void handleUserLogin() {
+        loginSuccessful(authService.getDemoUser());
     }
 
-    /**
-     * Handles login using a PIN code entered by the user.
-     * Validates input and checks the hashed PIN against stored data.
-     */
+    /** Toggles the caregiver login form. */
     @FXML
-    private void handlePinLogin() {
-        if (pinField == null) return;
+    private void handleShowCaregiverLogin() {
+        boolean show = !caregiverBox.isVisible();
+        caregiverBox.setVisible(show);
+        caregiverBox.setManaged(show);
+        setStatus("");
+    }
+
+    /** Submits the caregiver username + PIN to AuthService. */
+    @FXML
+    private void handleCaregiverSubmit() {
+        String username = usernameField.getText().trim();
         String pin = pinField.getText().trim();
-        if (pin.isEmpty()) {
-            setStatus("Ange PIN-kod.");
+
+        if (username.isEmpty() || pin.isEmpty()) {
+            setStatus("Fyll i användarnamn och PIN-kod.");
             return;
         }
 
-        Thread dbThread = new Thread(() -> {
-            User user = authService.faceIdLogin();
+        setStatus("Verifierar...");
+
+        Thread thread = new Thread(() -> {
+            User user = authService.login(username, pin);
             Platform.runLater(() -> {
                 if (user == null) {
-                    if (authService.verifyPin(authService.getDemoUser(), pin)) { loginSuccessful(authService.getDemoUser()); }
-                     else {
-                        setStatus("Felaktig PIN-kod. Vänligen försök igen.");
-                        pinField.clear();
-                    }
-                    return;
-                }
-            if (authService.verifyPin(user, pin)) {
-                    loginSuccessful(user);
-                } else {
-                    setStatus("Wrong pin code. Try again.");
+                    setStatus("Felaktigt användarnamn eller PIN-kod.");
                     pinField.clear();
+                } else {
+                    loginSuccessful(user);
                 }
             });
         });
-        dbThread.setDaemon(true);
-        dbThread.start();
+        thread.setDaemon(true);
+        thread.start();
     }
 
-    /**
-     * Handles successful login by storing the user in the application state
-     * and navigating to the home view.
-     *
-     * @param user the authenticated {@link User}
-     */
     private void loginSuccessful(User user) {
         AppState.getInstance().setCurrentUser(user);
-        long elapsed = System.currentTimeMillis() - initTime;
         navigateToHome();
     }
 
-    /**
-     * Navigates to the home view after successful login.
-     * Initializes the session manager for inactivity tracking.
-     */
     private void navigateToHome() {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/safefaces/safefaces/HomeView.fxml"));
             Parent root = loader.load();
             Stage stage = getStage();
-            if (stage == null) {
-                return;
-            }
-
+            if (stage == null) return;
             stage.setScene(new Scene(root, 400, 640));
             stage.show();
             SessionManager.start(stage);
         } catch (Exception e) {
-            setStatus("Nivigation err: " + e.getMessage());
+            setStatus("Navigationsfel: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
-    /**
-     * Retrieves the current application stage from available UI components.
-     *
-     * @return the current {@link Stage}, or {@code null} if not available
-     */
     private Stage getStage() {
         if (statusLabel != null && statusLabel.getScene() != null)
             return (Stage) statusLabel.getScene().getWindow();
-
         if (pinField != null && pinField.getScene() != null)
             return (Stage) pinField.getScene().getWindow();
-
-        if (fingerprintBtn != null && fingerprintBtn.getScene() != null)
-            return (Stage) fingerprintBtn.getScene().getWindow();
-
         return null;
     }
 
-    /**
-     * Updates the status label in the UI and logs the message.
-     *
-     * @param msg the message to display
-     */
     private void setStatus(String msg) {
         if (statusLabel != null) statusLabel.setText(msg);
-        System.out.println("Status: " + msg);
     }
-
 }

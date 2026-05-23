@@ -14,6 +14,12 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.animation.PauseTransition;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for the login screen.
@@ -28,6 +34,7 @@ public class LoginController {
     @FXML private VBox caregiverBox;
     @FXML private TextField usernameField;
     @FXML private PasswordField pinField;
+    @FXML private PauseTransition autoLoginTimer;
 
     private final AuthService authService = new AuthService();
 

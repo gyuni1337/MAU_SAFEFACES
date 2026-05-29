@@ -17,12 +17,8 @@ import javafx.scene.shape.Circle;
 
 import java.util.List;
 
-/**
- * Controller for the profile/journal view.
- * Displays user info, location, and medications fetched from the database.
- *
- * @author Emma Yousif
- */
+// Profilsidan — visar info om inloggad användare,
+// beter sig lite olika beroende på om det är en vårdgivare eller vanlig user
 public class ProfileController {
 
     @FXML private Label nameLabel;

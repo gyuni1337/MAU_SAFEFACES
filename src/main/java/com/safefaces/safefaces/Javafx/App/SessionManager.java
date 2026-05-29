@@ -60,17 +60,12 @@ public class SessionManager {
         return mainStage;
     }
 
-    /**
-     * Logs out the current user immediately and redirects to the login view.
-     */
+    // anropas från logout-knappen på profilsidan
     public static void logout() {
         expireSession();
     }
 
-    /**
-     * Expires the current session by logging out the user
-     * and redirecting to the login view.
-     */
+    // samma kod används för både manuell logout och inaktivitets-timeout
     private static void expireSession() {
         AppState.getInstance().logout();
         try {

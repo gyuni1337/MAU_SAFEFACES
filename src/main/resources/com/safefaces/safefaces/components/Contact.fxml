@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Imports for layout and controls -->
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<!--
-    Contact view layout.
-    Displays a greeting and a scrollable list of contacts.
-
-    The contact list is dynamically populated by ContactController
-    using the VBox with fx:id "contactListBox".
--->
+<!-- kontaktvyn — rubrik sätts till "Dina patienter" om det är en vårdgivare -->
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.safefaces.safefaces.Javafx.Controller.ContactController"
@@ -23,30 +16,25 @@
         <Insets bottom="16.0" left="24.0" right="24.0" top="24.0"/>
     </padding>
 
-    <!-- Greeting message displayed at the top -->
     <Label fx:id="greetingLabel"
            style="-fx-font-size:28; -fx-font-weight:bold;"/>
 
-    <!-- Section title for the contact list -->
+    <!-- "Dina kontakter" eller "Dina patienter" beroende på roll -->
     <Label fx:id="sectionLabel"
            text="Dina kontakter"
            style="-fx-font-size:14; -fx-text-fill:#888;"/>
 
-    <!-- Scrollable container for contacts -->
     <ScrollPane fitToWidth="true"
                 hbarPolicy="NEVER"
                 style="-fx-background-color:transparent; -fx-background:transparent;"
                 VBox.vgrow="ALWAYS">
-
         <content>
-            <!-- Container where contacts are added dynamically from controller -->
             <VBox fx:id="contactListBox" spacing="12">
                 <padding>
                     <Insets top="4" bottom="8"/>
                 </padding>
             </VBox>
         </content>
-
     </ScrollPane>
 
 </VBox>

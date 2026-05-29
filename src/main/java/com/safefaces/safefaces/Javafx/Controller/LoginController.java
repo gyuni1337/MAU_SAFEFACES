@@ -33,13 +33,12 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        // nothing to auto-start — user picks login method
 
         // to omvandla text till hashpin för manuellt inläggning i databasen ( för att vi inte har registrations knapp ).
         System.out.println("Hashed Password: " + AuthService.hashPin("1234"));
     }
 
-    /** Logs in as the patient user fetched from the database. */
+    /** logs in as the patient user fetched from the database. */
     @FXML
     private void handleUserLogin() {
         setStatus("Loggar in...");
@@ -57,7 +56,7 @@ public class LoginController {
         thread.start();
     }
 
-    /** Toggles the caregiver login form. */
+    /** toggles the caregiver login form. */
     @FXML
     private void handleShowCaregiverLogin() {
         boolean show = !caregiverBox.isVisible();
@@ -66,7 +65,7 @@ public class LoginController {
         setStatus("");
     }
 
-    /** Submits the caregiver username + PIN to AuthService. */
+    /** submits the caregiver username + PIN to AuthService. */
     @FXML
     private void handleCaregiverSubmit() {
         String username = usernameField.getText().trim();

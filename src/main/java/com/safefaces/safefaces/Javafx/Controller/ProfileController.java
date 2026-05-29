@@ -2,8 +2,12 @@ package com.safefaces.safefaces.Javafx.Controller;
 
 import com.safefaces.safefaces.Core.Model.Medication;
 import com.safefaces.safefaces.Core.Model.User;
+import com.safefaces.safefaces.Core.Model.Enums.RoleType;
+import com.safefaces.safefaces.Core.Repository.CaregiverPatientRepository;
 import com.safefaces.safefaces.Core.Repository.MedicationRepository;
+import com.safefaces.safefaces.Core.Repository.ReminderRepository;
 import com.safefaces.safefaces.Javafx.App.AppState;
+import com.safefaces.safefaces.Javafx.App.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -27,8 +31,13 @@ public class ProfileController {
     @FXML private ImageView profileImage;
     @FXML private Label medsLabel;
     @FXML private VBox medsBox;
+    @FXML private Label roleBadge;
+    @FXML private VBox caregiverStatsBox;
+    @FXML private Label patientCountLabel;
+    @FXML private Label reminderCountLabel;
 
     private final MedicationRepository medicationRepository = new MedicationRepository();
+    private final CaregiverPatientRepository caregiverPatientRepo = new CaregiverPatientRepository();
 
     @FXML
     public void initialize() {
@@ -57,7 +66,34 @@ public class ProfileController {
             System.out.println("Kunde inte ladda profilbild.");
         }
 
-        loadMedications(user.id);
+        if (user.role == RoleType.CAREGIVER) {
+            medsLabel.setVisible(false);
+            medsLabel.setManaged(false);
+            medsBox.setVisible(false);
+            medsBox.setManaged(false);
+            loadCaregiverStats(user.id);
+        } else {
+            loadMedications(user.id);
+        }
+    }
+
+    private void loadCaregiverStats(int caregiverId) {
+        roleBadge.setVisible(true);
+        roleBadge.setManaged(true);
+
+        List<User> patients = caregiverPatientRepo.findPatientsByCaregiver(caregiverId);
+        int patientCount = patients.size();
+
+        int totalReminders = 0;
+        for (User p : patients) {
+            totalReminders += new ReminderRepository(p.id).getActiveReminders().size();
+        }
+
+        patientCountLabel.setText("👥  " + patientCount + (patientCount == 1 ? " patient" : " patienter"));
+        reminderCountLabel.setText("🔔  " + totalReminders + " aktiva påminnelser totalt");
+
+        caregiverStatsBox.setVisible(true);
+        caregiverStatsBox.setManaged(true);
     }
 
     private void loadMedications(int userId) {
@@ -80,6 +116,11 @@ public class ProfileController {
         lbl.setStyle("-fx-font-size: " + size + "px; -fx-text-fill: " + color + ";");
         lbl.setWrapText(true);
         return lbl;
+    }
+
+    @FXML
+    private void handleLogout() {
+        SessionManager.logout();
     }
 
     @FXML

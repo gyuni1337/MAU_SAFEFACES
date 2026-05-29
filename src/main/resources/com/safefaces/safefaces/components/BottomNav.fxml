@@ -24,13 +24,13 @@
       style="-fx-background-color: #efefef; -fx-border-color: #dddddd transparent transparent transparent; -fx-border-width: 1 0 0 0;">
 
     <children>
-        <!-- Reminders button -->
+        <!-- Reminders / Caregiver button -->
         <StackPane onMouseClicked="#goReminders"
                    HBox.hgrow="ALWAYS"
                    prefHeight="78.0"
                    alignment="CENTER"
                    style="-fx-cursor: hand;">
-            <ImageView fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
+            <ImageView fx:id="leftNavIcon" fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
                 <image><Image url="@../images/reminder.png"/></image>
             </ImageView>
         </StackPane>

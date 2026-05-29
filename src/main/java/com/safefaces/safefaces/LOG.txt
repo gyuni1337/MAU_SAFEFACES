@@ -1,8 +1,0 @@
- ideer -Gyundyuz:
- + navigations meny:
- + som på mobil, 3 knappar i botten, där en är kontakter
- + en annan är "me" eller "profil" eller "account" eller renast "Jag"
-  vrf?: tre olika panel/pages så att man kan gå på djupet inom varje contacts ( voice message in i den panelen ), "me"-sidan ( kan visa mediciner, nån annan information )
- + en Home knapp hade också varit bra som kan ha typ påmminelser beroende på tiden det är, så typ ( reminder 11:00pm: take your X medication. )
-
-basically: a bottom navigation with 3 primary views to separate user interaction, personal data, and system reminders.

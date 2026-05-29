@@ -61,6 +61,13 @@ public class SessionManager {
     }
 
     /**
+     * Logs out the current user immediately and redirects to the login view.
+     */
+    public static void logout() {
+        expireSession();
+    }
+
+    /**
      * Expires the current session by logging out the user
      * and redirecting to the login view.
      */

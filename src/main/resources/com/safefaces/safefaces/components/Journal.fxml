@@ -2,6 +2,7 @@
 
 <!-- Imports for layout and UI components -->
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
@@ -36,10 +37,28 @@
            text="Namn"
            style="-fx-font-size: 26px; -fx-font-weight: bold;" />
 
+    <!-- Role badge — shown only for caregivers -->
+    <Label fx:id="roleBadge"
+           text="Vårdgivare"
+           visible="false" managed="false"
+           style="-fx-font-size: 13px; -fx-text-fill: white; -fx-background-color: #4a90d9;
+                  -fx-background-radius: 20; -fx-padding: 4 14 4 14; -fx-font-weight: bold;" />
+
     <!-- User's age -->
     <Label fx:id="ageLabel"
            text="Ålder"
            style="-fx-font-size: 18px; -fx-text-fill: #555;" />
+
+    <!-- Caregiver stats — hidden for regular users -->
+    <VBox fx:id="caregiverStatsBox"
+          visible="false" managed="false"
+          spacing="10"
+          style="-fx-background-color: white; -fx-background-radius: 14; -fx-padding: 16;">
+        <Label fx:id="patientCountLabel"
+               style="-fx-font-size: 16px; -fx-text-fill: #333;" />
+        <Label fx:id="reminderCountLabel"
+               style="-fx-font-size: 16px; -fx-text-fill: #333;" />
+    </VBox>
 
     <!-- Additional information section label -->
     <Label text="Information"
@@ -68,4 +87,12 @@
     <Label fx:id="locationLabel"
            wrapText="true"
            style="-fx-font-size: 18px;" />
+
+    <!-- Logout button -->
+    <Button text="Logga ut"
+            onAction="#handleLogout"
+            maxWidth="Infinity"
+            style="-fx-background-color: #e05555; -fx-text-fill: white;
+                   -fx-font-size: 16px; -fx-font-weight: bold;
+                   -fx-padding: 12; -fx-background-radius: 14; -fx-cursor: hand;" />
 </VBox>

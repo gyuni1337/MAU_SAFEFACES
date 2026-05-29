@@ -48,4 +48,32 @@ public class MedicationRepository {
         }
         return list;
     }
+
+    public void save(int userId, Medication med) {
+        String sql = """
+                INSERT INTO safefaces.medications (user_id, name, dose, time_of_day, is_active)
+                VALUES (?, ?, ?, ?, TRUE)
+                """;
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.setString(2, med.name);
+            stmt.setString(3, med.dose);
+            stmt.setString(4, med.timeOfDay);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("MedicationRepository.save error: " + e.getMessage());
+        }
+    }
+
+    public void deactivateById(int id) {
+        String sql = "UPDATE safefaces.medications SET is_active = FALSE WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("MedicationRepository.deactivateById error: " + e.getMessage());
+        }
+    }
 }

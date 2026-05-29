@@ -1,5 +1,9 @@
 package com.safefaces.safefaces.Javafx.Controller;
+import com.safefaces.safefaces.Core.Model.Enums.RoleType;
+import com.safefaces.safefaces.Javafx.App.AppState;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Controller class for the bottom navigation bar in the application.
@@ -11,8 +15,24 @@ import javafx.fxml.FXML;
  */
 public class BottomNavController {
 
+    @FXML private ImageView leftNavIcon;
+
     /** Reference to the main controller responsible for view switching. */
     private MainController mainController;
+
+    @FXML
+    public void initialize() {
+        var user = AppState.getInstance().getCurrentUser();
+        if (user != null && user.role == RoleType.CAREGIVER && leftNavIcon != null) {
+            try {
+                leftNavIcon.setImage(new Image(
+                        getClass().getResourceAsStream(
+                                "/com/safefaces/safefaces/images/contacts.png")));
+            } catch (Exception e) {
+                System.out.println("Kunde inte ladda caregiver-ikon.");
+            }
+        }
+    }
 
     /**
      * Sets the main controller used for handling navigation between views.

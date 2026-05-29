@@ -80,7 +80,7 @@ public class SessionManager {
             Parent root = loader.load();
             mainStage.setScene(new Scene(root, 400, 640));
             mainStage.show();
-            System.out.println("Session expired, back to login.");
+            System.out.println("User logged out.");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -101,8 +101,8 @@ public class MainController {
 
             bottomContainer.getChildren().setAll(nav);
 
-            System.out.println(nav.getPrefHeight());
-            System.out.println(bottomContainer.getHeight());
+//            System.out.println(nav.getPrefHeight());
+//            System.out.println(bottomContainer.getHeight());
         } catch (Exception e) {
             e.printStackTrace();
         }

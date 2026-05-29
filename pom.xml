@@ -96,6 +96,9 @@
                             <noManPages>true</noManPages>
                             <stripDebug>true</stripDebug>
                             <noHeaderFiles>true</noHeaderFiles>
+                            <options>
+                                <option>--enable-native-access=ALL-UNNAMED</option>
+                            </options>
                         </configuration>
                     </execution>
                 </executions>

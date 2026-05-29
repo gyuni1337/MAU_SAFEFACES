@@ -11,10 +11,10 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.safefaces.safefaces.Javafx.Controller.ProfileController"
       alignment="TOP_CENTER"
-      spacing="20"
+      spacing="0"
       style="-fx-background-color: #f4f4f4;">
 
-    <!-- sidhuvud -->
+    <!-- sidhuvud, sträcker sig hela vägen ut -->
     <VBox style="-fx-background-color: white; -fx-padding: 24 24 16 24;">
         <Label text="Mitt konto"
                style="-fx-font-size:26; -fx-font-weight:bold;"/>
@@ -22,79 +22,79 @@
                style="-fx-font-size:13; -fx-text-fill:#888;"/>
     </VBox>
 
-    <padding>
-        <Insets top="0" bottom="20" left="24" right="24"/>
-    </padding>
+    <!-- resten av innehållet med padding -->
+    <VBox spacing="20" style="-fx-padding: 24 24 20 24;">
 
-    <!-- profilkort — bild till vänster, namn + roll till höger -->
-    <HBox spacing="20" alignment="CENTER_LEFT"
-          style="-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 18;">
+        <!-- profilkort — bild till vänster, namn + roll till höger -->
+        <HBox spacing="20" alignment="CENTER_LEFT"
+              style="-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 18;">
 
-        <ImageView fx:id="profileImage"
-                   fitWidth="90"
-                   fitHeight="90"
-                   preserveRatio="true" />
+            <ImageView fx:id="profileImage"
+                       fitWidth="90"
+                       fitHeight="90"
+                       preserveRatio="true" />
 
-        <VBox spacing="8" alignment="CENTER_LEFT">
-            <Label fx:id="nameLabel"
-                   text="Namn"
-                   style="-fx-font-size: 22px; -fx-font-weight: bold;" />
+            <VBox spacing="8" alignment="CENTER_LEFT">
+                <Label fx:id="nameLabel"
+                       text="Namn"
+                       style="-fx-font-size: 22px; -fx-font-weight: bold;" />
 
-            <!-- roll-badge, sätts dynamiskt till Användare eller Vårdgivare -->
-            <Label fx:id="roleBadge"
-                   text=""
-                   style="-fx-font-size: 13px; -fx-text-fill: white;
-                          -fx-background-radius: 20; -fx-padding: 4 14 4 14;
-                          -fx-font-weight: bold;" />
+                <!-- roll-badge, sätts dynamiskt till Användare eller Vårdgivare -->
+                <Label fx:id="roleBadge"
+                       text=""
+                       style="-fx-font-size: 13px; -fx-text-fill: white;
+                              -fx-background-radius: 20; -fx-padding: 4 14 4 14;
+                              -fx-font-weight: bold;" />
+            </VBox>
+        </HBox>
+
+        <Label text="Information"
+               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #3a3a3a;" />
+
+        <!-- info-kort med ålder, plats och vårdgivar-stats om det är relevant -->
+        <VBox spacing="12"
+              style="-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 18;">
+
+            <Label fx:id="ageLabel"
+                   text="Ålder"
+                   style="-fx-font-size: 16px; -fx-text-fill: #555;" />
+
+            <Label fx:id="locationLabel"
+                   wrapText="true"
+                   style="-fx-font-size: 16px; -fx-text-fill: #555;" />
+
+            <!-- visas bara för vårdgivare -->
+            <VBox fx:id="caregiverStatsBox"
+                  visible="false" managed="false"
+                  spacing="8">
+                <Label fx:id="patientCountLabel"
+                       style="-fx-font-size: 16px; -fx-text-fill: #333;" />
+                <Label fx:id="reminderCountLabel"
+                       style="-fx-font-size: 16px; -fx-text-fill: #333;" />
+            </VBox>
         </VBox>
-    </HBox>
 
-    <Label text="Information"
-           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #3a3a3a;" />
+        <!-- medicin-sektion, gömd för vårdgivare -->
+        <Label fx:id="medsLabel"
+               onMouseClicked="#toggleMeds"
+               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;">
+            Mediciner ◀
+        </Label>
 
-    <!-- info-kort med ålder, plats och vårdgivar-stats om det är relevant -->
-    <VBox spacing="12"
-          style="-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 18;">
-
-        <Label fx:id="ageLabel"
-               text="Ålder"
-               style="-fx-font-size: 16px; -fx-text-fill: #555;" />
-
-        <Label fx:id="locationLabel"
-               wrapText="true"
-               style="-fx-font-size: 16px; -fx-text-fill: #555;" />
-
-        <!-- visas bara för vårdgivare -->
-        <VBox fx:id="caregiverStatsBox"
-              visible="false" managed="false"
-              spacing="8">
-            <Label fx:id="patientCountLabel"
-                   style="-fx-font-size: 16px; -fx-text-fill: #333;" />
-            <Label fx:id="reminderCountLabel"
-                   style="-fx-font-size: 16px; -fx-text-fill: #333;" />
+        <VBox fx:id="medsBox"
+              spacing="10"
+              visible="false"
+              managed="false"
+              style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
+            <Label text="Här listas dina mediciner"
+                   style="-fx-font-size: 16px;" />
         </VBox>
+
+        <Button text="Logga ut"
+                onAction="#handleLogout"
+                maxWidth="Infinity"
+                style="-fx-background-color: #e05555; -fx-text-fill: white;
+                       -fx-font-size: 16px; -fx-font-weight: bold;
+                       -fx-padding: 12; -fx-background-radius: 14; -fx-cursor: hand;" />
     </VBox>
-
-    <!-- medicin-sektion, gömd för vårdgivare -->
-    <Label fx:id="medsLabel"
-           onMouseClicked="#toggleMeds"
-           style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;">
-        Mediciner ◀
-    </Label>
-
-    <VBox fx:id="medsBox"
-          spacing="10"
-          visible="false"
-          managed="false"
-          style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
-        <Label text="Här listas dina mediciner"
-               style="-fx-font-size: 16px;" />
-    </VBox>
-
-    <Button text="Logga ut"
-            onAction="#handleLogout"
-            maxWidth="Infinity"
-            style="-fx-background-color: #e05555; -fx-text-fill: white;
-                   -fx-font-size: 16px; -fx-font-weight: bold;
-                   -fx-padding: 12; -fx-background-radius: 14; -fx-cursor: hand;" />
 </VBox>

@@ -19,22 +19,21 @@
                 <Label text="Dina patienter"
                        style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #3a3a3a;"/>
 
+                <!-- välj patient, sedan dyker tabpane upp -->
                 <ComboBox fx:id="patientPicker"
                           promptText="Välj patient"
                           maxWidth="Infinity"
                           style="-fx-font-size: 16px;"/>
 
-                <!-- Tab pane — hidden until patient selected -->
                 <TabPane fx:id="tabPane"
                          visible="false" managed="false"
                          tabClosingPolicy="UNAVAILABLE"
                          style="-fx-background-color: transparent;">
 
-                    <!-- ── Reminders tab ── -->
+                    <!-- påminnelser -->
                     <Tab text="Påminnelser">
                         <content>
                             <VBox spacing="12" style="-fx-padding: 12;">
-
                                 <VBox spacing="12"
                                       style="-fx-background-color: white; -fx-background-radius: 14;
                                              -fx-padding: 16;">
@@ -61,17 +60,15 @@
                                     <Label fx:id="formStatus" text="" wrapText="true"
                                            style="-fx-font-size: 13px; -fx-text-fill: #e05555;"/>
                                 </VBox>
-
                                 <VBox fx:id="reminderListBox" spacing="10"/>
                             </VBox>
                         </content>
                     </Tab>
 
-                    <!-- ── Contacts tab ── -->
+                    <!-- kontakter -->
                     <Tab text="Kontakter">
                         <content>
                             <VBox spacing="12" style="-fx-padding: 12;">
-
                                 <VBox spacing="12"
                                       style="-fx-background-color: white; -fx-background-radius: 14;
                                              -fx-padding: 16;">
@@ -94,17 +91,15 @@
                                     <Label fx:id="contactStatus" text="" wrapText="true"
                                            style="-fx-font-size: 13px; -fx-text-fill: #e05555;"/>
                                 </VBox>
-
                                 <VBox fx:id="contactListBox" spacing="10"/>
                             </VBox>
                         </content>
                     </Tab>
 
-                    <!-- ── Medications tab ── -->
+                    <!-- mediciner -->
                     <Tab text="Mediciner">
                         <content>
                             <VBox spacing="12" style="-fx-padding: 12;">
-
                                 <VBox spacing="12"
                                       style="-fx-background-color: white; -fx-background-radius: 14;
                                              -fx-padding: 16;">
@@ -127,7 +122,6 @@
                                     <Label fx:id="medStatus" text="" wrapText="true"
                                            style="-fx-font-size: 13px; -fx-text-fill: #e05555;"/>
                                 </VBox>
-
                                 <VBox fx:id="medListBox" spacing="10"/>
                             </VBox>
                         </content>

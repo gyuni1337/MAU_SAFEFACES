@@ -18,20 +18,15 @@ import javafx.scene.layout.VBox;
 import java.sql.Time;
 import java.util.List;
 
-/**
- * Controller for the caregiver view.
- * Lets a caregiver pick one of their assigned patients and manage
- * reminders, contacts, and medications for them.
- *
- * @author Gyundyuz Sadulov
- */
+// Vårdgivare-vyn — här kan man välja en patient och hantera
+// deras påminnelser, kontakter och mediciner via tre tabbar
 public class CaregiverController {
 
-    // Patient picker
+    // patient-dropdown + tabpane som visas när man valt någon
     @FXML private ComboBox<String> patientPicker;
     @FXML private TabPane tabPane;
 
-    // Reminder tab
+    // reminder-tabben
     @FXML private ComboBox<String> typePicker;
     @FXML private VBox reminderListBox;
     @FXML private TextField titleField;
@@ -39,14 +34,14 @@ public class CaregiverController {
     @FXML private TextField timeField;
     @FXML private Label formStatus;
 
-    // Contact tab
+    // kontakt-tabben
     @FXML private TextField contactNameField;
     @FXML private TextField contactRelationField;
     @FXML private TextField contactPhoneField;
     @FXML private Label contactStatus;
     @FXML private VBox contactListBox;
 
-    // Medication tab
+    // medicin-tabben
     @FXML private TextField medNameField;
     @FXML private TextField medDoseField;
     @FXML private TextField medTimeField;
@@ -96,7 +91,7 @@ public class CaregiverController {
         });
     }
 
-    // ── Reminders ────────────────────────────────────────────────────────────
+    // --- påminnelser ---
 
     @FXML
     private void handleAddReminder() {
@@ -182,7 +177,7 @@ public class CaregiverController {
         return row;
     }
 
-    // ── Contacts ─────────────────────────────────────────────────────────────
+    // --- kontakter ---
 
     @FXML
     private void handleAddContact() {
@@ -253,7 +248,7 @@ public class CaregiverController {
         return row;
     }
 
-    // ── Medications ───────────────────────────────────────────────────────────
+    // --- mediciner ---
 
     @FXML
     private void handleAddMedication() {
@@ -322,7 +317,7 @@ public class CaregiverController {
         return row;
     }
 
-    // ── Helpers ───────────────────────────────────────────────────────────────
+    // --- helpers för att slippa copy-paste ---
 
     private HBox buildRow() {
         HBox row = new HBox(12);

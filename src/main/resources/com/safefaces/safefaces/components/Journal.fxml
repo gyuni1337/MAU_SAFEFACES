@@ -18,7 +18,7 @@
         <Insets top="30" bottom="20" left="24" right="24"/>
     </padding>
 
-    <!-- Profile header: avatar left, name + role badge right -->
+    <!-- profilkort — bild till vänster, namn + roll till höger -->
     <HBox spacing="20" alignment="CENTER_LEFT"
           style="-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 18;">
 
@@ -32,7 +32,7 @@
                    text="Namn"
                    style="-fx-font-size: 22px; -fx-font-weight: bold;" />
 
-            <!-- Role badge — text and color set dynamically -->
+            <!-- roll-badge, sätts dynamiskt till Användare eller Vårdgivare -->
             <Label fx:id="roleBadge"
                    text=""
                    style="-fx-font-size: 13px; -fx-text-fill: white;
@@ -41,11 +41,10 @@
         </VBox>
     </HBox>
 
-    <!-- Information section header -->
     <Label text="Information"
            style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #3a3a3a;" />
 
-    <!-- Info card: age, location, and caregiver stats -->
+    <!-- info-kort med ålder, plats och vårdgivar-stats om det är relevant -->
     <VBox spacing="12"
           style="-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 18;">
 
@@ -57,7 +56,7 @@
                wrapText="true"
                style="-fx-font-size: 16px; -fx-text-fill: #555;" />
 
-        <!-- Caregiver-only stats -->
+        <!-- visas bara för vårdgivare -->
         <VBox fx:id="caregiverStatsBox"
               visible="false" managed="false"
               spacing="8">
@@ -68,14 +67,13 @@
         </VBox>
     </VBox>
 
-    <!-- Clickable header for medication section -->
+    <!-- medicin-sektion, gömd för vårdgivare -->
     <Label fx:id="medsLabel"
            onMouseClicked="#toggleMeds"
            style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-cursor: hand;">
         Mediciner ◀
     </Label>
 
-    <!-- Hidden container for medications, toggled dynamically -->
     <VBox fx:id="medsBox"
           spacing="10"
           visible="false"
@@ -85,7 +83,6 @@
                style="-fx-font-size: 16px;" />
     </VBox>
 
-    <!-- Logout button -->
     <Button text="Logga ut"
             onAction="#handleLogout"
             maxWidth="Infinity"

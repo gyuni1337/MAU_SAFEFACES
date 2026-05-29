@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Imports of JavaFX layout and image classes -->
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<!--
-    Bottom navigation bar layout.
-    Contains three navigation buttons:
-    - Reminders
-    - Home
-    - Profile
-
-    Connected to BottomNavController for handling navigation actions.
--->
+<!-- bottom nav med tre knappar, vänster-ikonen byts ut för vårdgivare i controllern -->
 <HBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.safefaces.safefaces.Javafx.Controller.BottomNavController"
@@ -24,7 +15,6 @@
       style="-fx-background-color: #efefef; -fx-border-color: #dddddd transparent transparent transparent; -fx-border-width: 1 0 0 0;">
 
     <children>
-        <!-- Reminders / Caregiver button -->
         <StackPane onMouseClicked="#goReminders"
                    HBox.hgrow="ALWAYS"
                    prefHeight="78.0"
@@ -35,7 +25,6 @@
             </ImageView>
         </StackPane>
 
-        <!-- Home button -->
         <StackPane onMouseClicked="#goHome"
                    HBox.hgrow="ALWAYS"
                    prefHeight="78.0"
@@ -46,7 +35,6 @@
             </ImageView>
         </StackPane>
 
-        <!-- Profile button -->
         <StackPane onMouseClicked="#goJournal"
                    HBox.hgrow="ALWAYS"
                    prefHeight="78.0"

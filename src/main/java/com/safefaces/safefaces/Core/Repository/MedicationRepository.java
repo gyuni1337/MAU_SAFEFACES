@@ -7,19 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Repository for reading medication data from the database.
- *
- * @author Gyundyuz Sadulov
- */
+// hämtar och sparar mediciner, används både av patienter och vårdgivare
 public class MedicationRepository {
 
-    /**
-     * Returns all active medications for a given user.
-     *
-     * @param userId the user's ID
-     * @return list of active medications, empty if none found
-     */
     public List<Medication> findActiveByUserId(int userId) {
         List<Medication> list = new ArrayList<>();
         String sql = """

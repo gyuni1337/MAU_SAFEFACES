@@ -28,7 +28,8 @@
            style="-fx-font-size:28; -fx-font-weight:bold;"/>
 
     <!-- Section title for the contact list -->
-    <Label text="Dina kontakter"
+    <Label fx:id="sectionLabel"
+           text="Dina kontakter"
            style="-fx-font-size:14; -fx-text-fill:#888;"/>
 
     <!-- Scrollable container for contacts -->

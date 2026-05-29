@@ -10,19 +10,17 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.safefaces.safefaces.Javafx.Controller.ContactController"
       alignment="TOP_CENTER"
-      spacing="16.0">
+      spacing="16.0"
+      style="-fx-background-color: #f5f6fa;">
 
-    <padding>
-        <Insets bottom="16.0" left="24.0" right="24.0" top="24.0"/>
-    </padding>
-
-    <Label fx:id="greetingLabel"
-           style="-fx-font-size:28; -fx-font-weight:bold;"/>
-
-    <!-- "Dina kontakter" eller "Dina patienter" beroende på roll -->
-    <Label fx:id="sectionLabel"
-           text="Dina kontakter"
-           style="-fx-font-size:14; -fx-text-fill:#888;"/>
+    <VBox style="-fx-background-color: white; -fx-padding: 24 24 16 24;">
+        <Label fx:id="sectionLabel"
+               text="Dina kontakter"
+               style="-fx-font-size:26; -fx-font-weight:bold;"/>
+        <Label text="Folk du enkelt kan ringa eller lyssna på röstmeddelanden från"
+               wrapText="true"
+               style="-fx-font-size:13; -fx-text-fill:#888;"/>
+    </VBox>
 
     <ScrollPane fitToWidth="true"
                 hbarPolicy="NEVER"
@@ -31,7 +29,7 @@
         <content>
             <VBox fx:id="contactListBox" spacing="12">
                 <padding>
-                    <Insets top="4" bottom="8"/>
+                    <Insets top="4" bottom="8" left="16" right="16"/>
                 </padding>
             </VBox>
         </content>

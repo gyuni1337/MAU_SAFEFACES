@@ -14,8 +14,16 @@
       spacing="20"
       style="-fx-background-color: #f4f4f4;">
 
+    <!-- sidhuvud -->
+    <VBox style="-fx-background-color: white; -fx-padding: 24 24 16 24;">
+        <Label text="Mitt konto"
+               style="-fx-font-size:26; -fx-font-weight:bold;"/>
+        <Label text="Din profil och kontoinformation"
+               style="-fx-font-size:13; -fx-text-fill:#888;"/>
+    </VBox>
+
     <padding>
-        <Insets top="30" bottom="20" left="24" right="24"/>
+        <Insets top="0" bottom="20" left="24" right="24"/>
     </padding>
 
     <!-- profilkort — bild till vänster, namn + roll till höger -->

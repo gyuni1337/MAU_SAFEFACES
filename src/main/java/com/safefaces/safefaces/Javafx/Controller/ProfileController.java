@@ -67,12 +67,16 @@ public class ProfileController {
         }
 
         if (user.role == RoleType.CAREGIVER) {
+            roleBadge.setText("Vårdgivare");
+            roleBadge.setStyle(roleBadge.getStyle() + "-fx-background-color: #4a90d9;");
             medsLabel.setVisible(false);
             medsLabel.setManaged(false);
             medsBox.setVisible(false);
             medsBox.setManaged(false);
             loadCaregiverStats(user.id);
         } else {
+            roleBadge.setText("Användare");
+            roleBadge.setStyle(roleBadge.getStyle() + "-fx-background-color: #6abf69;");
             loadMedications(user.id);
         }
     }

@@ -35,7 +35,8 @@ public class LoginController {
     public void initialize() {
         // nothing to auto-start — user picks login method
 
-        System.out.println(AuthService.hashPin("1234"));
+        // to omvandla text till hashpin för manuellt inläggning i databasen ( för att vi inte har registrations knapp ).
+        System.out.println("Hashed Password: " + AuthService.hashPin("1234"));
     }
 
     /** Logs in as the patient user fetched from the database. */

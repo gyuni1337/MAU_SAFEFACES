@@ -50,16 +50,26 @@ public class MainController {
 
     /**
      * Displays the home view.
+     *
+     * @author Shaima Almoayed
+     * @author Gyundyuz Sadulov
      */
     public void showHome() {
+        bottomContainer.setVisible(true);
+        bottomContainer.setManaged(true);
         loadView("/com/safefaces/safefaces/components/Contact.fxml");
     }
 
     /**
      * Displays the reminders view for regular users,
      * or the caregiver view for users with the CAREGIVER role.
+     *
+     * @author Gyundyuz Sadulov
+     * @author Shaima Almoayed
      */
     public void showReminders() {
+        bottomContainer.setVisible(true);
+        bottomContainer.setManaged(true);
         var user = AppState.getInstance().getCurrentUser();
         if (user != null && user.role == RoleType.CAREGIVER) {
             loadView("/com/safefaces/safefaces/components/CaregiverView.fxml");
@@ -68,12 +78,6 @@ public class MainController {
         }
     }
 
-    /**
-     * Displays the profile view.
-     */
-    public void showJournal() {
-        loadView("/com/safefaces/safefaces/components/Journal.fxml");
-    }
 
     /**
      * Initializes the main layout after the FXML has been loaded.
@@ -108,5 +112,26 @@ public class MainController {
         }
 
         showHome();
+    }
+
+    /**
+     * Displays the profile page in a separate scene
+     *
+     * @author Shaima Almoayed
+     */
+    public void showJournal(){
+        try {
+            FXMLLoader loader=new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/ProfileView.fxml"));
+
+            Parent root=loader.load();
+            javafx.stage.Stage stage=
+                    (javafx.stage.Stage)contentArea.getScene().getWindow();
+
+            stage.setScene(new javafx.scene.Scene(root, 400,700));
+            stage.show();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

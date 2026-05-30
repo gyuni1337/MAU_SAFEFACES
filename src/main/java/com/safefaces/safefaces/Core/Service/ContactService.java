@@ -88,4 +88,5 @@ public class ContactService {
         demo.add(new Contact("Bert",   "070-555 66 77", "Make",          "bert.jpg",   null));
         return demo;
     }
+
 }

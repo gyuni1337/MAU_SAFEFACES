@@ -50,6 +50,17 @@ public class ContactController {
         }
     }
 
+    /**
+     * Creates a contact row for the contact list
+     * Displays the contact's image, name, relation,
+     * call button and voice message button
+     *
+     * @param contact the contact to display
+     * @return an HBox containig the contact information
+     *
+     * @author Noor Nabi
+     * @author Shaima Almoayed
+     */
     private HBox buildRow(Contact contact) {
         HBox row = new HBox(16);
         row.setStyle("-fx-background-color:white; -fx-background-radius:16; -fx-padding:14;");
@@ -90,6 +101,7 @@ public class ContactController {
         nameBox.getChildren().addAll(nameLabel, relationLabel);
 
         Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
 
         Button callBtn = new Button("📞");
         callBtn.setStyle("-fx-font-size:20; -fx-background-color:#e8f5e9; " +
@@ -103,6 +115,8 @@ public class ContactController {
                 "-fx-min-width:48; -fx-min-height:48;");
         voiceBtn.setUserData(contact.getName());
         voiceBtn.setOnAction(e->handleVoiceMessage(contact,voiceBtn));
+
+        nameLabel.setStyle("-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill: #222222");
 
         row.getChildren().addAll(imageView, nameBox, spacer, callBtn, voiceBtn);
         return row;
@@ -133,8 +147,6 @@ public class ContactController {
         }
         System.out.println("Hittar filen spelar upp ");
         stopCurrentPlayer();
-
-
         new MediaPlayer((new Media(url.toExternalForm()))).play();
         
 
@@ -146,6 +158,4 @@ public class ContactController {
             currentPlayer =null;
         }
     }
-
-
 }

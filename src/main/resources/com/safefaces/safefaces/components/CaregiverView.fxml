@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
@@ -17,54 +16,118 @@
             <VBox spacing="16">
                 <padding><Insets top="24" bottom="24" left="20" right="20"/></padding>
 
-                <!-- Header -->
                 <Label text="Dina patienter"
                        style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #3a3a3a;"/>
 
-                <!-- Patient picker -->
+                <!-- välj patient, sedan dyker tabpane upp -->
                 <ComboBox fx:id="patientPicker"
                           promptText="Välj patient"
                           maxWidth="Infinity"
                           style="-fx-font-size: 16px;"/>
 
-                <!-- Add reminder form (hidden until patient selected) -->
-                <VBox fx:id="formBox" spacing="12"
-                      visible="false" managed="false"
-                      style="-fx-background-color: white; -fx-background-radius: 14;
-                             -fx-padding: 16;">
+                <TabPane fx:id="tabPane"
+                         visible="false" managed="false"
+                         tabClosingPolicy="UNAVAILABLE"
+                         style="-fx-background-color: transparent;">
 
-                    <Label text="Ny påminnelse"
-                           style="-fx-font-size: 17px; -fx-font-weight: bold;"/>
+                    <!-- påminnelser -->
+                    <Tab text="Påminnelser">
+                        <content>
+                            <VBox spacing="12" style="-fx-padding: 12;">
+                                <VBox spacing="12"
+                                      style="-fx-background-color: white; -fx-background-radius: 14;
+                                             -fx-padding: 16;">
+                                    <Label text="Ny påminnelse"
+                                           style="-fx-font-size: 17px; -fx-font-weight: bold;"/>
+                                    <TextField fx:id="titleField"
+                                               promptText="Titel"
+                                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                                    <TextField fx:id="descField"
+                                               promptText="Beskrivning (valfritt)"
+                                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                                    <TextField fx:id="timeField"
+                                               promptText="Tid  (HH:MM)"
+                                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                                    <ComboBox fx:id="typePicker"
+                                              promptText="Typ"
+                                              maxWidth="Infinity"
+                                              style="-fx-font-size: 15px;"/>
+                                    <Button text="Lägg till påminnelse"
+                                            onAction="#handleAddReminder"
+                                            maxWidth="Infinity"
+                                            style="-fx-background-color: #3a3a3a; -fx-text-fill: white;
+                                                   -fx-font-size: 15px; -fx-padding: 10; -fx-background-radius: 10;"/>
+                                    <Label fx:id="formStatus" text="" wrapText="true"
+                                           style="-fx-font-size: 13px; -fx-text-fill: #e05555;"/>
+                                </VBox>
+                                <VBox fx:id="reminderListBox" spacing="10"/>
+                            </VBox>
+                        </content>
+                    </Tab>
 
-                    <TextField fx:id="titleField"
-                               promptText="Titel"
-                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                    <!-- kontakter -->
+                    <Tab text="Kontakter">
+                        <content>
+                            <VBox spacing="12" style="-fx-padding: 12;">
+                                <VBox spacing="12"
+                                      style="-fx-background-color: white; -fx-background-radius: 14;
+                                             -fx-padding: 16;">
+                                    <Label text="Ny kontakt"
+                                           style="-fx-font-size: 17px; -fx-font-weight: bold;"/>
+                                    <TextField fx:id="contactNameField"
+                                               promptText="Namn"
+                                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                                    <TextField fx:id="contactRelationField"
+                                               promptText="Relation (t.ex. Dotter)"
+                                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                                    <TextField fx:id="contactPhoneField"
+                                               promptText="Telefonnummer"
+                                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                                    <Button text="Lägg till kontakt"
+                                            onAction="#handleAddContact"
+                                            maxWidth="Infinity"
+                                            style="-fx-background-color: #3a3a3a; -fx-text-fill: white;
+                                                   -fx-font-size: 15px; -fx-padding: 10; -fx-background-radius: 10;"/>
+                                    <Label fx:id="contactStatus" text="" wrapText="true"
+                                           style="-fx-font-size: 13px; -fx-text-fill: #e05555;"/>
+                                </VBox>
+                                <VBox fx:id="contactListBox" spacing="10"/>
+                            </VBox>
+                        </content>
+                    </Tab>
 
-                    <TextField fx:id="descField"
-                               promptText="Beskrivning (valfritt)"
-                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                    <!-- mediciner -->
+                    <Tab text="Mediciner">
+                        <content>
+                            <VBox spacing="12" style="-fx-padding: 12;">
+                                <VBox spacing="12"
+                                      style="-fx-background-color: white; -fx-background-radius: 14;
+                                             -fx-padding: 16;">
+                                    <Label text="Ny medicin"
+                                           style="-fx-font-size: 17px; -fx-font-weight: bold;"/>
+                                    <TextField fx:id="medNameField"
+                                               promptText="Namn"
+                                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                                    <TextField fx:id="medDoseField"
+                                               promptText="Dos (t.ex. 500mg)"
+                                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                                    <TextField fx:id="medTimeField"
+                                               promptText="Tid (t.ex. Morgon)"
+                                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
+                                    <Button text="Lägg till medicin"
+                                            onAction="#handleAddMedication"
+                                            maxWidth="Infinity"
+                                            style="-fx-background-color: #3a3a3a; -fx-text-fill: white;
+                                                   -fx-font-size: 15px; -fx-padding: 10; -fx-background-radius: 10;"/>
+                                    <Label fx:id="medStatus" text="" wrapText="true"
+                                           style="-fx-font-size: 13px; -fx-text-fill: #e05555;"/>
+                                </VBox>
+                                <VBox fx:id="medListBox" spacing="10"/>
+                            </VBox>
+                        </content>
+                    </Tab>
 
-                    <TextField fx:id="timeField"
-                               promptText="Tid  (HH:MM)"
-                               style="-fx-font-size: 15px; -fx-padding: 8;"/>
-
-                    <ComboBox fx:id="typePicker"
-                              promptText="Typ"
-                              maxWidth="Infinity"
-                              style="-fx-font-size: 15px;"/>
-
-                    <Button text="Lägg till påminnelse"
-                            onAction="#handleAddReminder"
-                            maxWidth="Infinity"
-                            style="-fx-background-color: #3a3a3a; -fx-text-fill: white;
-                                   -fx-font-size: 15px; -fx-padding: 10; -fx-background-radius: 10;"/>
-
-                    <Label fx:id="formStatus" text="" wrapText="true"
-                           style="-fx-font-size: 13px; -fx-text-fill: #e05555;"/>
-                </VBox>
-
-                <!-- Current reminders for selected patient -->
-                <VBox fx:id="reminderListBox" spacing="10"/>
+                </TabPane>
 
             </VBox>
         </content>

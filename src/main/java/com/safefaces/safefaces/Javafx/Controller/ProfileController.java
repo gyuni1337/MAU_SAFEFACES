@@ -2,8 +2,12 @@ package com.safefaces.safefaces.Javafx.Controller;
 
 import com.safefaces.safefaces.Core.Model.Medication;
 import com.safefaces.safefaces.Core.Model.User;
+import com.safefaces.safefaces.Core.Model.Enums.RoleType;
+import com.safefaces.safefaces.Core.Repository.CaregiverPatientRepository;
 import com.safefaces.safefaces.Core.Repository.MedicationRepository;
+import com.safefaces.safefaces.Core.Repository.ReminderRepository;
 import com.safefaces.safefaces.Javafx.App.AppState;
+import com.safefaces.safefaces.Javafx.App.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,6 +47,7 @@ public class ProfileController {
     @FXML private Button familyButton;
 
     private final MedicationRepository medicationRepository = new MedicationRepository();
+    private final CaregiverPatientRepository caregiverPatientRepo = new CaregiverPatientRepository();
 
     @FXML
     public void initialize() {
@@ -97,6 +102,11 @@ public class ProfileController {
         lbl.setStyle("-fx-font-size: " + size + "px; -fx-text-fill: " + color + ";");
         lbl.setWrapText(true);
         return lbl;
+    }
+
+    @FXML
+    private void handleLogout() {
+        SessionManager.logout();
     }
 
     @FXML

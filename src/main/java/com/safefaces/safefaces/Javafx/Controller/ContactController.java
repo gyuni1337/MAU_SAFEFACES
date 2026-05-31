@@ -1,6 +1,8 @@
 package com.safefaces.safefaces.Javafx.Controller;
+import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import com.safefaces.safefaces.Core.Model.Contact;
+import com.safefaces.safefaces.Core.Model.Enums.RoleType;
 import com.safefaces.safefaces.Core.Service.ContactService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -22,11 +24,16 @@ import java.util.Objects;
 public class ContactController {
 
     @FXML private VBox contactListBox;
+    @FXML private Label sectionLabel;
 
     private final ContactService contactService = new ContactService();
     private MediaPlayer currentPlayer;
     @FXML
     public void initialize() {
+        var user = AppState.getInstance().getCurrentUser();
+        if (user != null && user.role == RoleType.CAREGIVER && sectionLabel != null) {
+            sectionLabel.setText("Dina patienter");
+        }
         buildContactList();
     }
 

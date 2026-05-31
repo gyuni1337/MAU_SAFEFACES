@@ -60,10 +60,12 @@ public class SessionManager {
         return mainStage;
     }
 
-    /**
-     * Expires the current session by logging out the user
-     * and redirecting to the login view.
-     */
+    // anropas från logout-knappen på profilsidan
+    public static void logout() {
+        expireSession();
+    }
+
+    // samma kod används för både manuell logout och inaktivitets-timeout
     private static void expireSession() {
         AppState.getInstance().logout();
         try {
@@ -73,7 +75,7 @@ public class SessionManager {
             Parent root = loader.load();
             mainStage.setScene(new Scene(root, 400, 640));
             mainStage.show();
-            System.out.println("Session expired, back to login.");
+            System.out.println("User logged out.");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -19,7 +19,7 @@ public class Launcher {
      *
      * @param args command-line arguments passed to the application
      */
-    public static void main(String[] args) {
+    static void main(String[] args) {
      Application.launch(LoginView.class, args);
    }
 }

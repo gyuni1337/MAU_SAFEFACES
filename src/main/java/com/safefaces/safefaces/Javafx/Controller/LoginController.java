@@ -131,7 +131,7 @@ public class LoginController {
         loginOverlay.setManaged(true);
     }
 
-    /** Submits the caregiver username + PIN to AuthService. */
+    /** submits the caregiver username + PIN to AuthService. */
     @FXML
     private void handleCaregiverSubmit() {
         String username = usernameField.getText().trim();

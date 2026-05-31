@@ -7,19 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Repository for reading medication data from the database.
- *
- * @author Gyundyuz Sadulov
- */
+// hämtar och sparar mediciner, används både av patienter och vårdgivare
 public class MedicationRepository {
 
-    /**
-     * Returns all active medications for a given user.
-     *
-     * @param userId the user's ID
-     * @return list of active medications, empty if none found
-     */
     public List<Medication> findActiveByUserId(int userId) {
         List<Medication> list = new ArrayList<>();
         String sql = """
@@ -47,5 +37,33 @@ public class MedicationRepository {
             System.out.println("MedicationRepository error: " + e.getMessage());
         }
         return list;
+    }
+
+    public void save(int userId, Medication med) {
+        String sql = """
+                INSERT INTO safefaces.medications (user_id, name, dose, time_of_day, is_active)
+                VALUES (?, ?, ?, ?, TRUE)
+                """;
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            stmt.setString(2, med.name);
+            stmt.setString(3, med.dose);
+            stmt.setString(4, med.timeOfDay);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("MedicationRepository.save error: " + e.getMessage());
+        }
+    }
+
+    public void deactivateById(int id) {
+        String sql = "UPDATE safefaces.medications SET is_active = FALSE WHERE id = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("MedicationRepository.deactivateById error: " + e.getMessage());
+        }
     }
 }

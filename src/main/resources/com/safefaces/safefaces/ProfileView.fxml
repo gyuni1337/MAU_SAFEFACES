@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefWidth="400.0" prefHeight="700.0"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.safefaces.safefaces.Javafx.Controller.ProfileController">
+
+    <children>
+
+        <!-- Bakgrundsbild: lägg bilden i resources/com.safefaces.safefaces/images/profile_green.png -->
+        <ImageView fitWidth="400.0"
+                   fitHeight="700.0"
+                   preserveRatio="false">
+            <image>
+                <Image url="@images/user_profile.png"/>
+            </image>
+        </ImageView>
+
+        <Button fx:id="lifeStoryButton"
+                layoutX="34.0"
+                layoutY="525.0"
+                prefWidth="332.0"
+                prefHeight="80.0"
+                onAction="#openLifeStory"
+                style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+        <!-- Transparent knapp: Information -->
+        <Button fx:id="informationButton"
+                layoutX="34.0"
+                layoutY="250.0"
+                prefWidth="332.0"
+                prefHeight="72.0"
+                onAction="#openInformation"
+                style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+        <!-- Transparent knapp: Mediciner -->
+        <Button fx:id="medicineButton"
+                layoutX="34.0"
+                layoutY="330.0"
+                prefWidth="332.0"
+                prefHeight="72.0"
+                onAction="#openMedicines"
+                style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+        <!-- Transparent knapp: Hälsa -->
+        <Button fx:id="healthButton"
+                layoutX="34.0"
+                layoutY="410.0"
+                prefWidth="332.0"
+                prefHeight="72.0"
+                onAction="#openHealth"
+                style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+        <Button fx:id="familyButton"
+                layoutX="34.0"
+                layoutY="445.0"
+                prefWidth="332.0"
+                prefHeight="72.0"
+                onAction="#openFamily"
+                style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+        <!-- Bottenmeny: Översikt -->
+        <Button fx:id="overviewButton"
+                layoutX="35.0"
+                layoutY="625.0"
+                prefWidth="90.0"
+                prefHeight="55.0"
+                onAction="#openOverview"
+                style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+        <!-- Bottenmeny: Personer -->
+        <Button fx:id="peopleButton"
+                layoutX="155.0"
+                layoutY="625.0"
+                prefWidth="90.0"
+                prefHeight="55.0"
+                onAction="#openPeople"
+                style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+        <!-- Bottenmeny: Profil -->
+        <Button fx:id="profileButton"
+                layoutX="275.0"
+                layoutY="625.0"
+                prefWidth="90.0"
+                prefHeight="55.0"
+                onAction="#openProfile"
+                style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+    </children>
+</AnchorPane>

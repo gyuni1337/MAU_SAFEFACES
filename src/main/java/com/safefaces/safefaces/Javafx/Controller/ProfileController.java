@@ -9,16 +9,28 @@ import com.safefaces.safefaces.Core.Repository.ReminderRepository;
 import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.fxml.FXML;
+import javafx.stage.Stage;
 
 import java.util.List;
 
-// Profilsidan — visar info om inloggad användare,
-// beter sig lite olika beroende på om det är en vårdgivare eller vanlig user
+/**
+ * Controller for the profile/journal view.
+ * Displays user info, location, and medications fetched from the database.
+ *
+ * @author Emma Yousif
+ * @author Gyundyuz Sadulov
+ * @author Shaima Almoayed
+ */
 public class ProfileController {
 
     @FXML private Label nameLabel;
@@ -27,73 +39,47 @@ public class ProfileController {
     @FXML private ImageView profileImage;
     @FXML private Label medsLabel;
     @FXML private VBox medsBox;
-    @FXML private Label roleBadge;
-    @FXML private VBox caregiverStatsBox;
-    @FXML private Label patientCountLabel;
-    @FXML private Label reminderCountLabel;
+    @FXML private Button informationButton;
+    @FXML private Button peopleButton;
+    @FXML private Button oveerviewButton;
+    @FXML private Button medicineButton;
+    @FXML private Button healthButton;
+    @FXML private Button familyButton;
 
     private final MedicationRepository medicationRepository = new MedicationRepository();
     private final CaregiverPatientRepository caregiverPatientRepo = new CaregiverPatientRepository();
 
     @FXML
     public void initialize() {
-        User user = AppState.getInstance().getCurrentUser();
+//        User user = AppState.getInstance().getCurrentUser();
+//
+//        if (user == null) {
+//            nameLabel.setText("Ingen användare");
+//            ageLabel.setText("");
+//            return;
+//        }
+//
+//        String fullName = user.lastName != null
+//                ? user.firstName + " " + user.lastName
+//                : user.firstName;
+//        nameLabel.setText(fullName);
+//        ageLabel.setText("Ålder: " + user.age);
+//        locationLabel.setText(user.location != null ? "Du är hemma i " + user.location : "");
+//
+//        try {
+//            Image image = new Image(
+//                    getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + user.imagePath));
+//            profileImage.setTranslateX(-15);
+//            profileImage.setImage(image);
+//            profileImage.setClip(new Circle(60, 60, 60));
+//        } catch (Exception e) {
+//            System.out.println("Kunde inte ladda profilbild.");
+//        }
+//
+//        loadMedications(user.id);
+        System.out.println("ProfileView laddades");
 
-        if (user == null) {
-            nameLabel.setText("Ingen användare");
-            ageLabel.setText("");
-            return;
-        }
 
-        String fullName = user.lastName != null
-                ? user.firstName + " " + user.lastName
-                : user.firstName;
-        nameLabel.setText(fullName);
-        ageLabel.setText("Ålder: " + user.age);
-        locationLabel.setText(user.location != null ? "Du är hemma i " + user.location : "");
-
-        try {
-            Image image = new Image(
-                    getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + user.imagePath));
-            profileImage.setTranslateX(-15);
-            profileImage.setImage(image);
-            profileImage.setClip(new Circle(60, 60, 60));
-        } catch (Exception e) {
-            System.out.println("Kunde inte ladda profilbild.");
-        }
-
-        if (user.role == RoleType.CAREGIVER) {
-            roleBadge.setText("Vårdgivare");
-            roleBadge.setStyle(roleBadge.getStyle() + "-fx-background-color: #4a90d9;");
-            medsLabel.setVisible(false);
-            medsLabel.setManaged(false);
-            medsBox.setVisible(false);
-            medsBox.setManaged(false);
-            loadCaregiverStats(user.id);
-        } else {
-            roleBadge.setText("Användare");
-            roleBadge.setStyle(roleBadge.getStyle() + "-fx-background-color: #6abf69;");
-            loadMedications(user.id);
-        }
-    }
-
-    private void loadCaregiverStats(int caregiverId) {
-        roleBadge.setVisible(true);
-        roleBadge.setManaged(true);
-
-        List<User> patients = caregiverPatientRepo.findPatientsByCaregiver(caregiverId);
-        int patientCount = patients.size();
-
-        int totalReminders = 0;
-        for (User p : patients) {
-            totalReminders += new ReminderRepository(p.id).getActiveReminders().size();
-        }
-
-        patientCountLabel.setText("👥  " + patientCount + (patientCount == 1 ? " patient" : " patienter"));
-        reminderCountLabel.setText("🔔  " + totalReminders + " aktiva påminnelser totalt");
-
-        caregiverStatsBox.setVisible(true);
-        caregiverStatsBox.setManaged(true);
     }
 
     private void loadMedications(int userId) {
@@ -129,5 +115,168 @@ public class ProfileController {
         medsBox.setVisible(!isVisible);
         medsBox.setManaged(!isVisible);
         medsLabel.setText(isVisible ? "Mediciner ◀" : "Mediciner ▼");
+    }
+
+    /**
+     * Opens the information view and switches the current scene
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openInformation(){
+        try {
+            FXMLLoader loader= new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/InformationView.fxml")
+
+            );
+            Parent root=loader.load();
+            Stage stage=(Stage) informationButton.getScene().getWindow();
+            stage.setScene(new Scene(root,400,700));
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Open the medicines view
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openMedicines() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/MedicineView.fxml")
+
+            );
+            Parent root = loader.load();
+            Stage stage = (Stage) informationButton.getScene().getWindow();
+            stage.setScene(new Scene(root, 400, 700));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Opens the health view.
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openHealth(){
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/HealthView.fxml")
+
+            );
+            Parent root = loader.load();
+            Stage stage = (Stage) informationButton.getScene().getWindow();
+            stage.setScene(new Scene(root, 400, 700));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     * Navigates to the home view
+     *
+     * @author Shaima Almoayed
+     */
+   @FXML
+   private void openOverview(){
+        openHomeView();
+   }
+
+    /**
+     * Open the people view
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openPeople() {
+       openHomeView();
+    }
+
+    /**
+     * Handles clicks on the profile button
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openProfile() {
+        System.out.println("Profil klickad");
+    }
+
+    /**
+     * Opens the home page
+     *
+     * @author Shaima Almoayed
+     */
+    private void openHomeView(){
+        try {
+            FXMLLoader loader= new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/HomeView.fxml")
+
+            );
+            Parent root=loader.load();
+            Stage stage=(Stage) informationButton.getScene().getWindow();
+            stage.setScene(new Scene(root,400,700));
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Opens the family view
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openFamily(){
+            try{
+                FXMLLoader loader=new FXMLLoader(
+                        getClass().getResource("/com/safefaces/safefaces/FamilyView.fxml")
+                );
+                Parent root=loader.load();
+                Stage stage=(Stage)familyButton.getScene().getWindow();
+
+                stage.setScene(new Scene(root,400,700));
+                stage.show();
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+    }
+
+    /**
+     * Opens the life story view
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openLifeStory(){
+        try{
+            FXMLLoader loader=new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/LifeStoryView.fxml")
+            );
+            Parent root=loader.load();
+            Stage stage=(Stage)familyButton.getScene().getWindow();
+
+            stage.setScene(new Scene(root,400,700));
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

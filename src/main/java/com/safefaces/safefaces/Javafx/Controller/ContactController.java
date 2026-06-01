@@ -36,6 +36,9 @@ public class ContactController {
     @FXML private Label sectionLabel;
     @FXML private Button sosButton;
 
+    private boolean voiceHeaderAdded;
+    private boolean callHeaderAdded;
+
     private final ContactService contactService = new ContactService();
     private MediaPlayer currentPlayer;
     @FXML
@@ -50,8 +53,8 @@ public class ContactController {
             return;
 
         contactListBox.getChildren().clear();
-        private boolean voiceHeaderAdded = false;
-        private boolean callHeaderAdded = false;
+        voiceHeaderAdded = false;
+        callHeaderAdded = false;
 
 
         List<Contact> contacts = contactService.getContactList();

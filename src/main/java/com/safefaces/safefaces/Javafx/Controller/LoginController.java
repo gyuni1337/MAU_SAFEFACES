@@ -251,7 +251,7 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/safefaces/safefaces/HomeView.fxml"));
             Parent root = loader.load();
-            stage.setScene(new Scene(root, 400, 640));
+            stage.setScene(new Scene(root, 400, 700));
             stage.show();
             SessionManager.start(stage);
         }catch (Exception e){
@@ -361,7 +361,7 @@ public class LoginController {
                     getClass().getResource("/com/safefaces/safefaces/ContactListView.fxml")
             );
             Parent root=loader.load();
-            stage.setScene(new Scene(root,400,640));
+            stage.setScene(new Scene(root,400,700));
             stage.show();
 
             SessionManager.start(stage);

@@ -11,36 +11,42 @@
       fx:controller="com.safefaces.safefaces.Javafx.Controller.BottomNavController"
       fx:id="navBar"
       alignment="CENTER"
-      prefHeight="78.0"
-      style="-fx-background-color: #efefef; -fx-border-color: #dddddd transparent transparent transparent; -fx-border-width: 1 0 0 0;">
+      spacing="55"
+      prefHeight="90.0"
+      maxWidth="400.0"
+      translateY="-27"
+      style="-fx-background-color: rgba(255,255,255,0.92);
+       -fx-background-radius: 45 45 0 0;
+       -fx-padding: 10 25 10 25;
+       -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.10), 14, 0, 0, -2);">
 
     <children>
         <StackPane onMouseClicked="#goReminders"
                    HBox.hgrow="ALWAYS"
-                   prefHeight="78.0"
+                   prefHeight="90.0"
                    alignment="CENTER"
                    style="-fx-cursor: hand;">
-            <ImageView fx:id="leftNavIcon" fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
+            <ImageView fx:id="leftNavIcon" fitHeight="70.0" fitWidth="70.0" preserveRatio="true" mouseTransparent="true">
                 <image><Image url="@../images/reminder.png"/></image>
             </ImageView>
         </StackPane>
 
         <StackPane onMouseClicked="#goHome"
                    HBox.hgrow="ALWAYS"
-                   prefHeight="78.0"
+                   prefHeight="90.0"
                    alignment="CENTER"
                    style="-fx-cursor: hand;">
-            <ImageView fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
+            <ImageView fitHeight="70.0" fitWidth="70.0" preserveRatio="true" mouseTransparent="true">
                 <image><Image url="@../images/home.png"/></image>
             </ImageView>
         </StackPane>
 
         <StackPane onMouseClicked="#goJournal"
                    HBox.hgrow="ALWAYS"
-                   prefHeight="78.0"
+                   prefHeight="70.0"
                    alignment="CENTER"
                    style="-fx-cursor: hand;">
-            <ImageView fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
+            <ImageView fitHeight="70.0" fitWidth="70.0" preserveRatio="true" mouseTransparent="true">
                 <image><Image url="@../images/journal.png"/></image>
             </ImageView>
         </StackPane>

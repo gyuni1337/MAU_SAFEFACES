@@ -93,8 +93,8 @@ public class MainController {
             );
 
             HBox nav = loader.load();
-            nav.setPrefHeight(78);
-            nav.setMinHeight(78);
+            nav.setPrefHeight(95);
+            nav.setMinHeight(95);
             BottomNavController navController = loader.getController();
             navController.setMainController(this);
 

@@ -1,62 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Imports for layout and UI components -->
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<!--
-    Main application layout.
-    Acts as the root container for the entire UI.
-
-    Structure:
-    - Top: Header (TopBar component)
-    - Center: Dynamic content area (view switching)
-    - Bottom: Navigation bar (injected dynamically)
-
-    Controlled by MainController.
--->
-<AnchorPane prefHeight="800.0" prefWidth="400.0"
+<AnchorPane prefHeight="700.0"
+            prefWidth="400.0"
             style="-fx-background-color: #f4f4f4;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.safefaces.safefaces.Javafx.Controller.MainController">
+
     <children>
-        <BorderPane prefHeight="800.0" prefWidth="400.0"
-                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane prefHeight="700.0"
+                    prefWidth="400.0"
+                    AnchorPane.topAnchor="0.0"
+                    AnchorPane.bottomAnchor="0.0"
+                    AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0">
 
-            <!-- Top section: header / branding -->
-            <top>
-                <VBox spacing="10">
-                    <padding>
-                        <Insets top="20" bottom="10"/>
-                    </padding>
-                    <!-- Reusable header component (logo + title) -->
-                    <fx:include source="components/TopBar.fxml"/>
-                </VBox>
-            </top>
-
-            <!-- Center section: main dynamic content -->
             <center>
-                <!-- This area is replaced dynamically with different views -->
-                <AnchorPane fx:id="contentArea"/>
+                <AnchorPane fx:id="contentArea"
+                            prefWidth="400.0"
+                            prefHeight="700.0"/>
             </center>
 
-            <!-- Bottom section: navigation bar -->
             <bottom>
-                <!-- Navigation is injected dynamically by MainController -->
                 <AnchorPane fx:id="bottomContainer"
-                            prefHeight="78.0"
-                            minHeight="78.0"/>
+                            prefHeight="0.0"
+                            minHeight="0.0"
+                            maxHeight="0.0"
+                            visible="false"
+                            managed="false"/>
             </bottom>
+
         </BorderPane>
     </children>
 </AnchorPane>

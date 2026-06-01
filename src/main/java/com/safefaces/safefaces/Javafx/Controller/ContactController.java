@@ -17,6 +17,15 @@ import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ButtonBar;
+import javafx.stage.Stage;
+import javafx.scene.control.Button;
 
 import java.util.List;
 import java.util.Objects;
@@ -25,6 +34,7 @@ public class ContactController {
 
     @FXML private VBox contactListBox;
     @FXML private Label sectionLabel;
+    @FXML private Button sosButton;
 
     private final ContactService contactService = new ContactService();
     private MediaPlayer currentPlayer;
@@ -163,6 +173,99 @@ public class ContactController {
             currentPlayer.stop();
             currentPlayer.dispose();
             currentPlayer =null;
+        }
+    }
+
+    /**
+     * Opens the profile page
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openProfile(){
+        try{
+            FXMLLoader loader=new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/ProfileView.fxml")
+            );
+            Parent root=loader.load();
+            javafx.stage.Stage stage=(javafx.stage.Stage) contactListBox.getScene().getWindow();
+
+            stage.setScene(new Scene(root,400,700));
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Opens the reminders page
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openReminders() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/components/Reminders.fxml")
+            );
+            Parent root = loader.load();
+            javafx.stage.Stage stage = (javafx.stage.Stage) contactListBox.getScene().getWindow();
+
+            stage.setScene(new Scene(root, 400, 700));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Refreshes and displays the contact list
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openContacts() {
+        buildContactList();
+    }
+
+    /**
+     * Displays a dialog simulating an ongoing emergency call to 112
+     *
+     * @author Shaima Almoayed
+     */
+   @FXML
+    private void showCalling112(){
+        Alert calling=new Alert(Alert.AlertType.INFORMATION);
+        calling.setTitle("Samtal");
+        calling.setHeaderText("Ringer 112...");
+        calling.setContentText("Samtal pågår");
+
+        ButtonType endCall=new ButtonType("Anvslut samtal", ButtonBar.ButtonData.CANCEL_CLOSE);
+        calling.getButtonTypes().setAll(endCall);
+        calling.showAndWait();
+    }
+
+    /**
+     * Opens the SOS confirmation screen before placing an emergency call
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openSosConfirm(){
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/SosConfirmView.fxml")
+            );
+            Parent root = loader.load();
+            Stage stage=(Stage) contactListBox.getScene().getWindow();
+
+            stage.setScene(new Scene(root, 400, 700));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

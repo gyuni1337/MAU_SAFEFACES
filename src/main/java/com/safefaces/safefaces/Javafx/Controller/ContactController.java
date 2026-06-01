@@ -50,8 +50,8 @@ public class ContactController {
             return;
 
         contactListBox.getChildren().clear();
-        voiceHeaderAdded = false;
-        callHeaderAdded = false;
+        private boolean voiceHeaderAdded = false;
+        private boolean callHeaderAdded = false;
 
 
         List<Contact> contacts = contactService.getContactList();

@@ -13,6 +13,7 @@ import java.util.List;
  * @author Noor Nabi
  * @author Gyundyuz Sadulov
  * @author Emma Yousif
+ * @author Hamdi Ahmed
  */
 public class ContactRepository {
 
@@ -83,6 +84,29 @@ public class ContactRepository {
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("ContactRepository.deleteByName failed: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Updates voice_note_path for a contact
+     * @param contactName the name of the contact
+     * @param userId the ID of the user who owns the contact
+     * @param fileName the file name
+     * @author  Hamdi Ahmed
+     */
+
+    public void updateVoiceNotePath(String contactName, int userId, String fileName){
+        String sql = "UPDATE contacts SET voice_note_path = ? WHERE name = ? AND user_id = ?" ;
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, fileName);
+            stmt.setString(2, contactName);
+            stmt.setInt(3,userId);
+            stmt.executeUpdate();
+
+            System.out.println("voice_note_path updated for: " + contactName);
+        } catch (SQLException e) {
+            System.out.println("Update voice note path failed: " + e.getMessage());
         }
     }
 }

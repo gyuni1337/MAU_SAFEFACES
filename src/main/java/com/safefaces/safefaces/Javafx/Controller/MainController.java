@@ -104,34 +104,17 @@ public class MainController {
             AnchorPane.setRightAnchor(nav, 0.0);
 
             bottomContainer.getChildren().setAll(nav);
-
-//            System.out.println(nav.getPrefHeight());
-//            System.out.println(bottomContainer.getHeight());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        AppState.getInstance().setMainController(this);
         showHome();
     }
 
-    /**
-     * Displays the profile page in a separate scene
-     *
-     * @author Shaima Almoayed
-     */
-    public void showJournal(){
-        try {
-            FXMLLoader loader=new FXMLLoader(
-                    getClass().getResource("/com/safefaces/safefaces/ProfileView.fxml"));
-
-            Parent root=loader.load();
-            javafx.stage.Stage stage=
-                    (javafx.stage.Stage)contentArea.getScene().getWindow();
-
-            stage.setScene(new javafx.scene.Scene(root, 400,700));
-            stage.show();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    public void showProfile() {
+        bottomContainer.setVisible(true);
+        bottomContainer.setManaged(true);
+        loadView("/com/safefaces/safefaces/ProfileView.fxml");
     }
 }

@@ -41,6 +41,6 @@ public class BottomNavController {
 
     @FXML
     private void goJournal() {
-        mainController.showJournal();
+        mainController.showProfile();
     }
 }

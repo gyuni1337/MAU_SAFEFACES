@@ -1,6 +1,7 @@
 package com.safefaces.safefaces.Javafx.App;
 
 import com.safefaces.safefaces.Core.Model.User;
+import com.safefaces.safefaces.Javafx.Controller.MainController;
 
 /**
  * Singleton class that manages the global application state.
@@ -38,8 +39,16 @@ public class AppState {
         return instance;
     }
 
-    /** The currently authenticated user. */
     private User currentUser;
+    private MainController mainController;
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
+    public void setMainController(MainController mainController) {
+        this.mainController = mainController;
+    }
 
     /**
      * Returns the currently logged-in user.

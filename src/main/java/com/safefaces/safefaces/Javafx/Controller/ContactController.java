@@ -46,12 +46,9 @@ public class ContactController {
     @FXML private VBox contactListBox;
     @FXML private Label sectionLabel;
     @FXML private Button sosButton;
-    private boolean voiceHeaderAdded = false;
-    private boolean callHeaderAdded = false;
-
-
     private boolean voiceHeaderAdded;
     private boolean callHeaderAdded;
+
 
     private final ContactService contactService = new ContactService();
     private MediaPlayer currentPlayer;

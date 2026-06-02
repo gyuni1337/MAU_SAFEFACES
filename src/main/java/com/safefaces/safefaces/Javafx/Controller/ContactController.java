@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
@@ -20,33 +19,66 @@ import javafx.scene.shape.Circle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
-import javafx.scene.control.Button;
-
 import java.util.List;
 import java.util.Objects;
+
+/**
+ * This controller is responsible for displaying and managing
+ * the users contacts.
+ * Creating and displaying the contact list,
+ * simulated phone calls, voice memo playback,
+ * navigation between application views and SOS-related actions.
+ *
+ * This controller retrieves contact information through the
+ * ContactService class and dynamically creates the user interface elements shown in the contact list.
+ * @author Hamdi Ahmed
+ * @author  Noor Nabi
+ * @author Shaima ALmoayed
+ */
+
+
 
 public class ContactController {
 
     @FXML private VBox contactListBox;
     @FXML private Label sectionLabel;
     @FXML private Button sosButton;
+    private boolean voiceHeaderAdded = false;
+    private boolean callHeaderAdded = false;
+
 
     private boolean voiceHeaderAdded;
     private boolean callHeaderAdded;
 
     private final ContactService contactService = new ContactService();
     private MediaPlayer currentPlayer;
+
+    /**
+     * This method  is automatically called by JavaFX
+     * after the FXML file has been loaded.
+     * It initializes the contact view and loads all contacts for
+     * currently logged-in user
+     * @author Noor Nabi
+     * @author Hamdi Ahmed
+     */
     @FXML
 
     public void initialize() {
         int userId = AppState.getInstance().getCurrentUser().getId();
         buildContactList();
     }
+
+    /**
+     * This method Builds and populates the contact list view.
+     * It clears any existing contact entries and creates a new row for each contact retrieved
+     * from the ContactService.
+     * If no contact are available, a message is shown.
+     * @author Noor Nabi
+     * @author Hamdi Ahmed
+     */
 
     private void buildContactList() {
         if (contactListBox == null)
@@ -70,17 +102,26 @@ public class ContactController {
         }
     }
 
+    /**
+     * This method creates a visual row representing a contract.
+     * The row contains the contact image, name, relationship, call button and voice memo button.
+     * @param contact the contact to display
+     * @return an HBox containing the contact information
+     * @author Noor Nabi
+     * @author Hamdi Ahmed
+     */
+
     private HBox buildRow(Contact contact) {
         HBox row = new HBox(16);
         row.setStyle("-fx-background-color:white; -fx-background-radius:16; -fx-padding:14;");
         row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(56);
-        imageView.setFitHeight(56);
-        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(80);
+        imageView.setFitHeight(80);
+        imageView.setPreserveRatio(false);
 
-        Circle clip = new Circle(28, 28, 28);
+        Circle clip = new Circle(40, 40, 40);
         imageView.setClip(clip);
 
         String imageName = contact.getImagePath() != null
@@ -102,21 +143,21 @@ public class ContactController {
 
         VBox nameBox = new VBox(4);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
+        nameBox.setAlignment(Pos.CENTER_LEFT);
 
         Label nameLabel = new Label(contact.getName());
-        nameLabel.setStyle("-fx-font-size:18; -fx-font-weight:bold;");
+        nameLabel.setStyle("-fx-font-size:18; -fx-font-weight:bold;-fx-text-fill: darkgreen");
         Label relationLabel = new Label(contact.getRelation());
-        relationLabel.setStyle("-fx-font-size:13; -fx-text-fill:#888;");
+        relationLabel.setStyle("-fx-font-size:10; -fx-text-fill:#888;");
         nameBox.getChildren().addAll(nameLabel, relationLabel);
 
-        Region spacer = new Region();
-        VBox callBox = new VBox(4);
+        VBox callBox = new VBox(5);
         callBox.setAlignment(Pos.CENTER);
 
 
         if(!callHeaderAdded){
             Label callHeader = new Label("Ring");
-            callHeader.setStyle("-fx-font-size: 11; -fx-text-fill: #888;-fx-font-weight:bold;");
+            callHeader.setStyle("-fx-font-size: 9; -fx-text-fill: #888;-fx-font-weight:bold;-fx-text-fill:black;");
             callBox.getChildren().add(callHeader);
             callHeaderAdded = true;
         }
@@ -133,7 +174,7 @@ public class ContactController {
 
         if(!voiceHeaderAdded){
             Label voiceHeader = new Label("Röstmemo");
-            voiceHeader.setStyle("-fx-font-size: 11; -fx-text-fill: #888;-fx-font-weight:bold;");
+            voiceHeader.setStyle("-fx-font-size: 9; -fx-text-fill: #888;-fx-font-weight:bold;-fx-text-fill: black;");
             voiceBox.getChildren().add(voiceHeader);
             voiceHeaderAdded = true;
         }
@@ -146,9 +187,16 @@ public class ContactController {
         voiceBtn.setOnAction(e->handleVoiceMessage(contact,voiceBtn));
 
         voiceBox.getChildren().add(voiceBtn);
-        row.getChildren().addAll(imageView, nameBox, spacer, callBox, voiceBox);
+        row.getChildren().addAll(imageView, nameBox, callBox, voiceBox);
         return row;
     }
+
+    /**
+     * Simulates a phone call to a selected contact.
+     * This method displays a dialog indicating that the selected contact is being called.
+     * @param event the button click event
+     * @uthor Noor Nabi
+     */
 
     @FXML
     private void handleCall(javafx.event.ActionEvent event) {
@@ -162,6 +210,17 @@ public class ContactController {
                 + ".\nPress ok to end call.");
         alert.showAndWait();
     }
+
+    /**
+     * Plays the selected contact's voice memo.
+     * Stops any currently playing audio before
+     * starting playback of the new recording.
+     *
+     *If no voice memo exists, an information dialog is displayed
+     * @param contact the contact whose voice memo should be played.
+     * @param btn the button that triggered the action
+     * @author Hamdi Ahmed
+     */
 
     @FXML
     private void handleVoiceMessage(Contact contact,Button btn) {
@@ -191,6 +250,12 @@ public class ContactController {
         
 
     }
+
+    /**
+     * Stops and disposes the currently active media player.
+     * Used to ensure that only one voice memo is playing at the time.
+     * @author Hamdi Ahmed
+     */
     private void stopCurrentPlayer(){
         if(currentPlayer !=null){
             currentPlayer.stop();

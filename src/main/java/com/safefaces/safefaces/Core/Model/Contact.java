@@ -7,7 +7,7 @@ package com.safefaces.safefaces.Core.Model;
  *
  * @author Noor Nabi
  * @author Emma Yousif
- * @author Hamdi Ahmed
+ * @author Gyundyuz Sadulov
  */
 public class Contact {
 

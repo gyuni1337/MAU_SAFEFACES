@@ -44,6 +44,7 @@ public class ProfileController {
     @FXML private Button oveerviewButton;
     @FXML private Button medicineButton;
     @FXML private Button healthButton;
+    @FXML private Button logoutButton;
     @FXML private Button familyButton;
 
     private final MedicationRepository medicationRepository = new MedicationRepository();
@@ -273,6 +274,53 @@ public class ProfileController {
             Stage stage=(Stage)familyButton.getScene().getWindow();
 
             stage.setScene(new Scene(root,400,700));
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Logs out the current user and returns to the login view
+     * Loads the LoginView FXML file and replaces the current scene
+     *
+     * @author Shaima Almoayed
+     */
+
+    @FXML
+    private void logout() {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/LoginView.fxml")
+            );
+            Parent root = loader.load();
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
+
+            stage.setScene(new Scene(root, 400, 700));
+            stage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Opens the reminders view and switches the current scene
+     * to the reminders page
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openReminders(){
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/components/Reminders.fxml")
+            );
+            Parent root = loader.load();
+            Stage stage = (Stage) informationButton.getScene().getWindow();
+
+            stage.setScene(new Scene(root, 400, 700));
             stage.show();
 
         }catch (Exception e){

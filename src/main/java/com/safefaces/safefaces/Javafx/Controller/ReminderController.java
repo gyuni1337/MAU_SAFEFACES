@@ -9,6 +9,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 import java.util.List;
 
 /**
@@ -23,10 +28,15 @@ import java.util.List;
  */
 public class ReminderController {
 
-    /** Container for displaying the list of reminders. */
-    @FXML private VBox reminderListBox;
+    /**
+     * Container for displaying the list of reminders.
+     */
+    @FXML
+    private VBox reminderListBox;
 
-    /** Service used to fetch reminder data. */
+    /**
+     * Service used to fetch reminder data.
+     */
     private ReminderService reminderService;
 
     /**
@@ -34,7 +44,7 @@ public class ReminderController {
      * Retrieves the current user and populates the reminder list.
      */
     @FXML
-    public void initialize(){
+    public void initialize() {
         int userId = AppState.getInstance().getCurrentUser().getId();
 
         reminderService = new ReminderService(userId);
@@ -45,22 +55,22 @@ public class ReminderController {
      * Builds the reminder list UI by fetching active reminders
      * and creating visual rows for each entry.
      */
-    private void buildReminderList(){
-        if(reminderListBox == null)
+    private void buildReminderList() {
+        if (reminderListBox == null)
             return;
 
         reminderListBox.getChildren().clear();
         List<Reminder> reminders = reminderService.getActiveReminders();
 
 
-        if(reminders.isEmpty()){
+        if (reminders.isEmpty()) {
             Label empty = new Label("Inga påminnelser just nu.");
             empty.setStyle("-fx-font-size:16; -fx-text-fill:#888; -fx-padding: 20;");
 
             reminderListBox.getChildren().add(empty);
             return;
         }
-        for(Reminder reminder : reminders){
+        for (Reminder reminder : reminders) {
             reminderListBox.getChildren().add(buildRow(reminder));
         }
     }
@@ -71,7 +81,7 @@ public class ReminderController {
      * @param reminder the reminder to display
      * @return an {@link HBox} containing the formatted reminder information
      */
-    private HBox buildRow(Reminder reminder){
+    private HBox buildRow(Reminder reminder) {
         HBox row = new HBox(16);
         row.setStyle("""
                 -fx-background-color: white;
@@ -81,26 +91,54 @@ public class ReminderController {
                 """);
         row.setAlignment(Pos.CENTER_LEFT);
 
-        Label icon =new Label("\uD83D\uDCCB");
+        Label icon = new Label("\uD83D\uDCCB");
         icon.setStyle("-fx-font-size:28");
         VBox textBox = new VBox(4);
-        HBox.setHgrow(textBox,Priority.ALWAYS);
+        HBox.setHgrow(textBox, Priority.ALWAYS);
 
         Label titelLabel = new Label(reminder.title);
         titelLabel.setStyle("-fx-font-size:17; -fx-font-weight:bold");
 
         Label descLabel = new Label(
-        reminder.description != null &&! reminder.description.isBlank() ? reminder.description : "");
+                reminder.description != null && !reminder.description.isBlank() ? reminder.description : "");
 
         descLabel.setStyle("-fx-font-size:13;-fx-text-fill:#888");
         descLabel.setWrapText(true);
 
         Label timeLabel = new Label(
-                reminder.startTime != null ? "\uD83D\uDD50" + reminder.startTime.toString().substring(0,5)
-                        :"");
+                reminder.startTime != null ? "\uD83D\uDD50" + reminder.startTime.toString().substring(0, 5)
+                        : "");
         timeLabel.setStyle("-fx-font-size:13;-fx-text-fill:#aaa");
-        textBox.getChildren().addAll(titelLabel,descLabel,timeLabel);
-        row.getChildren().addAll(icon,textBox);
+        textBox.getChildren().addAll(titelLabel, descLabel, timeLabel);
+        row.getChildren().addAll(icon, textBox);
         return row;
+    }
+
+    @FXML
+    private void openPeople() {
+        loadPage("/com/safefaces/safefaces/HomeView.fxml");
+    }
+
+    @FXML
+    private void openProfile() {
+        loadPage("/com/safefaces/safefaces/ProfileView.fxml");
+    }
+
+    @FXML
+    private void openReminders() {
+    }
+
+    private void loadPage(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) reminderListBox.getScene().getWindow();
+            stage.setScene(new Scene(root, 400, 700));
+            stage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

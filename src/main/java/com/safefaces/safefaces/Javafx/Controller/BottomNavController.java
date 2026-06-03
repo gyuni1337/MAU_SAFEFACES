@@ -18,7 +18,7 @@ public class BottomNavController {
             try {
                 leftNavIcon.setImage(new Image(
                         getClass().getResourceAsStream(
-                                "/com/safefaces/safefaces/images/contacts.png")));
+                                "/com/safefaces/safefaces/images/påmina.png")));
             } catch (Exception e) {
                 System.out.println("Kunde inte ladda caregiver-ikon.");
             }

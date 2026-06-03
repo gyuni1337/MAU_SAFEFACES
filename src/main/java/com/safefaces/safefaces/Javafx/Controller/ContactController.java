@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
@@ -19,9 +20,13 @@ import javafx.scene.shape.Circle;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -46,6 +51,7 @@ public class ContactController {
     @FXML private VBox contactListBox;
     @FXML private Label sectionLabel;
     @FXML private Button sosButton;
+
     private boolean voiceHeaderAdded;
     private boolean callHeaderAdded;
 
@@ -143,9 +149,8 @@ public class ContactController {
         nameBox.setAlignment(Pos.CENTER_LEFT);
 
         Label nameLabel = new Label(contact.getName());
-        nameLabel.setStyle("-fx-font-size:18; -fx-font-weight:bold;-fx-text-fill: darkgreen");
-        Label relationLabel = new Label(contact.getRelation());
-        relationLabel.setStyle("-fx-font-size:10; -fx-text-fill:#888;");
+        nameLabel.setStyle("-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:#000000;");        Label relationLabel = new Label(contact.getRelation());
+        relationLabel.setStyle("-fx-font-size:13; -fx-text-fill:#888;");
         nameBox.getChildren().addAll(nameLabel, relationLabel);
 
         VBox callBox = new VBox(5);

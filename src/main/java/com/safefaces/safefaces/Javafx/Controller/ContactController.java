@@ -104,8 +104,7 @@ public class ContactController {
         HBox.setHgrow(nameBox, Priority.ALWAYS);
 
         Label nameLabel = new Label(contact.getName());
-        nameLabel.setStyle("-fx-font-size:18; -fx-font-weight:bold;");
-        Label relationLabel = new Label(contact.getRelation());
+        nameLabel.setStyle("-fx-font-size:18; -fx-font-weight:bold; -fx-text-fill:#000000;");        Label relationLabel = new Label(contact.getRelation());
         relationLabel.setStyle("-fx-font-size:13; -fx-text-fill:#888;");
         nameBox.getChildren().addAll(nameLabel, relationLabel);
 

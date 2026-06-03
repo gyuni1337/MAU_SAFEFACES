@@ -1,49 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Imports for layout and UI components -->
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
 
-<!--
-    Reminder view layout.
-    Displays a list of active reminders for the current user.
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.safefaces.safefaces.Javafx.Controller.ReminderController"
+            prefWidth="400"
+            prefHeight="700">
 
-    The reminder list is populated dynamically by ReminderController
-    using the VBox with fx:id "reminderListBox".
--->
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.safefaces.safefaces.Javafx.Controller.ReminderController"
-      spacing="0"
-      style ="-fx-background-color:#f5f6fa;">
+    <ImageView fitWidth="400"
+               fitHeight="700"
+               preserveRatio="false">
+        <image>
+            <Image url="@../images/extra.png"/>
+        </image>
+    </ImageView>
 
-    <!-- Header section with title and subtitle -->
-<VBox style="-fx-background-color: white;-fx-padding: 24 24 16 24;">
-    <Label text="Påminnelser"
-           style="-fx-font-size:26;-fx-font-weight:bold;"/>
-    <Label text="Dina aktiva påminnelser"
-           style="-fx-font-size:13;-fx-text-fill:#888;"/>
-</VBox>
 
-    <!-- Scrollable container for reminder list -->
-    <ScrollPane fitToWidth="true"
-                style="-fx-background-color:transparent;-fx-background-color: transparent;"
-                VBox.vgrow="ALWAYS">
-        <!-- Container where reminders are dynamically added -->
+    <ScrollPane layoutX="55"
+                layoutY="260"
+                prefWidth="290"
+                prefHeight="300"
+                fitToWidth="true"
+                style="-fx-background-color: transparent; -fx-background: transparent;">
+
         <VBox fx:id="reminderListBox"
               spacing="12"
-              style="-fx-background-color:#f5f6fa;">
-             <padding>
-                 <!-- Extra bottom padding to avoid overlap with navigation bar -->
-                 <Insets top="16"
-                    bottom="80"
-                    left="16"
-                    right="16"/>
-             </padding>
-        </VBox>
+              style="-fx-background-color: transparent;"/>
+
 
     </ScrollPane>
+    <!-- Bottenmeny-knappar -->
+    <Button fx:id="reminderButton"
+             layoutX="35.0" layoutY="625.0"
+             prefWidth="90.0" prefHeight="55.0"
+             onAction="#openReminders"
+             style="-fx-background-color: transparent; -fx-cursor: hand;"/>
 
-</VBox>
+    <Button fx:id="peopleButton"
+            layoutX="155.0" layoutY="625.0"
+            prefWidth="90.0" prefHeight="55.0"
+            onAction="#openPeople"
+            style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+    <Button fx:id="profileButton"
+            layoutX="275.0" layoutY="625.0"
+            prefWidth="90.0" prefHeight="55.0"
+            onAction="#openProfile"
+            style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+
+</AnchorPane>

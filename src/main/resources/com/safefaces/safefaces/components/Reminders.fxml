@@ -17,7 +17,7 @@
                fitHeight="700"
                preserveRatio="false">
         <image>
-            <Image url="@../images/extra.png"/>
+            <Image url="@../images/Reminders.png"/>
         </image>
     </ImageView>
 

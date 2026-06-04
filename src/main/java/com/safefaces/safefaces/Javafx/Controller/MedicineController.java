@@ -78,9 +78,9 @@ public class MedicineController {
 
         VBox text = new VBox(3);
         Label name = new Label(med.name + (med.dose != null ? "  " + med.dose : ""));
-        name.setStyle("-fx-font-size: 15; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;");
-        Label dose = new Label("1 tablett");
-        dose.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
+        name.setStyle("-fx-font-size: 15; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;");
+        Label dose = new Label(med.dose != null ? med.dose : "");
+        dose.setStyle("-fx-font-size: 13; -fx-font-family: 'Helvetica Neue'; -fx-text-fill: #8aab90;");
         text.getChildren().addAll(name, dose);
 
         row.getChildren().addAll(iconBox, text);

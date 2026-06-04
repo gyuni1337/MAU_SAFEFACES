@@ -48,15 +48,6 @@
                 </VBox>
             </HBox>
 
-            <!-- SafeFaces logo (centered, below header) -->
-            <VBox alignment="CENTER" spacing="4" style="-fx-padding: 10 0 16 0;">
-                <ImageView fitWidth="48" fitHeight="48" preserveRatio="true">
-                    <image><Image url="@../images/logo.png"/></image>
-                </ImageView>
-                <Label text="SafeFaces"
-                       style="-fx-font-size: 18; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
-            </VBox>
-
             <!-- Content -->
             <VBox spacing="14" style="-fx-background-color: transparent;">
                 <padding><Insets left="16" right="16" bottom="100"/></padding>

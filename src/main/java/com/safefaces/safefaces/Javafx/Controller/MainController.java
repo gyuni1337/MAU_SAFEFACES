@@ -121,13 +121,15 @@ public class MainController {
             HBox nav = loader.load();
             nav.setPrefHeight(70);
             nav.setMinHeight(70);
+            nav.setMaxHeight(70);
             BottomNavController navController = loader.getController();
             navController.setMainController(this);
 
-            AnchorPane.setTopAnchor(nav, 0.0);
-            AnchorPane.setBottomAnchor(nav, 0.0);
-            AnchorPane.setLeftAnchor(nav, 0.0);
-            AnchorPane.setRightAnchor(nav, 0.0);
+            // Float the nav: fixed height, 10px from bottom, 12px side margins
+            AnchorPane.setBottomAnchor(nav, 10.0);
+            AnchorPane.setLeftAnchor(nav, 12.0);
+            AnchorPane.setRightAnchor(nav, 12.0);
+            // No topAnchor — prefHeight/maxHeight drive the height
 
             bottomContainer.getChildren().setAll(nav);
 

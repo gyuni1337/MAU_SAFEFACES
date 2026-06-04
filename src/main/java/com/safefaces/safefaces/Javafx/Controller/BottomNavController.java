@@ -20,8 +20,8 @@ public class BottomNavController {
     private static final Color ACTIVE   = Color.web("#1a6b3d");
     private static final Color INACTIVE = Color.web("#8a8a8a");
 
-    private static final String ACTIVE_LABEL   = "-fx-font-size: 11; -fx-text-fill: #1a6b3d;";
-    private static final String INACTIVE_LABEL = "-fx-font-size: 11; -fx-text-fill: #8a8a8a;";
+    private static final String ACTIVE_LABEL   = "-fx-font-family: 'System'; -fx-font-size: 11; -fx-text-fill: #1a6b3d;";
+    private static final String INACTIVE_LABEL = "-fx-font-family: 'System'; -fx-font-size: 11; -fx-text-fill: #8a8a8a;";
 
     private MainController mainController;
 

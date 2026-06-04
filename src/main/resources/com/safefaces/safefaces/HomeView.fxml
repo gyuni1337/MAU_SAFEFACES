@@ -36,11 +36,9 @@
 
             <bottom>
                 <AnchorPane fx:id="bottomContainer"
-                            prefHeight="86.0"
-                            minHeight="86.0"
-                            style="-fx-background-color: transparent;">
-                    <padding><Insets bottom="10" left="12" right="12"/></padding>
-                </AnchorPane>
+                            prefHeight="90.0"
+                            minHeight="90.0"
+                            style="-fx-background-color: transparent;"/>
             </bottom>
         </BorderPane>
 

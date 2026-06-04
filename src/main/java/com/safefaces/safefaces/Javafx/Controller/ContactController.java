@@ -6,12 +6,10 @@ import com.safefaces.safefaces.Core.Model.Enums.RoleType;
 import com.safefaces.safefaces.Core.Service.ContactService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
@@ -53,66 +51,100 @@ public class ContactController {
         }
 
         for (Contact contact : contacts) {
-            contactListBox.getChildren().add(buildRow(contact));
+            VBox card = buildRow(contact);
+            VBox.setMargin(card, new javafx.geometry.Insets(4, 0, 4, 0));
+            contactListBox.getChildren().add(card);
         }
     }
 
-    private HBox buildRow(Contact contact) {
-        HBox row = new HBox(16);
-        row.setStyle("-fx-background-color:white; -fx-background-radius:16; -fx-padding:14;");
+    private VBox buildRow(Contact contact) {
+        // Outer card
+        VBox card = new VBox();
+        card.setStyle("-fx-background-color: white; -fx-background-radius: 18;"
+                + " -fx-padding: 14 16 14 16;"
+                + " -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);");
+        card.setMargin(card, new javafx.geometry.Insets(4, 0, 4, 0));
+
+        HBox row = new HBox(14);
         row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
+        // Profile photo
         ImageView imageView = new ImageView();
-        imageView.setFitWidth(56);
-        imageView.setFitHeight(56);
+        imageView.setFitWidth(80);
+        imageView.setFitHeight(80);
         imageView.setPreserveRatio(true);
 
-        Circle clip = new Circle(28, 28, 28);
+        Circle clip = new Circle(40, 40, 40);
         imageView.setClip(clip);
 
-        String imageName = contact.getImagePath() != null
-                ? contact.getImagePath() : "emptyavatar.jpg";
-
+        String imageName = contact.getImagePath() != null ? contact.getImagePath() : "emptyavatar.jpg";
         try {
             Image img = new Image(Objects.requireNonNull(
-                    getClass().getResourceAsStream(
-                            "/com/safefaces/safefaces/images/" + imageName)));
+                    getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + imageName)));
             imageView.setImage(img);
         } catch (Exception e) {
             try {
                 Image fallback = new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream(
-                                "/com/safefaces/safefaces/images/emptyavatar.jpg")));
+                        getClass().getResourceAsStream("/com/safefaces/safefaces/images/emptyavatar.jpg")));
                 imageView.setImage(fallback);
             } catch (Exception ignored) {}
         }
 
+        // Name + relation
         VBox nameBox = new VBox(4);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
-
         Label nameLabel = new Label(contact.getName());
-        nameLabel.setStyle("-fx-font-size:18; -fx-font-weight:bold;");
+        nameLabel.setStyle("-fx-font-family: 'System'; -fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;");
         Label relationLabel = new Label(contact.getRelation());
-        relationLabel.setStyle("-fx-font-size:13; -fx-text-fill:#888;");
+        relationLabel.setStyle("-fx-font-family: 'System'; -fx-font-size: 13; -fx-text-fill: #8aab90;");
         nameBox.getChildren().addAll(nameLabel, relationLabel);
 
-        Region spacer = new Region();
+        // Call button (light green circle)
+        VBox callBox = new VBox(4);
+        callBox.setAlignment(javafx.geometry.Pos.CENTER);
+        Label callLabel = new Label("Ring");
+        callLabel.setStyle("-fx-font-family: 'System'; -fx-font-size: 11; -fx-text-fill: #8aab90;");
+        VBox callCircle = new VBox();
+        callCircle.setAlignment(javafx.geometry.Pos.CENTER);
+        callCircle.setStyle("-fx-background-color: #e8f5e9; -fx-background-radius: 50;"
+                + " -fx-min-width: 52; -fx-min-height: 52;"
+                + " -fx-pref-width: 52; -fx-pref-height: 52;"
+                + " -fx-cursor: hand;");
+        org.kordamp.ikonli.javafx.FontIcon callIcon = new org.kordamp.ikonli.javafx.FontIcon("fas-phone");
+        callIcon.setIconSize(22);
+        callIcon.setIconColor(javafx.scene.paint.Color.web("#1a6b3d"));
+        callCircle.getChildren().add(callIcon);
+        callCircle.setOnMouseClicked(e -> {
+            SessionManager.beginSession();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ringer...");
+            alert.setHeaderText("Ringer " + contact.getName());
+            alert.setContentText("I samtal med " + contact.getName() + ".\nTryck OK för att avsluta.");
+            alert.showAndWait();
+        });
+        callBox.getChildren().addAll(callLabel, callCircle);
 
-        Button callBtn = new Button("📞");
-        callBtn.setStyle("-fx-font-size:20; -fx-background-color:#e8f5e9; " +
-                "-fx-background-radius:50; -fx-min-width:48; -fx-min-height:48;");
-        callBtn.setUserData(contact.getName());
-        callBtn.setOnAction(this::handleCall);
+        // Voice memo button (light green circle)
+        VBox voiceBox = new VBox(4);
+        voiceBox.setAlignment(javafx.geometry.Pos.CENTER);
+        Label voiceLabel = new Label("Röstmemo");
+        voiceLabel.setStyle("-fx-font-family: 'System'; -fx-font-size: 11; -fx-text-fill: #8aab90;");
+        VBox voiceCircle = new VBox();
+        voiceCircle.setAlignment(javafx.geometry.Pos.CENTER);
+        voiceCircle.setStyle("-fx-background-color: #e8f5e9; -fx-background-radius: 50;"
+                + " -fx-min-width: 52; -fx-min-height: 52;"
+                + " -fx-pref-width: 52; -fx-pref-height: 52;"
+                + " -fx-cursor: hand;");
+        org.kordamp.ikonli.javafx.FontIcon voiceIcon = new org.kordamp.ikonli.javafx.FontIcon("fas-microphone");
+        voiceIcon.setIconSize(22);
+        voiceIcon.setIconColor(javafx.scene.paint.Color.web("#1a6b3d"));
+        voiceCircle.getChildren().add(voiceIcon);
+        voiceCircle.setOnMouseClicked(e -> handleVoiceMessage(contact, null));
+        voiceBox.getChildren().addAll(voiceLabel, voiceCircle);
 
-        Button voiceBtn = new Button("▶");
-        voiceBtn.setStyle("-fx-font-size:16; -fx-background-color:#3a3a3a; " +
-                "-fx-text-fill:white; -fx-background-radius:50; " +
-                "-fx-min-width:48; -fx-min-height:48;");
-        voiceBtn.setUserData(contact.getName());
-        voiceBtn.setOnAction(e->handleVoiceMessage(contact,voiceBtn));
-
-        row.getChildren().addAll(imageView, nameBox, spacer, callBtn, voiceBtn);
-        return row;
+        row.getChildren().addAll(imageView, nameBox, callBox, voiceBox);
+        card.getChildren().add(row);
+        return card;
     }
 
     @FXML
@@ -121,20 +153,7 @@ public class ContactController {
     }
 
     @FXML
-    private void handleCall(javafx.event.ActionEvent event) {
-        SessionManager.beginSession();
-        Button btn = (Button) event.getSource();
-        String contactName = (String) btn.getUserData();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Calling...");
-        alert.setHeaderText("Ringing " + contactName);
-        alert.setContentText("In call with " + contactName
-                + ".\nPress ok to end call.");
-        alert.showAndWait();
-    }
-
-    @FXML
-    private void handleVoiceMessage(Contact contact,Button btn) {
+    private void handleVoiceMessage(Contact contact, Object ignored) {
         SessionManager.beginSession();
 
        String audioPath ="/com/safefaces/safefaces/audio/Audio1.mp3";

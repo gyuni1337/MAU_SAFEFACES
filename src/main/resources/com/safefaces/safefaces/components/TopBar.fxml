@@ -29,15 +29,16 @@
 <!--        </Label>-->
     </HBox>
 
-    <!-- Right-anchored: sound button -->
-    <Button text="🔊"
-            AnchorPane.topAnchor="15" AnchorPane.rightAnchor="16"
-            style="-fx-background-color: rgba(255,255,255,0.75);
+    <!-- Right-anchored: sound button (transparent background) -->
+    <Button text=""
+            AnchorPane.topAnchor="27" AnchorPane.rightAnchor="22"
+            style="-fx-background-color: transparent;
                    -fx-text-fill: #1a6b3d;
-                   -fx-font-size: 16;
+                   -fx-font-size: 18;
                    -fx-background-radius: 50;
                    -fx-min-width: 40; -fx-min-height: 40;
                    -fx-pref-width: 40; -fx-pref-height: 40;
-                   -fx-cursor: hand;"/>
+                   -fx-cursor: hand;
+                   -fx-effect: none;"/>
 
 </AnchorPane>

@@ -19,32 +19,34 @@
         <VBox spacing="0" style="-fx-background-color: transparent;">
 
             <!-- Header bar -->
-            <AnchorPane prefHeight="52" style="-fx-background-color: transparent;">
-                <padding><Insets top="6" left="12" right="12"/></padding>
-                <HBox onMouseClicked="#goBack" alignment="CENTER"
-                      AnchorPane.leftAnchor="12" AnchorPane.topAnchor="6"
+            <HBox alignment="CENTER_LEFT" spacing="0"
+                  style="-fx-background-color: transparent; -fx-padding: 10 12 6 12;">
+                <!-- Back button -->
+                <VBox onMouseClicked="#goBack" alignment="CENTER"
                       style="-fx-background-color: rgba(255,255,255,0.75);
                              -fx-background-radius: 50;
                              -fx-min-width: 38; -fx-min-height: 38;
                              -fx-pref-width: 38; -fx-pref-height: 38;
                              -fx-cursor: hand;">
-                    <Label text="←" style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
-                </HBox>
-                <Label text="Hälsa" alignment="CENTER"
-                       AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
-                       AnchorPane.topAnchor="10"
+                    <Label text="←" mouseTransparent="true"
+                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
+                </VBox>
+                <!-- Title (centered via equal spacers) -->
+                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                <Label text="Hälsa"
                        style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
-                <HBox alignment="CENTER"
-                      AnchorPane.rightAnchor="12" AnchorPane.topAnchor="6"
-                      onMouseClicked="#readHealth"
+                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                <!-- Sound button -->
+                <VBox onMouseClicked="#readHealth" alignment="CENTER"
                       style="-fx-background-color: rgba(255,255,255,0.75);
                              -fx-background-radius: 50;
                              -fx-min-width: 38; -fx-min-height: 38;
                              -fx-pref-width: 38; -fx-pref-height: 38;
                              -fx-cursor: hand;">
-                    <FontIcon iconLiteral="fas-volume-up" iconSize="16" iconColor="#1a6b3d"/>
-                </HBox>
-            </AnchorPane>
+                    <FontIcon iconLiteral="fas-volume-up" iconSize="16" iconColor="#1a6b3d"
+                              mouseTransparent="true"/>
+                </VBox>
+            </HBox>
 
             <!-- SafeFaces logo (centered, below header) -->
             <VBox alignment="CENTER" spacing="4" style="-fx-padding: 10 0 16 0;">

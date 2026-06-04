@@ -62,9 +62,9 @@
 
             <!-- X close button -->
             <Button text="✕"
-                    AnchorPane.topAnchor="18" AnchorPane.rightAnchor="16"
+                    AnchorPane.topAnchor="27" AnchorPane.rightAnchor="22"
                     onAction="#closeFaceIdOverlay"
-                    style="-fx-background-color: rgba(255,255,255,0.75);
+                    style="-fx-background-color: rgba(255,255,255,1);
                            -fx-text-fill: #1a6b3d;
                            -fx-font-size: 16; -fx-font-weight: bold;
                            -fx-background-radius: 50;

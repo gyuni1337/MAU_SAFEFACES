@@ -134,57 +134,55 @@
 
             <!-- Familj -->
             <HBox fx:id="familyCard"
-                  onMouseClicked="#openFamily"
                   alignment="CENTER_LEFT" spacing="14"
-                  style="-fx-background-color: white; -fx-background-radius: 18;
-                         -fx-padding: 14; -fx-cursor: hand;
+                  style="-fx-background-color: rgba(255,255,255,0.65); -fx-background-radius: 18;
+                         -fx-padding: 14;
                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
                 <VBox alignment="CENTER"
-                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 14;
+                      style="-fx-background-color: #eeeeee; -fx-background-radius: 14;
                              -fx-min-width: 54; -fx-min-height: 54;
                              -fx-pref-width: 54; -fx-pref-height: 54;">
-                    <FontIcon iconLiteral="fas-users" iconSize="26" iconColor="#1a6b3d"/>
+                    <FontIcon iconLiteral="fas-users" iconSize="26" iconColor="#9a9a9a"/>
                 </VBox>
                 <VBox spacing="3" HBox.hgrow="ALWAYS">
                     <Label text="Familj"
-                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
+                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #8a8a8a;"/>
                     <Label text="Dina närstående och viktig information"
                            wrapText="true"
-                           style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
+                           style="-fx-font-size: 13; -fx-text-fill: #aaaaaa;"/>
                 </VBox>
                 <VBox alignment="CENTER"
-                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
+                      style="-fx-background-color: #eeeeee; -fx-background-radius: 50;
                              -fx-min-width: 32; -fx-min-height: 32;
                              -fx-pref-width: 32; -fx-pref-height: 32;">
-                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #9a9a9a; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
                 </VBox>
             </HBox>
 
             <!-- Livsberättelse -->
             <HBox fx:id="lifeCard"
-                  onMouseClicked="#openLifeStory"
                   alignment="CENTER_LEFT" spacing="14"
-                  style="-fx-background-color: white; -fx-background-radius: 18;
-                         -fx-padding: 14; -fx-cursor: hand;
+                  style="-fx-background-color: rgba(255,255,255,0.65); -fx-background-radius: 18;
+                         -fx-padding: 14;
                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
                 <VBox alignment="CENTER"
-                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 14;
+                      style="-fx-background-color: #eeeeee; -fx-background-radius: 14;
                              -fx-min-width: 54; -fx-min-height: 54;
                              -fx-pref-width: 54; -fx-pref-height: 54;">
-                    <FontIcon iconLiteral="fas-book-open" iconSize="24" iconColor="#1a6b3d"/>
+                    <FontIcon iconLiteral="fas-book-open" iconSize="24" iconColor="#9a9a9a"/>
                 </VBox>
                 <VBox spacing="3" HBox.hgrow="ALWAYS">
                     <Label text="Livsberättelse"
-                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
+                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #8a8a8a;"/>
                     <Label text="Bilder, minnen och berättelser från ditt liv"
                            wrapText="true"
-                           style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
+                           style="-fx-font-size: 13; -fx-text-fill: #aaaaaa;"/>
                 </VBox>
                 <VBox alignment="CENTER"
-                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
+                      style="-fx-background-color: #eeeeee; -fx-background-radius: 50;
                              -fx-min-width: 32; -fx-min-height: 32;
                              -fx-pref-width: 32; -fx-pref-height: 32;">
-                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #9a9a9a; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
                 </VBox>
             </HBox>
 

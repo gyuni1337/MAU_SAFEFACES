@@ -3,6 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
@@ -16,7 +18,6 @@
     <content>
         <VBox spacing="0" style="-fx-background-color: transparent;">
 
-            <!-- Header bar -->
             <HBox alignment="CENTER_LEFT" spacing="0"
                   style="-fx-background-color: transparent; -fx-padding: 10 12 6 12;">
                 <VBox onMouseClicked="#goBack" alignment="CENTER"
@@ -45,11 +46,58 @@
                 </VBox>
             </HBox>
 
-            <!-- Empty content -->
-            <VBox spacing="16" style="-fx-background-color: transparent;">
+            <VBox spacing="14" style="-fx-background-color: transparent;">
                 <padding><Insets top="10" left="16" right="16" bottom="100"/></padding>
-            </VBox>
 
+                <VBox spacing="8"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-padding: 12;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <ImageView fitWidth="344" fitHeight="215" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/story1.jpg"/></image>
+                    </ImageView>
+                    <Label text="Minnen från förr"
+                           style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
+                                  -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                </VBox>
+
+                <VBox spacing="8"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-padding: 12;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <ImageView fitWidth="344" fitHeight="215" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/story2.jpg"/></image>
+                    </ImageView>
+                    <Label text="Familj och vänner"
+                           style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
+                                  -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                </VBox>
+
+                <VBox spacing="8"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-padding: 12;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <ImageView fitWidth="344" fitHeight="215" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/story3.jpg"/></image>
+                    </ImageView>
+                    <Label text="Viktiga platser"
+                           style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
+                                  -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                </VBox>
+
+                <VBox spacing="8"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-padding: 12;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <ImageView fitWidth="344" fitHeight="215" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/story5.jpg"/></image>
+                    </ImageView>
+                    <Label text="Ögonblick att minnas"
+                           style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
+                                  -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                </VBox>
+
+            </VBox>
         </VBox>
     </content>
 </ScrollPane>

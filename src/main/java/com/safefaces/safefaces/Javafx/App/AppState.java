@@ -14,6 +14,7 @@ import com.safefaces.safefaces.Core.Model.User;
  * @author Noor Nabi
  */
 public class AppState {
+    // s
 
     /** Singleton instance of AppState. */
     private static AppState instance;

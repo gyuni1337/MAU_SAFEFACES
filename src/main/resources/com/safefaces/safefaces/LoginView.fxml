@@ -12,70 +12,81 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="700.0" prefWidth="400.0"
-            style="-fx-background-color: #f4f4f4;"
+            style="-fx-background-color: #f5f0e8;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.safefaces.safefaces.Javafx.Controller.LoginController">
-
     <children>
-        <VBox alignment="CENTER" spacing="28.0"
-              AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
-              AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
-            <padding><Insets left="40" right="40"/></padding>
 
-            <!-- Title -->
-            <Label text="SafeFaces" style="-fx-text-fill: #3a3a3a;">
-                <font><Font name="System Bold" size="22"/></font>
-            </Label>
+        <!-- Decorative background -->
+        <ImageView fitWidth="400" fitHeight="700" preserveRatio="false"
+                   AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+            <image><Image url="@images/background.png"/></image>
+        </ImageView>
 
-            <!-- Face ID image (decorative) -->
-            <VBox alignment="CENTER"
-                  style="-fx-background-color: #e0e0e0; -fx-background-radius: 20;"
-                  prefWidth="160" prefHeight="160" maxWidth="160" maxHeight="160">
-                <ImageView fitWidth="160" fitHeight="160" preserveRatio="true">
-                    <image><Image url="@images/face_id_simulation.png"/></image>
-                </ImageView>
-            </VBox>
+        <!-- Login card — positioned in the content area below the header -->
+        <VBox alignment="CENTER" spacing="16"
+              AnchorPane.leftAnchor="24" AnchorPane.rightAnchor="24"
+              AnchorPane.topAnchor="160" AnchorPane.bottomAnchor="20"
+              style="-fx-background-color: white;
+                     -fx-background-radius: 24;
+                     -fx-padding: 32 28 32 28;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 16, 0, 0, 4);">
 
-            <!-- Status label -->
+            <!-- Face ID image -->
+            <ImageView fitWidth="120" fitHeight="120" preserveRatio="true">
+                <image><Image url="@images/face_id_simulation.png"/></image>
+            </ImageView>
+
+            <Label text="Välkommen till SafeFaces"
+                   style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+
             <Label fx:id="statusLabel" text=""
-                   style="-fx-text-fill: #e05555;" wrapText="true">
-                <font><Font size="14"/></font>
-            </Label>
+                   wrapText="true"
+                   style="-fx-text-fill: #c62828; -fx-font-size: 13;"/>
 
-            <!-- Login as User -->
-            <Button text="Logga in som User"
+            <!-- User login button -->
+            <Button text="Logga in som användare"
                     onAction="#handleUserLogin"
-                    maxWidth="280"
-                    style="-fx-background-color: #3a3a3a; -fx-text-fill: white;
-                           -fx-font-size: 16; -fx-padding: 12 20; -fx-background-radius: 12;"/>
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #1a6b3d; -fx-text-fill: white;
+                           -fx-font-size: 16; -fx-font-weight: bold;
+                           -fx-padding: 14; -fx-background-radius: 14; -fx-cursor: hand;"/>
 
-            <!-- Login as Vårdgivare -->
-            <Button text="Logga in som Vårdgivare"
+            <!-- Caregiver login button -->
+            <Button text="Logga in som vårdgivare"
                     onAction="#handleShowCaregiverLogin"
-                    maxWidth="280"
-                    style="-fx-background-color: white; -fx-text-fill: #3a3a3a;
-                           -fx-font-size: 16; -fx-padding: 12 20; -fx-background-radius: 12;
-                           -fx-border-color: #3a3a3a; -fx-border-radius: 12;"/>
+                    maxWidth="Infinity"
+                    style="-fx-background-color: #f0f7f2; -fx-text-fill: #1a6b3d;
+                           -fx-font-size: 16; -fx-font-weight: bold;
+                           -fx-padding: 14; -fx-background-radius: 14;
+                           -fx-border-color: #1a6b3d; -fx-border-radius: 14;
+                           -fx-cursor: hand;"/>
 
-            <!-- Caregiver login form (hidden until button pressed) -->
-            <VBox fx:id="caregiverBox" alignment="CENTER" spacing="12"
+            <!-- Caregiver form (toggled) -->
+            <VBox fx:id="caregiverBox" alignment="CENTER" spacing="10"
                   visible="false" managed="false">
                 <TextField fx:id="usernameField"
-                           promptText="Användarnamn"
-                           maxWidth="260"
-                           style="-fx-font-size: 16; -fx-padding: 10;"/>
+                           promptText="E-postadress"
+                           maxWidth="Infinity"
+                           style="-fx-font-size: 15; -fx-padding: 12;
+                                  -fx-background-radius: 12; -fx-border-radius: 12;
+                                  -fx-border-color: #d6d6d6; -fx-background-color: white;"/>
                 <PasswordField fx:id="pinField"
-                               promptText="PIN-kod"
-                               maxWidth="260"
-                               style="-fx-font-size: 16; -fx-padding: 10;"/>
-                <Button text="Logga in"
+                               promptText="Lösenord"
+                               maxWidth="Infinity"
+                               style="-fx-font-size: 15; -fx-padding: 12;
+                                      -fx-background-radius: 12; -fx-border-radius: 12;
+                                      -fx-border-color: #d6d6d6; -fx-background-color: white;"/>
+                <Button text="Logga in  →"
                         onAction="#handleCaregiverSubmit"
-                        maxWidth="260"
-                        style="-fx-background-color: #3a3a3a; -fx-text-fill: white;
-                               -fx-font-size: 16; -fx-padding: 10 20; -fx-background-radius: 12;"/>
+                        maxWidth="Infinity"
+                        style="-fx-background-color: #1a6b3d; -fx-text-fill: white;
+                               -fx-font-size: 16; -fx-font-weight: bold;
+                               -fx-padding: 13; -fx-background-radius: 14; -fx-cursor: hand;"/>
             </VBox>
 
         </VBox>
+
     </children>
 </AnchorPane>

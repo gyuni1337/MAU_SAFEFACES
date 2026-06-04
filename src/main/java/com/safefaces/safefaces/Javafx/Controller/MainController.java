@@ -19,6 +19,8 @@ import javafx.scene.layout.HBox;
  */
 public class MainController {
 
+    public static MainController instance;
+
     /** Container where views are dynamically loaded. */
     @FXML private AnchorPane contentArea;
 
@@ -75,6 +77,34 @@ public class MainController {
         loadView("/com/safefaces/safefaces/components/Journal.fxml");
     }
 
+    public void showInformation() {
+        loadView("/com/safefaces/safefaces/components/InformationView.fxml");
+    }
+
+    public void showHealth() {
+        loadView("/com/safefaces/safefaces/components/HealthView.fxml");
+    }
+
+    public void showMedicine() {
+        loadView("/com/safefaces/safefaces/components/MedicineView.fxml");
+    }
+
+    public void showFamily() {
+        loadView("/com/safefaces/safefaces/components/FamilyView.fxml");
+    }
+
+    public void showLifeStory() {
+        loadView("/com/safefaces/safefaces/components/LifeStoryView.fxml");
+    }
+
+    public void showSosConfirm() {
+        loadView("/com/safefaces/safefaces/components/SosConfirmView.fxml");
+    }
+
+    public void showSosCall() {
+        loadView("/com/safefaces/safefaces/components/SosCallView.fxml");
+    }
+
     /**
      * Initializes the main layout after the FXML has been loaded.
      * Loads the bottom navigation bar and sets up communication
@@ -89,8 +119,8 @@ public class MainController {
             );
 
             HBox nav = loader.load();
-            nav.setPrefHeight(78);
-            nav.setMinHeight(78);
+            nav.setPrefHeight(70);
+            nav.setMinHeight(70);
             BottomNavController navController = loader.getController();
             navController.setMainController(this);
 
@@ -107,6 +137,7 @@ public class MainController {
             e.printStackTrace();
         }
 
+        instance = this;
         showHome();
     }
 }

@@ -116,6 +116,11 @@ public class ContactController {
     }
 
     @FXML
+    private void handleAddContact() {
+        System.out.println("Lägg till kontakt – ej implementerat ännu");
+    }
+
+    @FXML
     private void handleCall(javafx.event.ActionEvent event) {
         SessionManager.beginSession();
         Button btn = (Button) event.getSource();

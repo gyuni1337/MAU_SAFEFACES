@@ -128,6 +128,13 @@ public class ProfileController {
         boolean isVisible = medsBox.isVisible();
         medsBox.setVisible(!isVisible);
         medsBox.setManaged(!isVisible);
-        medsLabel.setText(isVisible ? "Mediciner ◀" : "Mediciner ▼");
+        medsLabel.setText(isVisible ? "Mediciner ▶" : "Mediciner ▼");
     }
+
+    @FXML private void openInformation() { MainController.instance.showInformation(); }
+    @FXML private void openMedicines()   { MainController.instance.showMedicine(); }
+    @FXML private void openHealth()      { MainController.instance.showHealth(); }
+    @FXML private void openFamily()      { MainController.instance.showFamily(); }
+    @FXML private void openLifeStory()   { MainController.instance.showLifeStory(); }
+    @FXML private void openSos()         { MainController.instance.showSosConfirm(); }
 }

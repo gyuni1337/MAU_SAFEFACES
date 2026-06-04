@@ -1,49 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<!-- bottom nav med tre knappar, vänster-ikonen byts ut för vårdgivare i controllern -->
-<HBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
+<HBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.safefaces.safefaces.Javafx.Controller.BottomNavController"
       fx:id="navBar"
       alignment="CENTER"
-      prefHeight="78.0"
-      style="-fx-background-color: #efefef; -fx-border-color: #dddddd transparent transparent transparent; -fx-border-width: 1 0 0 0;">
+      prefHeight="70.0"
+      style="-fx-background-color: white;
+             -fx-background-radius: 35;
+             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 16, 0, 0, -2);">
+    <padding><Insets left="10" right="10"/></padding>
 
-    <children>
-        <StackPane onMouseClicked="#goReminders"
-                   HBox.hgrow="ALWAYS"
-                   prefHeight="78.0"
-                   alignment="CENTER"
-                   style="-fx-cursor: hand;">
-            <ImageView fx:id="leftNavIcon" fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
-                <image><Image url="@../images/reminder.png"/></image>
-            </ImageView>
-        </StackPane>
+    <!-- Påminnelser -->
+    <VBox fx:id="remindersTab"
+          onMouseClicked="#goReminders"
+          alignment="CENTER"
+          spacing="4"
+          HBox.hgrow="ALWAYS"
+          prefHeight="70.0"
+          style="-fx-cursor: hand;">
+        <FontIcon fx:id="remindersIcon"
+                  iconLiteral="far-bell"
+                  iconSize="24"
+                  iconColor="#8a8a8a"/>
+        <Label fx:id="remindersLabel"
+               text="Påminnelser"
+               mouseTransparent="true"
+               style="-fx-font-size: 11; -fx-text-fill: #8a8a8a;"/>
+    </VBox>
 
-        <StackPane onMouseClicked="#goHome"
-                   HBox.hgrow="ALWAYS"
-                   prefHeight="78.0"
-                   alignment="CENTER"
-                   style="-fx-cursor: hand;">
-            <ImageView fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
-                <image><Image url="@../images/home.png"/></image>
-            </ImageView>
-        </StackPane>
+    <!-- Person / Kontakter -->
+    <VBox fx:id="homeTab"
+          onMouseClicked="#goHome"
+          alignment="CENTER"
+          spacing="4"
+          HBox.hgrow="ALWAYS"
+          prefHeight="70.0"
+          style="-fx-cursor: hand;">
+        <FontIcon fx:id="homeIcon"
+                  iconLiteral="fas-user-friends"
+                  iconSize="24"
+                  iconColor="#8a8a8a"/>
+        <Label fx:id="homeLabel"
+               text="Person"
+               mouseTransparent="true"
+               style="-fx-font-size: 11; -fx-text-fill: #8a8a8a;"/>
+    </VBox>
 
-        <StackPane onMouseClicked="#goJournal"
-                   HBox.hgrow="ALWAYS"
-                   prefHeight="78.0"
-                   alignment="CENTER"
-                   style="-fx-cursor: hand;">
-            <ImageView fitHeight="46.0" fitWidth="48.0" preserveRatio="true" mouseTransparent="true">
-                <image><Image url="@../images/journal.png"/></image>
-            </ImageView>
-        </StackPane>
-    </children>
+    <!-- Profil -->
+    <VBox fx:id="journalTab"
+          onMouseClicked="#goJournal"
+          alignment="CENTER"
+          spacing="4"
+          HBox.hgrow="ALWAYS"
+          prefHeight="70.0"
+          style="-fx-cursor: hand;">
+        <FontIcon fx:id="journalIcon"
+                  iconLiteral="far-user-circle"
+                  iconSize="24"
+                  iconColor="#8a8a8a"/>
+        <Label fx:id="journalLabel"
+               text="Profil"
+               mouseTransparent="true"
+               style="-fx-font-size: 11; -fx-text-fill: #8a8a8a;"/>
+    </VBox>
 
 </HBox>

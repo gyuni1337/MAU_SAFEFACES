@@ -1,62 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Imports for layout and UI components -->
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<!--
-    Main application layout.
-    Acts as the root container for the entire UI.
-
-    Structure:
-    - Top: Header (TopBar component)
-    - Center: Dynamic content area (view switching)
-    - Bottom: Navigation bar (injected dynamically)
-
-    Controlled by MainController.
--->
-<AnchorPane prefHeight="800.0" prefWidth="400.0"
-            style="-fx-background-color: #f4f4f4;"
+<AnchorPane prefHeight="700.0" prefWidth="400.0"
+            style="-fx-background-color: #f5f0e8;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.safefaces.safefaces.Javafx.Controller.MainController">
     <children>
-        <BorderPane prefHeight="800.0" prefWidth="400.0"
-                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
-            <!-- Top section: header / branding -->
+        <!-- Decorative background image (wave, leaves, cream color) -->
+        <ImageView fitWidth="400" fitHeight="700" preserveRatio="false"
+                   AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+            <image><Image url="@images/background.png"/></image>
+        </ImageView>
+
+        <!-- UI layer — transparent so background image shows through -->
+        <BorderPane prefHeight="700.0" prefWidth="400.0"
+                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+                    style="-fx-background-color: transparent;">
+
             <top>
-                <VBox spacing="10">
-                    <padding>
-                        <Insets top="20" bottom="10"/>
-                    </padding>
-                    <!-- Reusable header component (logo + title) -->
-                    <fx:include source="components/TopBar.fxml"/>
-                </VBox>
+                <fx:include source="components/TopBar.fxml"/>
             </top>
 
-            <!-- Center section: main dynamic content -->
             <center>
-                <!-- This area is replaced dynamically with different views -->
-                <AnchorPane fx:id="contentArea"/>
+                <AnchorPane fx:id="contentArea"
+                            style="-fx-background-color: transparent;"/>
             </center>
 
-            <!-- Bottom section: navigation bar -->
             <bottom>
-                <!-- Navigation is injected dynamically by MainController -->
                 <AnchorPane fx:id="bottomContainer"
-                            prefHeight="78.0"
-                            minHeight="78.0"/>
+                            prefHeight="86.0"
+                            minHeight="86.0"
+                            style="-fx-background-color: transparent;">
+                    <padding><Insets bottom="10" left="12" right="12"/></padding>
+                </AnchorPane>
             </bottom>
         </BorderPane>
+
     </children>
 </AnchorPane>

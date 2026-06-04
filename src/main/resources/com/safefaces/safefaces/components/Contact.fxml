@@ -39,21 +39,13 @@
         </VBox>
     </HBox>
 
-    <!-- White card containing the scrollable contact list -->
-    <VBox VBox.vgrow="ALWAYS"
-          style="-fx-background-color: white;
-                 -fx-background-radius: 20;
-                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
-        <ScrollPane fitToWidth="true"
-                    hbarPolicy="NEVER"
-                    VBox.vgrow="ALWAYS"
-                    style="-fx-background-color: transparent; -fx-background: transparent;">
-            <content>
-                <VBox fx:id="contactListBox" spacing="0">
-                    <padding><Insets top="8" bottom="8" left="12" right="12"/></padding>
-                </VBox>
-            </content>
-        </ScrollPane>
-    </VBox>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS"
+                style="-fx-background-color: transparent; -fx-background: transparent;">
+        <content>
+            <VBox fx:id="contactListBox" spacing="12">
+                <padding><Insets top="4" bottom="100"/></padding>
+            </VBox>
+        </content>
+    </ScrollPane>
 
 </VBox>

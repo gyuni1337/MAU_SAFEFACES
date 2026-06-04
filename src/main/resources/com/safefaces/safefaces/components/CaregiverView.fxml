@@ -46,175 +46,167 @@
                                  -fx-border-radius: 12; -fx-padding: 6;"/>
             </VBox>
 
-            <!-- Tab pane — hidden until patient is picked -->
-            <TabPane fx:id="tabPane"
-                     visible="false" managed="false"
-                     tabClosingPolicy="UNAVAILABLE"
-                     style="-fx-background-color: transparent; -fx-tab-min-width: 90;
-                            -fx-font-size: 14; -fx-font-family: 'Helvetica Neue';">
+            <!-- Custom tab bar + content — hidden until patient is picked -->
+            <VBox fx:id="tabPane" visible="false" managed="false" spacing="12">
 
-                <!-- ── Påminnelser ── -->
-                <Tab text="Påminnelser">
-                    <content>
-                        <VBox spacing="14" style="-fx-padding: 0 0 8 0;">
+                <!-- Pill tab bar -->
+                <HBox fx:id="tabBar" spacing="6"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 16; -fx-padding: 5;">
+                    <HBox fx:id="tabReminders" onMouseClicked="#showReminders"
+                          alignment="CENTER" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: white; -fx-background-radius: 12;
+                                 -fx-padding: 10 0 10 0; -fx-cursor: hand;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 6, 0, 0, 1);">
+                        <Label text="Påminnelser" mouseTransparent="true"
+                               style="-fx-font-size: 13; -fx-font-family: 'Helvetica Neue';
+                                      -fx-font-weight: 600; -fx-text-fill: #1a6b3d;"/>
+                    </HBox>
+                    <HBox fx:id="tabContacts" onMouseClicked="#showContacts"
+                          alignment="CENTER" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: transparent; -fx-background-radius: 12;
+                                 -fx-padding: 10 0 10 0; -fx-cursor: hand;">
+                        <Label text="Kontakter" mouseTransparent="true"
+                               style="-fx-font-size: 13; -fx-font-family: 'Helvetica Neue';
+                                      -fx-font-weight: 600; -fx-text-fill: #6a9070;"/>
+                    </HBox>
+                    <HBox fx:id="tabMeds" onMouseClicked="#showMeds"
+                          alignment="CENTER" HBox.hgrow="ALWAYS"
+                          style="-fx-background-color: transparent; -fx-background-radius: 12;
+                                 -fx-padding: 10 0 10 0; -fx-cursor: hand;">
+                        <Label text="Mediciner" mouseTransparent="true"
+                               style="-fx-font-size: 13; -fx-font-family: 'Helvetica Neue';
+                                      -fx-font-weight: 600; -fx-text-fill: #6a9070;"/>
+                    </HBox>
+                </HBox>
 
-                            <!-- Add form -->
-                            <VBox spacing="10"
-                                  style="-fx-background-color: white; -fx-background-radius: 18;
-                                         -fx-padding: 16;
-                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
-                                <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <VBox alignment="CENTER"
-                                          style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
-                                                 -fx-min-width: 38; -fx-min-height: 38;
-                                                 -fx-pref-width: 38; -fx-pref-height: 38;">
-                                        <FontIcon iconLiteral="far-bell" iconSize="20" iconColor="#1a6b3d"/>
-                                    </VBox>
-                                    <Label text="Ny påminnelse"
-                                           style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
-                                                  -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
-                                </HBox>
-                                <TextField fx:id="titleField"
-                                           promptText="Titel"
-                                           style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                  -fx-border-radius: 12; -fx-padding: 10;"/>
-                                <TextField fx:id="descField"
-                                           promptText="Beskrivning (valfritt)"
-                                           style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                  -fx-border-radius: 12; -fx-padding: 10;"/>
-                                <TextField fx:id="timeField"
-                                           promptText="Tid (HH:MM)"
-                                           style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                  -fx-border-radius: 12; -fx-padding: 10;"/>
-                                <ComboBox fx:id="typePicker"
-                                          promptText="Typ"
-                                          maxWidth="Infinity"
-                                          style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                 -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                 -fx-border-radius: 12; -fx-padding: 6;"/>
-                                <Button text="Lägg till påminnelse"
-                                        onAction="#handleAddReminder"
-                                        maxWidth="Infinity"
-                                        style="-fx-background-color: #1a6b3d; -fx-text-fill: white;
-                                               -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;
-                                               -fx-font-size: 15; -fx-padding: 12;
-                                               -fx-background-radius: 14; -fx-cursor: hand;"/>
-                                <Label fx:id="formStatus" text="" wrapText="true"
-                                       style="-fx-font-size: 13; -fx-text-fill: #c0392b;"/>
+                <!-- ── Påminnelser pane ── -->
+                <VBox fx:id="reminderPane" spacing="12">
+                    <VBox spacing="10"
+                          style="-fx-background-color: white; -fx-background-radius: 18;
+                                 -fx-padding: 16;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <VBox alignment="CENTER"
+                                  style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                                         -fx-min-width: 38; -fx-min-height: 38;
+                                         -fx-pref-width: 38; -fx-pref-height: 38;">
+                                <FontIcon iconLiteral="far-bell" iconSize="20" iconColor="#1a6b3d"/>
                             </VBox>
+                            <Label text="Ny påminnelse"
+                                   style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
+                                          -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                        </HBox>
+                        <TextField fx:id="titleField" promptText="Titel"
+                                   style="-fx-font-size: 15; -fx-background-radius: 12;
+                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <TextField fx:id="descField" promptText="Beskrivning (valfritt)"
+                                   style="-fx-font-size: 15; -fx-background-radius: 12;
+                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <TextField fx:id="timeField" promptText="Tid (HH:MM)"
+                                   style="-fx-font-size: 15; -fx-background-radius: 12;
+                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <ComboBox fx:id="typePicker" promptText="Typ" maxWidth="Infinity"
+                                  style="-fx-font-size: 15; -fx-background-radius: 12;
+                                         -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                         -fx-border-radius: 12; -fx-padding: 6;"/>
+                        <Button text="Lägg till påminnelse" onAction="#handleAddReminder"
+                                maxWidth="Infinity"
+                                style="-fx-background-color: #1a6b3d; -fx-text-fill: white;
+                                       -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;
+                                       -fx-font-size: 15; -fx-padding: 12;
+                                       -fx-background-radius: 14; -fx-cursor: hand;"/>
+                        <Label fx:id="formStatus" text="" wrapText="true"
+                               style="-fx-font-size: 13; -fx-text-fill: #c0392b;"/>
+                    </VBox>
+                    <VBox fx:id="reminderListBox" spacing="10"/>
+                </VBox>
 
-                            <!-- List -->
-                            <VBox fx:id="reminderListBox" spacing="10"/>
-                        </VBox>
-                    </content>
-                </Tab>
-
-                <!-- ── Kontakter ── -->
-                <Tab text="Kontakter">
-                    <content>
-                        <VBox spacing="14" style="-fx-padding: 0 0 8 0;">
-
-                            <VBox spacing="10"
-                                  style="-fx-background-color: white; -fx-background-radius: 18;
-                                         -fx-padding: 16;
-                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
-                                <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <VBox alignment="CENTER"
-                                          style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
-                                                 -fx-min-width: 38; -fx-min-height: 38;
-                                                 -fx-pref-width: 38; -fx-pref-height: 38;">
-                                        <FontIcon iconLiteral="fas-address-book" iconSize="20" iconColor="#1a6b3d"/>
-                                    </VBox>
-                                    <Label text="Ny kontakt"
-                                           style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
-                                                  -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
-                                </HBox>
-                                <TextField fx:id="contactNameField"
-                                           promptText="Namn"
-                                           style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                  -fx-border-radius: 12; -fx-padding: 10;"/>
-                                <TextField fx:id="contactRelationField"
-                                           promptText="Relation (t.ex. Dotter)"
-                                           style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                  -fx-border-radius: 12; -fx-padding: 10;"/>
-                                <TextField fx:id="contactPhoneField"
-                                           promptText="Telefonnummer"
-                                           style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                  -fx-border-radius: 12; -fx-padding: 10;"/>
-                                <Button text="Lägg till kontakt"
-                                        onAction="#handleAddContact"
-                                        maxWidth="Infinity"
-                                        style="-fx-background-color: #1a6b3d; -fx-text-fill: white;
-                                               -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;
-                                               -fx-font-size: 15; -fx-padding: 12;
-                                               -fx-background-radius: 14; -fx-cursor: hand;"/>
-                                <Label fx:id="contactStatus" text="" wrapText="true"
-                                       style="-fx-font-size: 13; -fx-text-fill: #c0392b;"/>
+                <!-- ── Kontakter pane ── -->
+                <VBox fx:id="contactPane" visible="false" managed="false" spacing="12">
+                    <VBox spacing="10"
+                          style="-fx-background-color: white; -fx-background-radius: 18;
+                                 -fx-padding: 16;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <VBox alignment="CENTER"
+                                  style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                                         -fx-min-width: 38; -fx-min-height: 38;
+                                         -fx-pref-width: 38; -fx-pref-height: 38;">
+                                <FontIcon iconLiteral="fas-address-book" iconSize="20" iconColor="#1a6b3d"/>
                             </VBox>
+                            <Label text="Ny kontakt"
+                                   style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
+                                          -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                        </HBox>
+                        <TextField fx:id="contactNameField" promptText="Namn"
+                                   style="-fx-font-size: 15; -fx-background-radius: 12;
+                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <TextField fx:id="contactRelationField" promptText="Relation (t.ex. Dotter)"
+                                   style="-fx-font-size: 15; -fx-background-radius: 12;
+                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <TextField fx:id="contactPhoneField" promptText="Telefonnummer"
+                                   style="-fx-font-size: 15; -fx-background-radius: 12;
+                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <Button text="Lägg till kontakt" onAction="#handleAddContact"
+                                maxWidth="Infinity"
+                                style="-fx-background-color: #1a6b3d; -fx-text-fill: white;
+                                       -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;
+                                       -fx-font-size: 15; -fx-padding: 12;
+                                       -fx-background-radius: 14; -fx-cursor: hand;"/>
+                        <Label fx:id="contactStatus" text="" wrapText="true"
+                               style="-fx-font-size: 13; -fx-text-fill: #c0392b;"/>
+                    </VBox>
+                    <VBox fx:id="contactListBox" spacing="10"/>
+                </VBox>
 
-                            <VBox fx:id="contactListBox" spacing="10"/>
-                        </VBox>
-                    </content>
-                </Tab>
-
-                <!-- ── Mediciner ── -->
-                <Tab text="Mediciner">
-                    <content>
-                        <VBox spacing="14" style="-fx-padding: 0 0 8 0;">
-
-                            <VBox spacing="10"
-                                  style="-fx-background-color: white; -fx-background-radius: 18;
-                                         -fx-padding: 16;
-                                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
-                                <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <VBox alignment="CENTER"
-                                          style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
-                                                 -fx-min-width: 38; -fx-min-height: 38;
-                                                 -fx-pref-width: 38; -fx-pref-height: 38;">
-                                        <FontIcon iconLiteral="fas-pills" iconSize="20" iconColor="#1a6b3d"/>
-                                    </VBox>
-                                    <Label text="Ny medicin"
-                                           style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
-                                                  -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
-                                </HBox>
-                                <TextField fx:id="medNameField"
-                                           promptText="Namn"
-                                           style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                  -fx-border-radius: 12; -fx-padding: 10;"/>
-                                <TextField fx:id="medDoseField"
-                                           promptText="Dos (t.ex. 500mg)"
-                                           style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                  -fx-border-radius: 12; -fx-padding: 10;"/>
-                                <TextField fx:id="medTimeField"
-                                           promptText="Tid (t.ex. Morgon)"
-                                           style="-fx-font-size: 15; -fx-background-radius: 12;
-                                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                                  -fx-border-radius: 12; -fx-padding: 10;"/>
-                                <Button text="Lägg till medicin"
-                                        onAction="#handleAddMedication"
-                                        maxWidth="Infinity"
-                                        style="-fx-background-color: #1a6b3d; -fx-text-fill: white;
-                                               -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;
-                                               -fx-font-size: 15; -fx-padding: 12;
-                                               -fx-background-radius: 14; -fx-cursor: hand;"/>
-                                <Label fx:id="medStatus" text="" wrapText="true"
-                                       style="-fx-font-size: 13; -fx-text-fill: #c0392b;"/>
+                <!-- ── Mediciner pane ── -->
+                <VBox fx:id="medPane" visible="false" managed="false" spacing="12">
+                    <VBox spacing="10"
+                          style="-fx-background-color: white; -fx-background-radius: 18;
+                                 -fx-padding: 16;
+                                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <VBox alignment="CENTER"
+                                  style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                                         -fx-min-width: 38; -fx-min-height: 38;
+                                         -fx-pref-width: 38; -fx-pref-height: 38;">
+                                <FontIcon iconLiteral="fas-pills" iconSize="20" iconColor="#1a6b3d"/>
                             </VBox>
+                            <Label text="Ny medicin"
+                                   style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue';
+                                          -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                        </HBox>
+                        <TextField fx:id="medNameField" promptText="Namn"
+                                   style="-fx-font-size: 15; -fx-background-radius: 12;
+                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <TextField fx:id="medDoseField" promptText="Dos (t.ex. 500mg)"
+                                   style="-fx-font-size: 15; -fx-background-radius: 12;
+                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <TextField fx:id="medTimeField" promptText="Tid (t.ex. Morgon)"
+                                   style="-fx-font-size: 15; -fx-background-radius: 12;
+                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <Button text="Lägg till medicin" onAction="#handleAddMedication"
+                                maxWidth="Infinity"
+                                style="-fx-background-color: #1a6b3d; -fx-text-fill: white;
+                                       -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;
+                                       -fx-font-size: 15; -fx-padding: 12;
+                                       -fx-background-radius: 14; -fx-cursor: hand;"/>
+                        <Label fx:id="medStatus" text="" wrapText="true"
+                               style="-fx-font-size: 13; -fx-text-fill: #c0392b;"/>
+                    </VBox>
+                    <VBox fx:id="medListBox" spacing="10"/>
+                </VBox>
 
-                            <VBox fx:id="medListBox" spacing="10"/>
-                        </VBox>
-                    </content>
-                </Tab>
-
-            </TabPane>
+            </VBox>
         </VBox>
     </content>
 </ScrollPane>

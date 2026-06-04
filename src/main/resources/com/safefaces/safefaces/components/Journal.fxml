@@ -6,7 +6,10 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <ScrollPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
@@ -16,130 +19,179 @@
             style="-fx-background-color: transparent; -fx-background: transparent;">
     <content>
         <VBox alignment="TOP_CENTER"
-              spacing="12"
+              spacing="14"
               style="-fx-background-color: transparent;">
 
-            <padding><Insets top="16" left="16" right="16" bottom="80"/></padding>
+            <padding><Insets top="24" left="16" right="16" bottom="100"/></padding>
 
-            <!-- Profile card -->
-            <VBox style="-fx-background-color: white;
-                         -fx-background-radius: 20;
-                         -fx-padding: 16;
-                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
-                <HBox spacing="16" alignment="CENTER_LEFT">
-                    <ImageView fx:id="profileImage"
-                               fitWidth="72" fitHeight="72"
-                               preserveRatio="true"/>
-                    <VBox spacing="6" alignment="CENTER_LEFT">
-                        <Label fx:id="nameLabel"
-                               text="Namn"
-                               style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
-                        <Label fx:id="roleBadge"
-                               text=""
-                               style="-fx-font-size: 12; -fx-text-fill: white;
-                                      -fx-background-radius: 20; -fx-padding: 3 12 3 12;
-                                      -fx-font-weight: bold;"/>
-                    </VBox>
-                </HBox>
-            </VBox>
+            <!-- Circular profile image -->
+            <ImageView fx:id="profileImage"
+                       fitWidth="130" fitHeight="130"
+                       preserveRatio="true"/>
 
-            <!-- Info card -->
-            <VBox spacing="8"
-                  style="-fx-background-color: white;
-                         -fx-background-radius: 20;
-                         -fx-padding: 16;
-                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
-                <Label text="Information"
-                       style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+            <!-- Name -->
+            <Label fx:id="nameLabel"
+                   text=""
+                   style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+
+            <!-- Age + location inline -->
+            <HBox alignment="CENTER" spacing="8">
                 <Label fx:id="ageLabel"
                        text=""
-                       style="-fx-font-size: 15; -fx-text-fill: #555;"/>
+                       style="-fx-font-size: 15; -fx-text-fill: #5a7060;"/>
+                <Label fx:id="locationSep"
+                       text="•"
+                       style="-fx-font-size: 15; -fx-text-fill: #5a7060;"/>
                 <Label fx:id="locationLabel"
-                       wrapText="true"
-                       style="-fx-font-size: 15; -fx-text-fill: #555;"/>
-                <VBox fx:id="caregiverStatsBox"
-                      visible="false" managed="false" spacing="6">
-                    <Label fx:id="patientCountLabel"
-                           style="-fx-font-size: 15; -fx-text-fill: #333;"/>
-                    <Label fx:id="reminderCountLabel"
-                           style="-fx-font-size: 15; -fx-text-fill: #333;"/>
-                </VBox>
+                       text=""
+                       style="-fx-font-size: 15; -fx-text-fill: #5a7060;"/>
+            </HBox>
+
+            <!-- Caregiver stats (only for caregivers) -->
+            <VBox fx:id="caregiverStatsBox"
+                  visible="false" managed="false" spacing="4" alignment="CENTER">
+                <Label fx:id="patientCountLabel"
+                       style="-fx-font-size: 15; -fx-text-fill: #333;"/>
+                <Label fx:id="reminderCountLabel"
+                       style="-fx-font-size: 15; -fx-text-fill: #333;"/>
             </VBox>
 
-            <!-- Medications card (collapsible) -->
-            <VBox style="-fx-background-color: white;
-                         -fx-background-radius: 20;
+            <!-- ── Menu cards ── -->
+
+            <!-- Information -->
+            <HBox onMouseClicked="#openInformation"
+                  alignment="CENTER_LEFT" spacing="14"
+                  style="-fx-background-color: white; -fx-background-radius: 18;
+                         -fx-padding: 14; -fx-cursor: hand;
                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
-                <HBox alignment="CENTER_LEFT"
-                      onMouseClicked="#toggleMeds"
-                      style="-fx-cursor: hand; -fx-padding: 14 16 14 16;">
-                    <Label fx:id="medsLabel"
-                           text="Mediciner ▶"
-                           HBox.hgrow="ALWAYS"
-                           style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
-                </HBox>
-                <VBox fx:id="medsBox"
-                      spacing="8"
-                      visible="false" managed="false"
-                      style="-fx-padding: 0 16 14 16;">
-                    <Label text="Här listas dina mediciner"
-                           style="-fx-font-size: 14; -fx-text-fill: #555;"/>
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 14;
+                             -fx-min-width: 54; -fx-min-height: 54;
+                             -fx-pref-width: 54; -fx-pref-height: 54;">
+                    <FontIcon iconLiteral="far-id-card" iconSize="26" iconColor="#1a6b3d"/>
                 </VBox>
-            </VBox>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                    <Label text="Information"
+                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                    <Label text="Om dig, utbildning, arbete och intressen"
+                           wrapText="true"
+                           style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
+                </VBox>
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
+                             -fx-min-width: 32; -fx-min-height: 32;
+                             -fx-pref-width: 32; -fx-pref-height: 32;">
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
+                </VBox>
+            </HBox>
 
-            <!-- Features navigation -->
-            <VBox spacing="8"
-                  style="-fx-background-color: white;
-                         -fx-background-radius: 20;
-                         -fx-padding: 14 16 14 16;
+            <!-- Mediciner -->
+            <HBox onMouseClicked="#openMedicines"
+                  alignment="CENTER_LEFT" spacing="14"
+                  style="-fx-background-color: white; -fx-background-radius: 18;
+                         -fx-padding: 14; -fx-cursor: hand;
                          -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
-                <Label text="Utforska"
-                       style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
-                <Button text="Information"
-                        onAction="#openInformation"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #f0f7f2; -fx-text-fill: #1a3d2e;
-                               -fx-font-size: 15; -fx-font-weight: bold;
-                               -fx-padding: 12; -fx-background-radius: 12; -fx-cursor: hand;"/>
-                <Button text="Mediciner"
-                        onAction="#openMedicines"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #f0f7f2; -fx-text-fill: #1a3d2e;
-                               -fx-font-size: 15; -fx-font-weight: bold;
-                               -fx-padding: 12; -fx-background-radius: 12; -fx-cursor: hand;"/>
-                <Button text="Hälsa"
-                        onAction="#openHealth"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #f0f7f2; -fx-text-fill: #1a3d2e;
-                               -fx-font-size: 15; -fx-font-weight: bold;
-                               -fx-padding: 12; -fx-background-radius: 12; -fx-cursor: hand;"/>
-                <Button text="Familj"
-                        onAction="#openFamily"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #f0f7f2; -fx-text-fill: #1a3d2e;
-                               -fx-font-size: 15; -fx-font-weight: bold;
-                               -fx-padding: 12; -fx-background-radius: 12; -fx-cursor: hand;"/>
-                <Button text="Livsberättelse"
-                        onAction="#openLifeStory"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #f0f7f2; -fx-text-fill: #1a3d2e;
-                               -fx-font-size: 15; -fx-font-weight: bold;
-                               -fx-padding: 12; -fx-background-radius: 12; -fx-cursor: hand;"/>
-                <Button text="SOS – Ring 112"
-                        onAction="#openSos"
-                        maxWidth="Infinity"
-                        style="-fx-background-color: #fde8e8; -fx-text-fill: #c62828;
-                               -fx-font-size: 15; -fx-font-weight: bold;
-                               -fx-padding: 12; -fx-background-radius: 12; -fx-cursor: hand;"/>
-            </VBox>
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 14;
+                             -fx-min-width: 54; -fx-min-height: 54;
+                             -fx-pref-width: 54; -fx-pref-height: 54;">
+                    <FontIcon iconLiteral="fas-pills" iconSize="26" iconColor="#1a6b3d"/>
+                </VBox>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                    <Label text="Mediciner"
+                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                    <Label text="Dina mediciner och när du ska ta dem"
+                           wrapText="true"
+                           style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
+                </VBox>
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
+                             -fx-min-width: 32; -fx-min-height: 32;
+                             -fx-pref-width: 32; -fx-pref-height: 32;">
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
+                </VBox>
+            </HBox>
 
-            <!-- Logout -->
-            <Button text="Logga ut"
-                    onAction="#handleLogout"
-                    maxWidth="Infinity"
-                    style="-fx-background-color: #e05555; -fx-text-fill: white;
-                           -fx-font-size: 16; -fx-font-weight: bold;
-                           -fx-padding: 12; -fx-background-radius: 14; -fx-cursor: hand;"/>
+            <!-- Hälsa -->
+            <HBox onMouseClicked="#openHealth"
+                  alignment="CENTER_LEFT" spacing="14"
+                  style="-fx-background-color: white; -fx-background-radius: 18;
+                         -fx-padding: 14; -fx-cursor: hand;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 14;
+                             -fx-min-width: 54; -fx-min-height: 54;
+                             -fx-pref-width: 54; -fx-pref-height: 54;">
+                    <FontIcon iconLiteral="fas-heartbeat" iconSize="26" iconColor="#1a6b3d"/>
+                </VBox>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                    <Label text="Hälsa"
+                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                    <Label text="Diagnoser, behandlingar och viktiga upplysningar"
+                           wrapText="true"
+                           style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
+                </VBox>
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
+                             -fx-min-width: 32; -fx-min-height: 32;
+                             -fx-pref-width: 32; -fx-pref-height: 32;">
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Familj -->
+            <HBox onMouseClicked="#openFamily"
+                  alignment="CENTER_LEFT" spacing="14"
+                  style="-fx-background-color: white; -fx-background-radius: 18;
+                         -fx-padding: 14; -fx-cursor: hand;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 14;
+                             -fx-min-width: 54; -fx-min-height: 54;
+                             -fx-pref-width: 54; -fx-pref-height: 54;">
+                    <FontIcon iconLiteral="fas-users" iconSize="26" iconColor="#1a6b3d"/>
+                </VBox>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                    <Label text="Familj"
+                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                    <Label text="Dina närstående och viktig information"
+                           wrapText="true"
+                           style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
+                </VBox>
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
+                             -fx-min-width: 32; -fx-min-height: 32;
+                             -fx-pref-width: 32; -fx-pref-height: 32;">
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Livsberättelse -->
+            <HBox onMouseClicked="#openLifeStory"
+                  alignment="CENTER_LEFT" spacing="14"
+                  style="-fx-background-color: white; -fx-background-radius: 18;
+                         -fx-padding: 14; -fx-cursor: hand;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 14;
+                             -fx-min-width: 54; -fx-min-height: 54;
+                             -fx-pref-width: 54; -fx-pref-height: 54;">
+                    <FontIcon iconLiteral="fas-book-open" iconSize="24" iconColor="#1a6b3d"/>
+                </VBox>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                    <Label text="Livsberättelse"
+                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                    <Label text="Bilder, minnen och berättelser från ditt liv"
+                           wrapText="true"
+                           style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
+                </VBox>
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
+                             -fx-min-width: 32; -fx-min-height: 32;
+                             -fx-pref-width: 32; -fx-pref-height: 32;">
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
+                </VBox>
+            </HBox>
 
         </VBox>
     </content>

@@ -24,6 +24,7 @@ public class ProfileController {
     @FXML private Label nameLabel;
     @FXML private Label ageLabel;
     @FXML private Label locationLabel;
+    @FXML private Label locationSep;
     @FXML private ImageView profileImage;
     @FXML private Label medsLabel;
     @FXML private VBox medsBox;
@@ -50,29 +51,37 @@ public class ProfileController {
                 : user.firstName;
         nameLabel.setText(fullName);
         ageLabel.setText("Ålder: " + user.age);
-        locationLabel.setText(user.location != null ? "Du är hemma i " + user.location : "");
+        if (user.location != null && !user.location.isBlank()) {
+            locationLabel.setText(user.location);
+        } else {
+            locationSep.setVisible(false);
+            locationSep.setManaged(false);
+            locationLabel.setVisible(false);
+            locationLabel.setManaged(false);
+        }
 
         try {
             Image image = new Image(
                     getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + user.imagePath));
-            profileImage.setTranslateX(-15);
             profileImage.setImage(image);
-            profileImage.setClip(new Circle(60, 60, 60));
+            profileImage.setClip(new Circle(65, 65, 65));
         } catch (Exception e) {
             System.out.println("Kunde inte ladda profilbild.");
         }
 
         if (user.role == RoleType.CAREGIVER) {
-            roleBadge.setText("Vårdgivare");
-            roleBadge.setStyle(roleBadge.getStyle() + "-fx-background-color: #4a90d9;");
-            medsLabel.setVisible(false);
-            medsLabel.setManaged(false);
-            medsBox.setVisible(false);
-            medsBox.setManaged(false);
+            if (roleBadge != null) {
+                roleBadge.setText("Vårdgivare");
+                roleBadge.setStyle(roleBadge.getStyle() + "-fx-background-color: #4a90d9;");
+            }
+            if (medsLabel != null) { medsLabel.setVisible(false); medsLabel.setManaged(false); }
+            if (medsBox != null)   { medsBox.setVisible(false);   medsBox.setManaged(false); }
             loadCaregiverStats(user.id);
         } else {
-            roleBadge.setText("Användare");
-            roleBadge.setStyle(roleBadge.getStyle() + "-fx-background-color: #6abf69;");
+            if (roleBadge != null) {
+                roleBadge.setText("Användare");
+                roleBadge.setStyle(roleBadge.getStyle() + "-fx-background-color: #6abf69;");
+            }
             loadMedications(user.id);
         }
     }
@@ -97,6 +106,7 @@ public class ProfileController {
     }
 
     private void loadMedications(int userId) {
+        if (medsBox == null) return;
         List<Medication> meds = medicationRepository.findActiveByUserId(userId);
         medsBox.getChildren().clear();
 
@@ -125,10 +135,11 @@ public class ProfileController {
 
     @FXML
     private void toggleMeds() {
+        if (medsBox == null) return;
         boolean isVisible = medsBox.isVisible();
         medsBox.setVisible(!isVisible);
         medsBox.setManaged(!isVisible);
-        medsLabel.setText(isVisible ? "Mediciner ▶" : "Mediciner ▼");
+        if (medsLabel != null) medsLabel.setText(isVisible ? "Mediciner ➡️" : "Mediciner ⬇️");
     }
 
     @FXML private void openInformation() { MainController.instance.showInformation(); }

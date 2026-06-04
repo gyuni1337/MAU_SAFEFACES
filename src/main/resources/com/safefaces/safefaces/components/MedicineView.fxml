@@ -27,12 +27,12 @@
                              -fx-pref-width: 38; -fx-pref-height: 38;
                              -fx-cursor: hand;">
                     <Label text="←" mouseTransparent="true"
-                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
+                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;"/>
                 </VBox>
                 <!-- Title (centered via equal spacers) -->
                 <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
                 <Label text="Mediciner"
-                       style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                       style="-fx-font-size: 22; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                 <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
                 <!-- Sound button -->
                 <VBox onMouseClicked="#readMedicines" alignment="CENTER"
@@ -66,10 +66,10 @@
                           style="-fx-padding: 4 0 8 0;">
                         <FontIcon iconLiteral="fas-sun" iconSize="22" iconColor="#f59e0b"/>
                         <Label text="Morgon"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"
                                HBox.hgrow="ALWAYS"/>
                         <Label fx:id="morningTime" text="08:00"
-                               style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1a6b3d;"/>
+                               style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a6b3d;"/>
                     </HBox>
                     <VBox fx:id="morningBox" spacing="0"
                           style="-fx-background-color: white; -fx-background-radius: 16;
@@ -82,10 +82,10 @@
                           style="-fx-padding: 4 0 8 0;">
                         <FontIcon iconLiteral="fas-sun" iconSize="22" iconColor="#f59e0b"/>
                         <Label text="Lunch"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"
                                HBox.hgrow="ALWAYS"/>
                         <Label fx:id="lunchTime" text="12:00"
-                               style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1a6b3d;"/>
+                               style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a6b3d;"/>
                     </HBox>
                     <VBox fx:id="lunchBox" spacing="0"
                           style="-fx-background-color: white; -fx-background-radius: 16;
@@ -98,10 +98,10 @@
                           style="-fx-padding: 4 0 8 0;">
                         <FontIcon iconLiteral="fas-moon" iconSize="22" iconColor="#7c3aed"/>
                         <Label text="Kväll"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"
                                HBox.hgrow="ALWAYS"/>
                         <Label fx:id="eveningTime" text="20:00"
-                               style="-fx-font-size: 16; -fx-font-weight: bold; -fx-text-fill: #1a6b3d;"/>
+                               style="-fx-font-size: 16; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a6b3d;"/>
                     </HBox>
                     <VBox fx:id="eveningBox" spacing="0"
                           style="-fx-background-color: white; -fx-background-radius: 16;

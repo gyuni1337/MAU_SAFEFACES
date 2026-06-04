@@ -27,12 +27,12 @@
                              -fx-pref-width: 38; -fx-pref-height: 38;
                              -fx-cursor: hand;">
                     <Label text="←" mouseTransparent="true"
-                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
+                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;"/>
                 </VBox>
                 <!-- Title (centered via equal spacers) -->
                 <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
                 <Label text="Information"
-                       style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                       style="-fx-font-size: 22; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                 <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
                 <!-- Sound button -->
                 <VBox onMouseClicked="#readInformation" alignment="CENTER"
@@ -63,7 +63,7 @@
                             <FontIcon iconLiteral="far-user" iconSize="18" iconColor="#1a6b3d"/>
                         </VBox>
                         <Label text="Om mig"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
                     <!-- Namn -->
                     <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
@@ -104,7 +104,7 @@
                             <FontIcon iconLiteral="fas-graduation-cap" iconSize="18" iconColor="#1a6b3d"/>
                         </VBox>
                         <Label text="Utbildning"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
                     <VBox fx:id="educationBox" spacing="0"/>
                 </VBox>
@@ -122,7 +122,7 @@
                             <FontIcon iconLiteral="fas-briefcase" iconSize="18" iconColor="#1a6b3d"/>
                         </VBox>
                         <Label text="Arbetsliv"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
                     <VBox fx:id="workBox" spacing="0"/>
                 </VBox>
@@ -140,7 +140,7 @@
                             <FontIcon iconLiteral="far-heart" iconSize="18" iconColor="#1a6b3d"/>
                         </VBox>
                         <Label text="Intressen"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
                     <HBox spacing="24" alignment="CENTER">
                         <VBox alignment="CENTER" spacing="6">

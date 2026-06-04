@@ -32,7 +32,7 @@
             <!-- Name -->
             <Label fx:id="nameLabel"
                    text=""
-                   style="-fx-font-size: 26; -fx-font-weight: bold; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
+                   style="-fx-font-size: 26; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
 
             <!-- Age + location inline -->
             <HBox alignment="CENTER" spacing="8">
@@ -72,7 +72,7 @@
                 </VBox>
                 <VBox spacing="3" HBox.hgrow="ALWAYS">
                     <Label text="Information"
-                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
+                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
                     <Label text="Om dig, utbildning, arbete och intressen"
                            wrapText="true"
                            style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
@@ -81,7 +81,7 @@
                       style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
                              -fx-min-width: 32; -fx-min-height: 32;
                              -fx-pref-width: 32; -fx-pref-height: 32;">
-                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold; -fx-letter-spacing: 0.5;"/>
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
                 </VBox>
             </HBox>
 
@@ -99,7 +99,7 @@
                 </VBox>
                 <VBox spacing="3" HBox.hgrow="ALWAYS">
                     <Label text="Mediciner"
-                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
+                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
                     <Label text="Dina mediciner och när du ska ta dem"
                            wrapText="true"
                            style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
@@ -108,7 +108,7 @@
                       style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
                              -fx-min-width: 32; -fx-min-height: 32;
                              -fx-pref-width: 32; -fx-pref-height: 32;">
-                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold; -fx-letter-spacing: 0.5;"/>
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
                 </VBox>
             </HBox>
 
@@ -126,7 +126,7 @@
                 </VBox>
                 <VBox spacing="3" HBox.hgrow="ALWAYS">
                     <Label text="Hälsa"
-                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
+                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
                     <Label text="Diagnoser, behandlingar och viktiga upplysningar"
                            wrapText="true"
                            style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
@@ -135,7 +135,7 @@
                       style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
                              -fx-min-width: 32; -fx-min-height: 32;
                              -fx-pref-width: 32; -fx-pref-height: 32;">
-                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold; -fx-letter-spacing: 0.5;"/>
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
                 </VBox>
             </HBox>
 
@@ -153,7 +153,7 @@
                 </VBox>
                 <VBox spacing="3" HBox.hgrow="ALWAYS">
                     <Label text="Familj"
-                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
+                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
                     <Label text="Dina närstående och viktig information"
                            wrapText="true"
                            style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
@@ -162,7 +162,7 @@
                       style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
                              -fx-min-width: 32; -fx-min-height: 32;
                              -fx-pref-width: 32; -fx-pref-height: 32;">
-                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold; -fx-letter-spacing: 0.5;"/>
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
                 </VBox>
             </HBox>
 
@@ -180,7 +180,7 @@
                 </VBox>
                 <VBox spacing="3" HBox.hgrow="ALWAYS">
                     <Label text="Livsberättelse"
-                           style="-fx-font-size: 17; -fx-font-weight: bold; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
+                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
                     <Label text="Bilder, minnen och berättelser från ditt liv"
                            wrapText="true"
                            style="-fx-font-size: 13; -fx-text-fill: #7a9080;"/>
@@ -189,7 +189,7 @@
                       style="-fx-background-color: #e8f5e9; -fx-background-radius: 50;
                              -fx-min-width: 32; -fx-min-height: 32;
                              -fx-pref-width: 32; -fx-pref-height: 32;">
-                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-weight: bold; -fx-letter-spacing: 0.5;"/>
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
                 </VBox>
             </HBox>
 

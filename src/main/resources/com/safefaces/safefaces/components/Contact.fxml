@@ -21,7 +21,7 @@
         <VBox HBox.hgrow="ALWAYS" spacing="4">
             <Label fx:id="sectionLabel"
                    text="Dina kontakter"
-                   style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                   style="-fx-font-size: 24; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
             <Label text="Här ser du dina närstående och vårdgivare som du kan kontakta."
                    wrapText="true"
                    style="-fx-font-size: 13; -fx-text-fill: #5a7060;"/>

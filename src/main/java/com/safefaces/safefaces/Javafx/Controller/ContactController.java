@@ -94,7 +94,7 @@ public class ContactController {
         VBox nameBox = new VBox(4);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
         Label nameLabel = new Label(contact.getName());
-        nameLabel.setStyle("-fx-font-size: 22; -fx-font-weight: bold; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;");
+        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 22; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;");
         Label relationLabel = new Label(contact.getRelation());
         relationLabel.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
         nameBox.getChildren().addAll(nameLabel, relationLabel);

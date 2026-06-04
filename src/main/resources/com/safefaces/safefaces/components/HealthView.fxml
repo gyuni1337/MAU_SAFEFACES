@@ -29,12 +29,12 @@
                              -fx-pref-width: 38; -fx-pref-height: 38;
                              -fx-cursor: hand;">
                     <Label text="←" mouseTransparent="true"
-                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-weight: bold;"/>
+                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;"/>
                 </VBox>
                 <!-- Title (centered via equal spacers) -->
                 <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
                 <Label text="Hälsa"
-                       style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                       style="-fx-font-size: 22; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                 <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
                 <!-- Sound button -->
                 <VBox onMouseClicked="#readHealth" alignment="CENTER"
@@ -54,7 +54,7 @@
                     <image><Image url="@../images/logo.png"/></image>
                 </ImageView>
                 <Label text="SafeFaces"
-                       style="-fx-font-size: 18; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                       style="-fx-font-size: 18; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
             </VBox>
 
             <!-- Content -->
@@ -73,7 +73,7 @@
                             <FontIcon iconLiteral="fas-heart" iconSize="18" iconColor="#1a6b3d"/>
                         </VBox>
                         <Label text="Diagnoser"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
                     <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
                         <VBox alignment="CENTER"
@@ -113,7 +113,7 @@
                             <FontIcon iconLiteral="fas-clipboard-list" iconSize="18" iconColor="#1a6b3d"/>
                         </VBox>
                         <Label text="Viktigt att komma ihåg"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
                     <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
                         <VBox alignment="CENTER"
@@ -153,7 +153,7 @@
                             <FontIcon iconLiteral="fas-plus" iconSize="18" iconColor="white"/>
                         </VBox>
                         <Label text="Behandling"
-                               style="-fx-font-size: 17; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
                     <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
                         <VBox alignment="CENTER"

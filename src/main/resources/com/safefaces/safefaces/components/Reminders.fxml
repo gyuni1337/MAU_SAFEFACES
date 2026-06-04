@@ -15,7 +15,7 @@
     <padding><Insets top="16" left="16" right="16"/></padding>
 
     <Label text="Här är din reminderlista"
-           style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
+           style="-fx-font-size: 22; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
     <Label text="Här ser du saker som du måste fixa eller komma ihåg."
            wrapText="true"
            style="-fx-font-size: 13; -fx-text-fill: #5a7060;"/>

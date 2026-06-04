@@ -7,6 +7,7 @@ import com.safefaces.safefaces.Core.Repository.MedicationRepository;
 import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -62,6 +63,11 @@ public class ProfileController {
             Image image = new Image(
                     getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + user.imagePath));
             profileImage.setImage(image);
+            profileImage.setFitWidth(130);
+            profileImage.setFitHeight(130);
+            profileImage.setPreserveRatio(false);
+            profileImage.setSmooth(true);
+            profileImage.setViewport(centerSquareViewport(image));
             profileImage.setClip(new Circle(65, 65, 65));
         } catch (Exception e) {
             System.out.println("Kunde inte ladda profilbild.");
@@ -120,6 +126,13 @@ public class ProfileController {
         lbl.setStyle("-fx-font-size: " + size + "px; -fx-text-fill: " + color + ";");
         lbl.setWrapText(true);
         return lbl;
+    }
+
+    private Rectangle2D centerSquareViewport(Image image) {
+        double size = Math.min(image.getWidth(), image.getHeight());
+        double x = (image.getWidth() - size) / 2;
+        double y = (image.getHeight() - size) / 2;
+        return new Rectangle2D(x, y, size, size);
     }
 
     @FXML

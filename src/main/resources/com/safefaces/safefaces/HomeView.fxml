@@ -11,6 +11,7 @@
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.safefaces.safefaces.Javafx.Controller.MainController">
+
     <children>
 
         <!-- Decorative background image (wave, leaves, cream color) -->
@@ -40,6 +41,7 @@
                             minHeight="90.0"
                             style="-fx-background-color: transparent;"/>
             </bottom>
+
         </BorderPane>
 
     </children>

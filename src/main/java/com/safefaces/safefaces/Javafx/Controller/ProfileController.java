@@ -7,12 +7,18 @@ import com.safefaces.safefaces.Core.Repository.MedicationRepository;
 import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
+import javafx.fxml.FXML;
+import javafx.stage.Stage;
 
 import java.util.List;
 
@@ -35,13 +41,34 @@ public class ProfileController {
 
     @FXML
     public void initialize() {
-        User user = AppState.getInstance().getCurrentUser();
+//        User user = AppState.getInstance().getCurrentUser();
+//
+//        if (user == null) {
+//            nameLabel.setText("Ingen användare");
+//            ageLabel.setText("");
+//            return;
+//        }
+//
+//        String fullName = user.lastName != null
+//                ? user.firstName + " " + user.lastName
+//                : user.firstName;
+//        nameLabel.setText(fullName);
+//        ageLabel.setText("Ålder: " + user.age);
+//        locationLabel.setText(user.location != null ? "Du är hemma i " + user.location : "");
+//
+//        try {
+//            Image image = new Image(
+//                    getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + user.imagePath));
+//            profileImage.setTranslateX(-15);
+//            profileImage.setImage(image);
+//            profileImage.setClip(new Circle(60, 60, 60));
+//        } catch (Exception e) {
+//            System.out.println("Kunde inte ladda profilbild.");
+//        }
+//
+//        loadMedications(user.id);
+        System.out.println("ProfileView laddades");
 
-        if (user == null) {
-            nameLabel.setText("Ingen användare");
-            ageLabel.setText("");
-            return;
-        }
 
         String fullName = user.lastName != null
                 ? user.firstName + " " + user.lastName

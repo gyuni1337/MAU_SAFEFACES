@@ -7,6 +7,7 @@ import com.safefaces.safefaces.Javafx.App.SessionManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -15,6 +16,17 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.animation.PauseTransition;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.TextArea;
+
+import java.nio.file.StandardOpenOption;
+
 
 public class LoginController {
 
@@ -35,6 +47,13 @@ public class LoginController {
 
     private final AuthService authService = new AuthService();
 
+    /**
+     * initialize the login controller
+     * Starts automatic Face ID login for the patient user
+     * unless caregiver login is selected
+     *
+     * @author Shaima Almoayed
+     */
     @FXML
     public void initialize() {
         System.out.println("Hashed Password: " + AuthService.hashPin("1234"));
@@ -154,10 +173,86 @@ public class LoginController {
 
     private void loginSuccessful(User user) {
         AppState.getInstance().setCurrentUser(user);
-        navigateToHome();
+        Stage stage=getStage();
+        if(stage !=null){
+            navigateToHome(stage);
+        }
     }
 
-    private void navigateToHome() {
+    /**
+     * Displays the FaceID simulation screen
+     * <p>
+     * simulation a Face ID scan before automatically loggin in
+     * the user and navigating to the home view
+     *
+     * @author Shaima Almoayed
+     */
+    private void showFaceIdSimulation(){
+        Stage stage=getStage();
+        if(stage==null)return;
+
+        AnchorPane root=new AnchorPane();
+
+        ImageView faceId=new ImageView(new Image(getClass().getResourceAsStream("/com/safefaces/safefaces/images/face_id_simulation.png")));
+
+        faceId.setFitWidth(400);
+        faceId.setFitHeight(640);
+        faceId.setPreserveRatio(false);
+
+        root.getChildren().addAll(faceId);
+        Button closeButton=new Button();
+
+        closeButton.setLayoutX(330);
+        closeButton.setLayoutY(30);
+
+        closeButton.setPrefWidth(45);
+        closeButton.setPrefHeight(45);
+
+        closeButton.setStyle("-fx-background-color:transparent;");
+        closeButton.setOnAction(e->{
+            try {
+
+            FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/safefaces/safefaces/LoginView.fxml"));
+
+            Parent loginView=loader.load();
+            stage.setScene(new Scene(loginView,400,640));
+            }catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            });
+
+        root.getChildren().add(closeButton);
+        stage.setScene(new Scene(root,400,640));
+
+        PauseTransition scanDely=new PauseTransition(Duration.seconds(6));
+
+        scanDely.setOnFinished(e->{
+            Thread thread=new Thread(()->{
+                User user=authService.faceIdLogin();
+
+                Platform.runLater(()->{
+                    if(user==null){
+                        setStatus("Kunde inte logga in:");
+                    } else{
+                        AppState.getInstance().setCurrentUser(user);
+                        navigateToHome(stage);
+                    }
+                });
+            });
+            thread.setDaemon(true);
+            thread.start();
+        });
+        scanDely.play();
+    }
+
+    /**
+     * Navigares to the home view after login
+     *
+     * @param stage the current application stage
+     * @author Shaima Almoayed
+     * @author Noor Nabi
+     */
+    private void navigateToHome(Stage stage) {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/com/safefaces/safefaces/HomeView.fxml"));
@@ -167,9 +262,9 @@ public class LoginController {
             stage.setScene(new Scene(root, 400, 700));
             stage.show();
             SessionManager.start(stage);
-        } catch (Exception e) {
-            setStatus("Navigationsfel: " + e.getMessage());
+        }catch (Exception e){
             e.printStackTrace();
+            setStatus("Navifationsfel:"+ e.getMessage());
         }
     }
 

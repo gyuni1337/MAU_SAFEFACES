@@ -12,7 +12,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.TextArea?>
 
+<?import javafx.scene.layout.HBox?>
 <AnchorPane prefHeight="700.0" prefWidth="400.0"
             style="-fx-background-color: linear-gradient(to bottom, #fbfdf9, #eef7e9);"
             xmlns="http://javafx.com/javafx/21"
@@ -232,4 +234,5 @@
         </AnchorPane>
 
     </children>
+
 </AnchorPane>

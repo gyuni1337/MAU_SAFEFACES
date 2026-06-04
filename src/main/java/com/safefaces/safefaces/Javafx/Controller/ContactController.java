@@ -4,7 +4,6 @@ import com.safefaces.safefaces.Core.Repository.CaregiverPatientRepository;
 import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import com.safefaces.safefaces.Core.Model.Contact;
-import com.safefaces.safefaces.Core.Model.Enums.RoleType;
 import com.safefaces.safefaces.Core.Service.ContactService;
 import javafx.fxml.FXML;
 import javafx.geometry.Rectangle2D;
@@ -18,19 +17,45 @@ import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
-
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ButtonBar;
+import javafx.stage.Stage;
 import java.util.List;
 import java.util.Objects;
+
+/**
+ * This controller is responsible for displaying and managing
+ * the users contacts.
+ * Creating and displaying the contact list,
+ * simulated phone calls, voice memo playback,
+ * navigation between application views and SOS-related actions.
+ *
+ * This controller retrieves contact information through the
+ * ContactService class and dynamically creates the user interface elements shown in the contact list.
+ * @author Hamdi Ahmed
+ * @author  Noor Nabi
+ * @author Shaima ALmoayed
+ */
+
+
 
 public class ContactController {
 
     @FXML private VBox contactListBox;
     @FXML private Label sectionLabel;
+    @FXML private Button sosButton;
+    private boolean voiceHeaderAdded;
+    private boolean callHeaderAdded;
+
 
     private final ContactService contactService = new ContactService();
     private MediaPlayer currentPlayer;
     private static final double AVATAR_SIZE = 88;
     @FXML
+
     public void initialize() {
         var user = AppState.getInstance().getCurrentUser();
         if (user != null && user.role == RoleType.CAREGIVER) {
@@ -91,11 +116,23 @@ public class ContactController {
         return card;
     }
 
+    /**
+     * This method Builds and populates the contact list view.
+     * It clears any existing contact entries and creates a new row for each contact retrieved
+     * from the ContactService.
+     * If no contact are available, a message is shown.
+     * @author Noor Nabi
+     * @author Hamdi Ahmed
+     */
+
     private void buildContactList() {
         if (contactListBox == null)
             return;
 
         contactListBox.getChildren().clear();
+        voiceHeaderAdded = false;
+        callHeaderAdded = false;
+
 
         List<Contact> contacts = contactService.getContactList();
 
@@ -105,7 +142,6 @@ public class ContactController {
             contactListBox.getChildren().add(empty);
             return;
         }
-
         for (Contact contact : contacts) {
             VBox card = buildRow(contact);
             VBox.setMargin(card, new javafx.geometry.Insets(4, 0, 4, 0));
@@ -216,29 +252,63 @@ public class ContactController {
         return new Rectangle2D(x, y, size, size);
     }
 
+    /**
+     * Simulates a phone call to a selected contact.
+     * This method displays a dialog indicating that the selected contact is being called.
+     * @param event the button click event
+     * @uthor Noor Nabi
+     */
+
     @FXML
     private void handleAddContact() {
         System.out.println("Lägg till kontakt – ej implementerat ännu");
     }
 
+    /**
+     * Plays the selected contact's voice memo.
+     * Stops any currently playing audio before
+     * starting playback of the new recording.
+     *
+     *If no voice memo exists, an information dialog is displayed
+     * @param contact the contact whose voice memo should be played.
+     * @param btn the button that triggered the action
+     * @author Hamdi Ahmed
+     */
+
     @FXML
     private void handleVoiceMessage(Contact contact, Object ignored) {
         SessionManager.beginSession();
 
-       String audioPath ="/com/safefaces/safefaces/audio/Audio1.mp3";
+        String filePath = contact.getVoicePath();
+        if(filePath == null || filePath.isBlank()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Inget röstmemo");
+            alert.showAndWait();
+            return;
+        }
+
+       String audioPath ="/com/safefaces/safefaces/audio/" + filePath;
         var url =getClass().getResource(audioPath);
         if(url == null){
-            System.out.println("Hittar inte ljudfilden: " +audioPath);
+            System.out.println("Hittar inte ljudfilen: " +audioPath);
             return;
         }
         System.out.println("Hittar filen spelar upp ");
         stopCurrentPlayer();
 
+       stopCurrentPlayer();
+       currentPlayer = new MediaPlayer((new Media(url.toExternalForm())));
+       currentPlayer.play();
 
-        new MediaPlayer((new Media(url.toExternalForm()))).play();
         
 
     }
+
+    /**
+     * Stops and disposes the currently active media player.
+     * Used to ensure that only one voice memo is playing at the time.
+     * @author Hamdi Ahmed
+     */
     private void stopCurrentPlayer(){
         if(currentPlayer !=null){
             currentPlayer.stop();
@@ -247,5 +317,18 @@ public class ContactController {
         }
     }
 
+    /**
+     * Opens the profile page
+     *
+     * @author Shaima Almoayed
+     */
+    @FXML
+    private void openProfile(){
+        try{
+            FXMLLoader loader=new FXMLLoader(
+                    getClass().getResource("/com/safefaces/safefaces/ProfileView.fxml")
+            );
+            Parent root=loader.load();
+            javafx.stage.Stage stage=(javafx.stage.Stage) contactListBox.getScene().getWindow();
 
 }

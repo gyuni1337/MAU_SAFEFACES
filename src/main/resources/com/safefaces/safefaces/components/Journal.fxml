@@ -86,7 +86,8 @@
             </HBox>
 
             <!-- Mediciner -->
-            <HBox onMouseClicked="#openMedicines"
+            <HBox fx:id="medCard"
+                  onMouseClicked="#openMedicines"
                   alignment="CENTER_LEFT" spacing="14"
                   style="-fx-background-color: white; -fx-background-radius: 18;
                          -fx-padding: 14; -fx-cursor: hand;
@@ -113,7 +114,8 @@
             </HBox>
 
             <!-- Hälsa -->
-            <HBox onMouseClicked="#openHealth"
+            <HBox fx:id="healthCard"
+                  onMouseClicked="#openHealth"
                   alignment="CENTER_LEFT" spacing="14"
                   style="-fx-background-color: white; -fx-background-radius: 18;
                          -fx-padding: 14; -fx-cursor: hand;
@@ -140,7 +142,8 @@
             </HBox>
 
             <!-- Familj -->
-            <HBox onMouseClicked="#openFamily"
+            <HBox fx:id="familyCard"
+                  onMouseClicked="#openFamily"
                   alignment="CENTER_LEFT" spacing="14"
                   style="-fx-background-color: white; -fx-background-radius: 18;
                          -fx-padding: 14; -fx-cursor: hand;
@@ -167,7 +170,8 @@
             </HBox>
 
             <!-- Livsberättelse -->
-            <HBox onMouseClicked="#openLifeStory"
+            <HBox fx:id="lifeCard"
+                  onMouseClicked="#openLifeStory"
                   alignment="CENTER_LEFT" spacing="14"
                   style="-fx-background-color: white; -fx-background-radius: 18;
                          -fx-padding: 14; -fx-cursor: hand;
@@ -190,6 +194,33 @@
                              -fx-min-width: 32; -fx-min-height: 32;
                              -fx-pref-width: 32; -fx-pref-height: 32;">
                     <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
+                </VBox>
+            </HBox>
+
+            <!-- Logga ut -->
+            <HBox onMouseClicked="#handleLogout"
+                  alignment="CENTER_LEFT" spacing="14"
+                  style="-fx-background-color: white; -fx-background-radius: 18;
+                         -fx-padding: 14; -fx-cursor: hand;
+                         -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #fdecea; -fx-background-radius: 14;
+                             -fx-min-width: 54; -fx-min-height: 54;
+                             -fx-pref-width: 54; -fx-pref-height: 54;">
+                    <FontIcon iconLiteral="fas-sign-out-alt" iconSize="24" iconColor="#c0392b"/>
+                </VBox>
+                <VBox spacing="3" HBox.hgrow="ALWAYS">
+                    <Label text="Logga ut"
+                           style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #c0392b;"/>
+                    <Label text="Avsluta sessionen och återgå till inloggning"
+                           wrapText="true"
+                           style="-fx-font-size: 13; -fx-text-fill: #e07070;"/>
+                </VBox>
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #fdecea; -fx-background-radius: 50;
+                             -fx-min-width: 32; -fx-min-height: 32;
+                             -fx-pref-width: 32; -fx-pref-height: 32;">
+                    <Label text="›" style="-fx-font-size: 20; -fx-text-fill: #c0392b; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-letter-spacing: 0.5;"/>
                 </VBox>
             </HBox>
 

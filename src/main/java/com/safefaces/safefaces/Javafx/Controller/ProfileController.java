@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 
@@ -32,6 +33,10 @@ public class ProfileController {
     @FXML private VBox caregiverStatsBox;
     @FXML private Label patientCountLabel;
     @FXML private Label reminderCountLabel;
+    @FXML private HBox medCard;
+    @FXML private HBox healthCard;
+    @FXML private HBox familyCard;
+    @FXML private HBox lifeCard;
 
     private final MedicationRepository medicationRepository = new MedicationRepository();
     private final CaregiverPatientRepository caregiverPatientRepo = new CaregiverPatientRepository();
@@ -74,8 +79,12 @@ public class ProfileController {
                 roleBadge.setText("Vårdgivare");
                 roleBadge.setStyle(roleBadge.getStyle() + "-fx-background-color: #4a90d9;");
             }
-            if (medsLabel != null) { medsLabel.setVisible(false); medsLabel.setManaged(false); }
-            if (medsBox != null)   { medsBox.setVisible(false);   medsBox.setManaged(false); }
+            if (medsLabel != null)  { medsLabel.setVisible(false);  medsLabel.setManaged(false); }
+            if (medsBox != null)    { medsBox.setVisible(false);     medsBox.setManaged(false); }
+            if (medCard != null)    { medCard.setVisible(false);     medCard.setManaged(false); }
+            if (healthCard != null) { healthCard.setVisible(false);  healthCard.setManaged(false); }
+            if (familyCard != null) { familyCard.setVisible(false);  familyCard.setManaged(false); }
+            if (lifeCard != null)   { lifeCard.setVisible(false);    lifeCard.setManaged(false); }
             loadCaregiverStats(user.id);
         } else {
             if (roleBadge != null) {

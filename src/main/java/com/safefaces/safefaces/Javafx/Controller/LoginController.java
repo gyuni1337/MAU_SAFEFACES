@@ -11,40 +11,54 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-/**
- * Controller for the login screen.
- * Handles login as demo User and login as Vårdgivare (username + PIN).
- *
- * @author Noor Nabi
- * @author Gyundyuz Sadulov
- */
 public class LoginController {
 
+    // Face ID overlay
+    @FXML private AnchorPane faceIdOverlay;
     @FXML private Label statusLabel;
-    @FXML private VBox caregiverBox;
+
+    // Caregiver overlay
+    @FXML private AnchorPane loginOverlay;
     @FXML private TextField usernameField;
     @FXML private PasswordField pinField;
+    @FXML private Label caregiverStatusLabel;
+
+    // Support overlay
+    @FXML private AnchorPane supportOverlay;
+    @FXML private TextField supportEmailField;
+    @FXML private TextArea supportMessageField;
 
     private final AuthService authService = new AuthService();
 
     @FXML
     public void initialize() {
-
-        // to omvandla text till hashpin för manuellt inläggning i databasen ( för att vi inte har registrations knapp ).
         System.out.println("Hashed Password: " + AuthService.hashPin("1234"));
     }
 
-    /** logs in as the patient user fetched from the database. */
+    // ── Face ID ──────────────────────────────────────────────────────────────
+
+    @FXML
+    private void handleShowFaceId() {
+        show(faceIdOverlay);
+    }
+
+    @FXML
+    private void closeFaceIdOverlay() {
+        hide(faceIdOverlay);
+        setStatus("");
+    }
+
     @FXML
     private void handleUserLogin() {
         setStatus("Loggar in...");
         Thread thread = new Thread(() -> {
-            var user = authService.faceIdLogin();
-            javafx.application.Platform.runLater(() -> {
+            User user = authService.faceIdLogin();
+            Platform.runLater(() -> {
                 if (user == null) {
                     setStatus("Kunde inte hämta användare från databasen.");
                 } else {
@@ -56,33 +70,37 @@ public class LoginController {
         thread.start();
     }
 
-    /** toggles the caregiver login form. */
+    // ── Caregiver ────────────────────────────────────────────────────────────
+
     @FXML
     private void handleShowCaregiverLogin() {
-        boolean show = !caregiverBox.isVisible();
-        caregiverBox.setVisible(show);
-        caregiverBox.setManaged(show);
-        setStatus("");
+        show(loginOverlay);
+        setCaregiverStatus("");
     }
 
-    /** submits the caregiver username + PIN to AuthService. */
+    @FXML
+    private void closeCaregiverPopup() {
+        hide(loginOverlay);
+        if (usernameField != null) usernameField.clear();
+        if (pinField != null) pinField.clear();
+    }
+
     @FXML
     private void handleCaregiverSubmit() {
         String username = usernameField.getText().trim();
-        String pin = pinField.getText().trim();
+        String pin      = pinField.getText().trim();
 
         if (username.isEmpty() || pin.isEmpty()) {
-            setStatus("Fyll i användarnamn och PIN-kod.");
+            setCaregiverStatus("Fyll i e-postadress och lösenord.");
             return;
         }
 
-        setStatus("Verifierar...");
-
+        setCaregiverStatus("Verifierar...");
         Thread thread = new Thread(() -> {
             User user = authService.login(username, pin);
             Platform.runLater(() -> {
                 if (user == null) {
-                    setStatus("Felaktigt användarnamn eller PIN-kod.");
+                    setCaregiverStatus("Felaktigt e-post eller lösenord.");
                     pinField.clear();
                 } else {
                     loginSuccessful(user);
@@ -91,6 +109,47 @@ public class LoginController {
         });
         thread.setDaemon(true);
         thread.start();
+    }
+
+    // ── Support ──────────────────────────────────────────────────────────────
+
+    @FXML
+    private void handleShowSupport() {
+        show(supportOverlay);
+    }
+
+    @FXML
+    private void closeSupportPopup() {
+        hide(supportOverlay);
+    }
+
+    @FXML
+    private void handleSendSupport() {
+        System.out.println("Support: " + supportEmailField.getText()
+                + " / " + supportMessageField.getText());
+        hide(supportOverlay);
+    }
+
+    // ── Helpers ──────────────────────────────────────────────────────────────
+
+    private void show(AnchorPane pane) {
+        if (pane == null) return;
+        pane.setVisible(true);
+        pane.setManaged(true);
+    }
+
+    private void hide(AnchorPane pane) {
+        if (pane == null) return;
+        pane.setVisible(false);
+        pane.setManaged(false);
+    }
+
+    private void setStatus(String msg) {
+        if (statusLabel != null) statusLabel.setText(msg);
+    }
+
+    private void setCaregiverStatus(String msg) {
+        if (caregiverStatusLabel != null) caregiverStatusLabel.setText(msg);
     }
 
     private void loginSuccessful(User user) {
@@ -105,7 +164,7 @@ public class LoginController {
             Parent root = loader.load();
             Stage stage = getStage();
             if (stage == null) return;
-            stage.setScene(new Scene(root, 400, 640));
+            stage.setScene(new Scene(root, 400, 700));
             stage.show();
             SessionManager.start(stage);
         } catch (Exception e) {
@@ -115,14 +174,10 @@ public class LoginController {
     }
 
     private Stage getStage() {
-        if (statusLabel != null && statusLabel.getScene() != null)
-            return (Stage) statusLabel.getScene().getWindow();
+        if (faceIdOverlay != null && faceIdOverlay.getScene() != null)
+            return (Stage) faceIdOverlay.getScene().getWindow();
         if (pinField != null && pinField.getScene() != null)
             return (Stage) pinField.getScene().getWindow();
         return null;
-    }
-
-    private void setStatus(String msg) {
-        if (statusLabel != null) statusLabel.setText(msg);
     }
 }

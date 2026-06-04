@@ -7,14 +7,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-/**
- * Utility class that manages the PostgreSQL database connection.
- * Credentials and connection parameters are loaded from
- * {@code /Encrypted_data/config.properties} on the classpath.
- *
- * @author Noor Nabi
- * @author Gyundyuz Sadulov
- */
 public class DatabaseConnection {
 
 
@@ -53,12 +45,6 @@ public class DatabaseConnection {
     }
 
 
-    /**
-     * Returns an active database connection, creating one if needed.
-     *
-     * @return a valid {@link Connection} to the database
-     * @throws SQLException if a database access error occurs
-     */
     public static Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -66,9 +52,6 @@ public class DatabaseConnection {
         return connection;
     }
 
-    /**
-     * Closes the current database connection if open.
-     */
     public static void closeConnection() {
         if (connection != null) {
             try {

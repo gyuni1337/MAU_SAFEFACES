@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.safefaces.safefaces.Javafx.Controller.InformationController"
+            fitToWidth="true" hbarPolicy="NEVER"
+            style="-fx-background-color: transparent; -fx-background: transparent;">
+    <content>
+        <VBox spacing="0" style="-fx-background-color: transparent;">
+
+            <!-- Header bar -->
+            <HBox alignment="CENTER_LEFT" spacing="0"
+                  style="-fx-background-color: transparent; -fx-padding: 10 12 6 12;">
+                <!-- Back button -->
+                <VBox onMouseClicked="#goBack" alignment="CENTER"
+                      style="-fx-background-color: rgba(255,255,255,0.75);
+                             -fx-background-radius: 50;
+                             -fx-min-width: 38; -fx-min-height: 38;
+                             -fx-pref-width: 38; -fx-pref-height: 38;
+                             -fx-cursor: hand;">
+                    <Label text="←" mouseTransparent="true"
+                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;"/>
+                </VBox>
+                <!-- Title (centered via equal spacers) -->
+                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                <Label text="Information"
+                       style="-fx-font-size: 22; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                <!-- Sound button -->
+                <VBox onMouseClicked="#readInformation" alignment="CENTER"
+                      style="-fx-background-color: rgba(255,255,255,0.75);
+                             -fx-background-radius: 50;
+                             -fx-min-width: 38; -fx-min-height: 38;
+                             -fx-pref-width: 38; -fx-pref-height: 38;
+                             -fx-cursor: hand;">
+                    <FontIcon iconLiteral="fas-volume-up" iconSize="16" iconColor="#1a6b3d"
+                              mouseTransparent="true"/>
+                </VBox>
+            </HBox>
+
+            <!-- Content -->
+            <VBox spacing="14" style="-fx-background-color: transparent;">
+                <padding><Insets top="10" left="16" right="16" bottom="100"/></padding>
+
+                <!-- Om mig -->
+                <VBox spacing="0"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <HBox spacing="12" alignment="CENTER_LEFT"
+                          style="-fx-padding: 14 16 10 16;">
+                        <VBox alignment="CENTER"
+                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                                     -fx-min-width: 36; -fx-min-height: 36;
+                                     -fx-pref-width: 36; -fx-pref-height: 36;">
+                            <FontIcon iconLiteral="far-user" iconSize="18" iconColor="#1a6b3d"/>
+                        </VBox>
+                        <Label text="Om mig"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <!-- Namn -->
+                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
+                        <FontIcon iconLiteral="far-user" iconSize="16" iconColor="#1a6b3d"/>
+                        <Label text="Namn" style="-fx-font-size: 15; -fx-text-fill: #5a7060;" minWidth="80"/>
+                        <Label fx:id="nameInfoLabel" text="" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <!-- Ålder -->
+                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
+                        <FontIcon iconLiteral="fas-birthday-cake" iconSize="16" iconColor="#1a6b3d"/>
+                        <Label text="Ålder" style="-fx-font-size: 15; -fx-text-fill: #5a7060;" minWidth="80"/>
+                        <Label fx:id="ageInfoLabel" text="" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <!-- Bor i -->
+                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
+                        <FontIcon iconLiteral="fas-home" iconSize="16" iconColor="#1a6b3d"/>
+                        <Label text="Bor i" style="-fx-font-size: 15; -fx-text-fill: #5a7060;" minWidth="80"/>
+                        <Label fx:id="locationInfoLabel" text="" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <!-- Yrke -->
+                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 14 16;">
+                        <FontIcon iconLiteral="fas-briefcase" iconSize="16" iconColor="#1a6b3d"/>
+                        <Label text="Yrke" style="-fx-font-size: 15; -fx-text-fill: #5a7060;" minWidth="80"/>
+                        <Label fx:id="jobInfoLabel" text="–" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Utbildning -->
+                <VBox spacing="0"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <HBox spacing="12" alignment="CENTER_LEFT"
+                          style="-fx-padding: 14 16 10 16;">
+                        <VBox alignment="CENTER"
+                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                                     -fx-min-width: 36; -fx-min-height: 36;
+                                     -fx-pref-width: 36; -fx-pref-height: 36;">
+                            <FontIcon iconLiteral="fas-graduation-cap" iconSize="18" iconColor="#1a6b3d"/>
+                        </VBox>
+                        <Label text="Utbildning"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <VBox fx:id="educationBox" spacing="0"/>
+                </VBox>
+
+                <!-- Arbetsliv -->
+                <VBox spacing="0"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <HBox spacing="12" alignment="CENTER_LEFT"
+                          style="-fx-padding: 14 16 10 16;">
+                        <VBox alignment="CENTER"
+                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                                     -fx-min-width: 36; -fx-min-height: 36;
+                                     -fx-pref-width: 36; -fx-pref-height: 36;">
+                            <FontIcon iconLiteral="fas-briefcase" iconSize="18" iconColor="#1a6b3d"/>
+                        </VBox>
+                        <Label text="Arbetsliv"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <VBox fx:id="workBox" spacing="0"/>
+                </VBox>
+
+                <!-- Intressen -->
+                <VBox spacing="12"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-padding: 14 16 18 16;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <VBox alignment="CENTER"
+                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                                     -fx-min-width: 36; -fx-min-height: 36;
+                                     -fx-pref-width: 36; -fx-pref-height: 36;">
+                            <FontIcon iconLiteral="far-heart" iconSize="18" iconColor="#1a6b3d"/>
+                        </VBox>
+                        <Label text="Intressen"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <HBox spacing="24" alignment="CENTER">
+                        <VBox alignment="CENTER" spacing="6">
+                            <FontIcon iconLiteral="fas-plane" iconSize="26" iconColor="#1a6b3d"/>
+                            <Label text="Resor" style="-fx-font-size: 12; -fx-text-fill: #5a7060;"/>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="6">
+                            <FontIcon iconLiteral="fas-camera" iconSize="26" iconColor="#1a6b3d"/>
+                            <Label text="Fotografering" style="-fx-font-size: 12; -fx-text-fill: #5a7060;"/>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="6">
+                            <FontIcon iconLiteral="fas-seedling" iconSize="26" iconColor="#1a6b3d"/>
+                            <Label text="Trädgård" style="-fx-font-size: 12; -fx-text-fill: #5a7060;"/>
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="6">
+                            <FontIcon iconLiteral="fas-music" iconSize="26" iconColor="#1a6b3d"/>
+                            <Label text="Musik" style="-fx-font-size: 12; -fx-text-fill: #5a7060;"/>
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+            </VBox>
+        </VBox>
+    </content>
+</ScrollPane>

@@ -1,39 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Imports for layout, controls, and images -->
-<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<!--
-    Header component for the application.
-    Displays the application name ("SafeFaces") together with a logo.
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            prefHeight="70.0" prefWidth="400.0"
+            style="-fx-background-color: transparent;">
 
-    This component is used as a static UI element and does not
-    require a controller.
--->
-<HBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      alignment="CENTER"
-      spacing="15.0"
-      style="-fx-background-color: transparent;">
+    <!-- Centered: logo icon + app name -->
+    <HBox alignment="CENTER"
+          spacing="10"
+          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0"
+          mouseTransparent="true">
+<!--        <ImageView fitHeight="32.0" fitWidth="32.0" preserveRatio="true">-->
+<!--            <image><Image url="@../images/logo.png"/></image>-->
+<!--        </ImageView>-->
+<!--        <Label text="SafeFaces">-->
+<!--            <font><Font name="System Bold" size="22.0"/></font>-->
+<!--            <style>-fx-text-fill: #1a6b3d;</style>-->
+<!--        </Label>-->
+    </HBox>
 
-    <children>
-        <!-- Application title -->
-        <Label text="SafeFaces" style="-fx-text-fill: #3a3a3a;">
-            <font>
-                <Font name="System Bold" size="18.0"/>
-            </font>
-        </Label>
+    <!-- Right-anchored: sound button (transparent background) -->
+    <Button text=""
+            AnchorPane.topAnchor="27" AnchorPane.rightAnchor="22"
+            style="-fx-background-color: transparent;
+                   -fx-text-fill: #1a6b3d;
+                   -fx-font-size: 18;
+                   -fx-background-radius: 50;
+                   -fx-min-width: 40; -fx-min-height: 40;
+                   -fx-pref-width: 40; -fx-pref-height: 40;
+                   -fx-cursor: hand;
+                   -fx-effect: none;"/>
 
-        <!-- Application logo -->
-        <ImageView fitHeight="24.0" fitWidth="21.0" preserveRatio="true">
-            <image>
-                <Image url="@../images/logo.png"/>
-            </image>
-        </ImageView>
-    </children>
-
-</HBox>
+</AnchorPane>

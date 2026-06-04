@@ -1,60 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane prefWidth="400.0"
-            prefHeight="700.0"
-            xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.safefaces.safefaces.Javafx.Controller.ContactController">
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.safefaces.safefaces.Javafx.Controller.ContactController"
+      alignment="TOP_CENTER"
+      spacing="10"
+      style="-fx-background-color: transparent;">
 
-    <children>
+    <padding><Insets top="16" left="16" right="16"/></padding>
 
-        <ImageView fitWidth="400.0"
-                   fitHeight="700.0"
-                   preserveRatio="false">
-            <image>
-                <Image url="@../images/contact_background.png"/>
-            </image>
-        </ImageView>
+    <!-- Title row -->
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <VBox HBox.hgrow="ALWAYS" spacing="4">
+            <Label fx:id="sectionLabel"
+                   text="Dina kontakter"
+                   style="-fx-font-size: 24; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+            <Label text="Här ser du dina närstående och vårdgivare som du kan kontakta."
+                   wrapText="true"
+                   style="-fx-font-size: 13; -fx-text-fill: #5a7060;"/>
+        </VBox>
+        <!-- Add button -->
+        <VBox onMouseClicked="#handleAddContact"
+              alignment="CENTER"
+              style="-fx-background-color: #eeeeee;
+                     -fx-background-radius: 50;
+                     -fx-min-width: 52; -fx-min-height: 52;
+                     -fx-pref-width: 52; -fx-pref-height: 52;
+                     -fx-cursor: hand;">
+            <FontIcon iconLiteral="fas-plus" iconSize="22" iconColor="#e53935"
+                      mouseTransparent="true"/>
+        </VBox>
+    </HBox>
 
-        <!-- Osynlig SOS-knapp ovanpå röda plusset -->
-        <Button fx:id="sosButton"
-                layoutX="305"
-                layoutY="175"
-                prefWidth="75"
-                prefHeight="75"
-                onAction="#openSosConfirm"
-                style="-fx-background-color: transparent; -fx-cursor: hand;"/>
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" VBox.vgrow="ALWAYS"
+                style="-fx-background-color: transparent; -fx-background: transparent;">
+        <content>
+            <VBox fx:id="contactListBox" spacing="12">
+                <padding><Insets top="4" bottom="100"/></padding>
+            </VBox>
+        </content>
+    </ScrollPane>
 
-        <ScrollPane layoutX="30"
-                    layoutY="235"
-                    prefWidth="340"
-                    prefHeight="315"
-                    fitToWidth="true"
-                    hbarPolicy="NEVER"
-                    vbarPolicy="AS_NEEDED"
-                    style="-fx-background-color: transparent;
-                           -fx-background: transparent;
-                           -fx-border-color: transparent;">
-
-            <content>
-                <VBox fx:id="contactListBox"
-                      spacing="12"
-                      style="-fx-background-color: transparent;">
-                    <padding>
-                        <Insets top="10" bottom="10"/>
-                    </padding>
-                </VBox>
-            </content>
-
-        </ScrollPane>
-
-    </children>
-</AnchorPane>
+</VBox>

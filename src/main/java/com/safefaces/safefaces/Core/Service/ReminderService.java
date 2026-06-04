@@ -33,4 +33,8 @@ public class ReminderService {
     public List<Reminder> getActiveReminders(){
         return repo.getActiveReminders();
     }
+
+    public void deleteById(int reminderId) {
+        repo.deleteById(reminderId);
+    }
 }

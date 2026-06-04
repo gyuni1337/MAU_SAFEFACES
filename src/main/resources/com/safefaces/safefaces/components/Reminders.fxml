@@ -1,49 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Imports for layout and UI components -->
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
 
-<!--
-    Reminder view layout.
-    Displays a list of active reminders for the current user.
+<ScrollPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.safefaces.safefaces.Javafx.Controller.ReminderController"
+            fitToWidth="true"
+            hbarPolicy="NEVER"
+            style="-fx-background-color: transparent; -fx-background: transparent;">
+    <content>
+        <VBox spacing="14"
+              style="-fx-background-color: transparent;">
+            <padding><Insets top="28" left="16" right="16" bottom="100"/></padding>
 
-    The reminder list is populated dynamically by ReminderController
-    using the VBox with fx:id "reminderListBox".
--->
-<VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.safefaces.safefaces.Javafx.Controller.ReminderController"
-      spacing="0"
-      style ="-fx-background-color:#f5f6fa;">
+            <Label text="Påminnelser"
+                   style="-fx-font-size: 28; -fx-font-family: 'Helvetica Neue';
+                          -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;"/>
+            <Label text="Saker du måste fixa eller komma ihåg."
+                   wrapText="true"
+                   style="-fx-font-size: 14; -fx-text-fill: #5a7060;"/>
 
-    <!-- Header section with title and subtitle -->
-<VBox style="-fx-background-color: white;-fx-padding: 24 24 16 24;">
-    <Label text="Påminnelser"
-           style="-fx-font-size:26;-fx-font-weight:bold;"/>
-    <Label text="Dina aktiva påminnelser"
-           style="-fx-font-size:13;-fx-text-fill:#888;"/>
-</VBox>
-
-    <!-- Scrollable container for reminder list -->
-    <ScrollPane fitToWidth="true"
-                style="-fx-background-color:transparent;-fx-background-color: transparent;"
-                VBox.vgrow="ALWAYS">
-        <!-- Container where reminders are dynamically added -->
-        <VBox fx:id="reminderListBox"
-              spacing="12"
-              style="-fx-background-color:#f5f6fa;">
-             <padding>
-                 <!-- Extra bottom padding to avoid overlap with navigation bar -->
-                 <Insets top="16"
-                    bottom="80"
-                    left="16"
-                    right="16"/>
-             </padding>
+            <VBox fx:id="reminderListBox" spacing="12"/>
         </VBox>
-
-    </ScrollPane>
-
-</VBox>
+    </content>
+</ScrollPane>

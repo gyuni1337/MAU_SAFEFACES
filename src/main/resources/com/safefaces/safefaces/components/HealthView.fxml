@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.safefaces.safefaces.Javafx.Controller.HealthController"
+            fitToWidth="true" hbarPolicy="NEVER"
+            style="-fx-background-color: transparent; -fx-background: transparent;">
+    <content>
+        <VBox spacing="0" style="-fx-background-color: transparent;">
+
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" spacing="0"
+                  style="-fx-background-color: transparent; -fx-padding: 10 12 6 12;">
+                <VBox onMouseClicked="#goBack" alignment="CENTER"
+                      style="-fx-background-color: rgba(255,255,255,0.75); -fx-background-radius: 50;
+                             -fx-min-width: 38; -fx-min-height: 38;
+                             -fx-pref-width: 38; -fx-pref-height: 38; -fx-cursor: hand;">
+                    <Label text="←" mouseTransparent="true"
+                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d;
+                                  -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Hälsa"
+                       style="-fx-font-size: 22; -fx-font-family: 'Helvetica Neue';
+                              -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <VBox onMouseClicked="#readHealth" alignment="CENTER"
+                      style="-fx-background-color: rgba(255,255,255,0.75); -fx-background-radius: 50;
+                             -fx-min-width: 38; -fx-min-height: 38;
+                             -fx-pref-width: 38; -fx-pref-height: 38; -fx-cursor: hand;">
+                    <FontIcon iconLiteral="fas-volume-up" iconSize="16" iconColor="#1a6b3d"
+                              mouseTransparent="true"/>
+                </VBox>
+            </HBox>
+
+            <!-- Content -->
+            <VBox spacing="14" style="-fx-background-color: transparent;">
+                <padding><Insets top="10" left="16" right="16" bottom="100"/></padding>
+
+                <!-- ── Diagnoser ── -->
+                <VBox fx:id="diagnosSection" spacing="0" visible="false" managed="false"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 14 16 10 16;">
+                        <VBox alignment="CENTER"
+                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                                     -fx-min-width: 36; -fx-min-height: 36;
+                                     -fx-pref-width: 36; -fx-pref-height: 36;">
+                            <FontIcon iconLiteral="fas-heart" iconSize="18" iconColor="#1a6b3d"/>
+                        </VBox>
+                        <Label text="Diagnoser"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue';
+                                      -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <VBox fx:id="diagnosBox" spacing="0"/>
+                </VBox>
+
+                <!-- ── Viktigt att komma ihåg ── -->
+                <VBox fx:id="noteringSection" spacing="0" visible="false" managed="false"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 14 16 10 16;">
+                        <VBox alignment="CENTER"
+                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 10;
+                                     -fx-min-width: 36; -fx-min-height: 36;
+                                     -fx-pref-width: 36; -fx-pref-height: 36;">
+                            <FontIcon iconLiteral="fas-clipboard-list" iconSize="18" iconColor="#1a6b3d"/>
+                        </VBox>
+                        <Label text="Viktigt att komma ihåg"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue';
+                                      -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <VBox fx:id="noteringBox" spacing="0"/>
+                </VBox>
+
+                <!-- ── Behandling ── -->
+                <VBox fx:id="behandlingSection" spacing="0" visible="false" managed="false"
+                      style="-fx-background-color: white; -fx-background-radius: 18;
+                             -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
+                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 14 16 10 16;">
+                        <VBox alignment="CENTER"
+                              style="-fx-background-color: #1a6b3d; -fx-background-radius: 50;
+                                     -fx-min-width: 36; -fx-min-height: 36;
+                                     -fx-pref-width: 36; -fx-pref-height: 36;">
+                            <FontIcon iconLiteral="fas-plus" iconSize="18" iconColor="white"/>
+                        </VBox>
+                        <Label text="Behandling"
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue';
+                                      -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                    </HBox>
+                    <VBox fx:id="behandlingBox" spacing="0"/>
+                </VBox>
+
+                <!-- Empty state -->
+                <Label fx:id="emptyLabel" text="Ingen hälsoinformation registrerad ännu."
+                       visible="false" managed="false"
+                       style="-fx-font-size: 15; -fx-text-fill: #8aab90; -fx-padding: 8;"/>
+
+            </VBox>
+        </VBox>
+    </content>
+</ScrollPane>

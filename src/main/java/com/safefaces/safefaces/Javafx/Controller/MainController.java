@@ -19,6 +19,8 @@ import javafx.scene.layout.HBox;
  */
 public class MainController {
 
+    public static MainController instance;
+
     /** Container where views are dynamically loaded. */
     @FXML private AnchorPane contentArea;
 
@@ -50,26 +52,16 @@ public class MainController {
 
     /**
      * Displays the home view.
-     *
-     * @author Shaima Almoayed
-     * @author Gyundyuz Sadulov
      */
     public void showHome() {
-        bottomContainer.setVisible(true);
-        bottomContainer.setManaged(true);
         loadView("/com/safefaces/safefaces/components/Contact.fxml");
     }
 
     /**
      * Displays the reminders view for regular users,
      * or the caregiver view for users with the CAREGIVER role.
-     *
-     * @author Gyundyuz Sadulov
-     * @author Shaima Almoayed
      */
     public void showReminders() {
-        bottomContainer.setVisible(true);
-        bottomContainer.setManaged(true);
         var user = AppState.getInstance().getCurrentUser();
         if (user != null && user.role == RoleType.CAREGIVER) {
             loadView("/com/safefaces/safefaces/components/CaregiverView.fxml");
@@ -78,6 +70,40 @@ public class MainController {
         }
     }
 
+    /**
+     * Displays the profile view.
+     */
+    public void showJournal() {
+        loadView("/com/safefaces/safefaces/components/Journal.fxml");
+    }
+
+    public void showInformation() {
+        loadView("/com/safefaces/safefaces/components/InformationView.fxml");
+    }
+
+    public void showHealth() {
+        loadView("/com/safefaces/safefaces/components/HealthView.fxml");
+    }
+
+    public void showMedicine() {
+        loadView("/com/safefaces/safefaces/components/MedicineView.fxml");
+    }
+
+    public void showFamily() {
+        loadView("/com/safefaces/safefaces/components/FamilyView.fxml");
+    }
+
+    public void showLifeStory() {
+        loadView("/com/safefaces/safefaces/components/LifeStoryView.fxml");
+    }
+
+    public void showSosConfirm() {
+        loadView("/com/safefaces/safefaces/components/SosConfirmView.fxml");
+    }
+
+    public void showSosCall() {
+        loadView("/com/safefaces/safefaces/components/SosCallView.fxml");
+    }
 
     /**
      * Initializes the main layout after the FXML has been loaded.
@@ -93,15 +119,17 @@ public class MainController {
             );
 
             HBox nav = loader.load();
-            nav.setPrefHeight(95);
-            nav.setMinHeight(95);
+            nav.setPrefHeight(70);
+            nav.setMinHeight(70);
+            nav.setMaxHeight(70);
             BottomNavController navController = loader.getController();
             navController.setMainController(this);
 
-            AnchorPane.setTopAnchor(nav, 0.0);
-            AnchorPane.setBottomAnchor(nav, 0.0);
-            AnchorPane.setLeftAnchor(nav, 0.0);
-            AnchorPane.setRightAnchor(nav, 0.0);
+            // Float the nav: fixed height, 10px from bottom, 12px side margins
+            AnchorPane.setBottomAnchor(nav, 10.0);
+            AnchorPane.setLeftAnchor(nav, 12.0);
+            AnchorPane.setRightAnchor(nav, 12.0);
+            // No topAnchor — prefHeight/maxHeight drive the height
 
             bottomContainer.getChildren().setAll(nav);
 
@@ -111,27 +139,7 @@ public class MainController {
             e.printStackTrace();
         }
 
+        instance = this;
         showHome();
-    }
-
-    /**
-     * Displays the profile page in a separate scene
-     *
-     * @author Shaima Almoayed
-     */
-    public void showJournal(){
-        try {
-            FXMLLoader loader=new FXMLLoader(
-                    getClass().getResource("/com/safefaces/safefaces/ProfileView.fxml"));
-
-            Parent root=loader.load();
-            javafx.stage.Stage stage=
-                    (javafx.stage.Stage)contentArea.getScene().getWindow();
-
-            stage.setScene(new javafx.scene.Scene(root, 400,700));
-            stage.show();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 }

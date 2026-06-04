@@ -94,16 +94,16 @@ public class ContactController {
         VBox nameBox = new VBox(4);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
         Label nameLabel = new Label(contact.getName());
-        nameLabel.setStyle("-fx-font-family: 'System'; -fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;");
+        nameLabel.setStyle("-fx-font-size: 22; -fx-font-weight: bold; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;");
         Label relationLabel = new Label(contact.getRelation());
-        relationLabel.setStyle("-fx-font-family: 'System'; -fx-font-size: 13; -fx-text-fill: #8aab90;");
+        relationLabel.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
         nameBox.getChildren().addAll(nameLabel, relationLabel);
 
         // Call button (light green circle)
         VBox callBox = new VBox(4);
         callBox.setAlignment(javafx.geometry.Pos.CENTER);
         Label callLabel = new Label("Ring");
-        callLabel.setStyle("-fx-font-family: 'System'; -fx-font-size: 11; -fx-text-fill: #8aab90;");
+        callLabel.setStyle("-fx-font-size: 11; -fx-text-fill: #8aab90;");
         VBox callCircle = new VBox();
         callCircle.setAlignment(javafx.geometry.Pos.CENTER);
         callCircle.setStyle("-fx-background-color: #e8f5e9; -fx-background-radius: 50;"
@@ -128,7 +128,7 @@ public class ContactController {
         VBox voiceBox = new VBox(4);
         voiceBox.setAlignment(javafx.geometry.Pos.CENTER);
         Label voiceLabel = new Label("Röstmemo");
-        voiceLabel.setStyle("-fx-font-family: 'System'; -fx-font-size: 11; -fx-text-fill: #8aab90;");
+        voiceLabel.setStyle("-fx-font-size: 11; -fx-text-fill: #8aab90;");
         VBox voiceCircle = new VBox();
         voiceCircle.setAlignment(javafx.geometry.Pos.CENTER);
         voiceCircle.setStyle("-fx-background-color: #e8f5e9; -fx-background-radius: 50;"

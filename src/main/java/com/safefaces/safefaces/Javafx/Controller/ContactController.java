@@ -222,6 +222,11 @@ public class ContactController {
     }
 
     @FXML
+    private void openSos() {
+        MainController.instance.showSosConfirm();
+    }
+
+    @FXML
     private void handleVoiceMessage(Contact contact, Object ignored) {
         SessionManager.beginSession();
 
@@ -234,9 +239,9 @@ public class ContactController {
         System.out.println("Hittar filen spelar upp ");
         stopCurrentPlayer();
 
-
-        new MediaPlayer((new Media(url.toExternalForm()))).play();
-        
+        currentPlayer = new MediaPlayer(new Media(url.toExternalForm()));
+        currentPlayer.setOnEndOfMedia(this::stopCurrentPlayer);
+        currentPlayer.play();
 
     }
     private void stopCurrentPlayer(){

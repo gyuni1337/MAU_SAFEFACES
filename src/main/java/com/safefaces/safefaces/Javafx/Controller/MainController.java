@@ -27,6 +27,9 @@ public class MainController {
     /** Container for the bottom navigation bar. */
     @FXML private AnchorPane bottomContainer;
 
+    /** Shared top bar shown on normal app views. */
+    @FXML private AnchorPane topBar;
+
     /**
      * Loads a specified FXML view into the content area.
      *
@@ -34,6 +37,12 @@ public class MainController {
      */
     public void loadView(String fxml) {
         try {
+            boolean isSosView = fxml.endsWith("SosConfirmView.fxml") || fxml.endsWith("SosCallView.fxml");
+            if (topBar != null) {
+                topBar.setVisible(!isSosView);
+                topBar.setManaged(!isSosView);
+            }
+
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(fxml)
             );

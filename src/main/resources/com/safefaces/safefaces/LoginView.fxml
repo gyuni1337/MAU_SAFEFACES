@@ -102,14 +102,6 @@
                        wrapText="true"
                        style="-fx-text-fill: #c62828; -fx-font-size: 13;"/>
 
-                <!-- Scan button -->
-                <Button text="Logga in"
-                        onAction="#handleUserLogin"
-                        prefWidth="260"
-                        style="-fx-background-color: linear-gradient(to right, #2f7d46, #1f8a3a);
-                               -fx-text-fill: white;
-                               -fx-font-size: 17; -fx-font-weight: bold;
-                               -fx-padding: 14; -fx-background-radius: 14; -fx-cursor: hand;"/>
             </VBox>
         </AnchorPane>
 

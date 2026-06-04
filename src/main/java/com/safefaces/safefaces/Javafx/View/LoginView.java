@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * JavaFX application entry point for the SafeFaces system.
@@ -39,8 +40,8 @@ public class LoginView extends Application {
 
         Scene scene = new Scene(root, 400, 640);
         stage.setTitle("SafeFaces");
-        stage.getIcons().add(new Image(getClass().getResourceAsStream(
-                "/com/safefaces/safefaces/images/logo.png")));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream(
+                "/com/safefaces/safefaces/images/logo.png"))));
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

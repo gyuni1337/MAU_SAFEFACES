@@ -26,7 +26,7 @@
                     style="-fx-background-color: transparent;">
 
             <top>
-                <fx:include source="components/TopBar.fxml"/>
+                <fx:include fx:id="topBar" source="components/TopBar.fxml"/>
             </top>
 
             <center>

@@ -80,7 +80,7 @@ public class ContactController {
                 ? patient.firstName + " " + patient.lastName
                 : patient.firstName;
         Label nameLabel = new Label(fullName);
-        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 20; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #007f2f;");
+        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 20; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;");
         Label ageLabel = new Label("Ålder: " + patient.age
                 + (patient.location != null && !patient.location.isBlank() ? "  •  " + patient.location : ""));
         ageLabel.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
@@ -133,7 +133,7 @@ public class ContactController {
         HBox.setHgrow(nameBox, Priority.ALWAYS);
         nameBox.setMinWidth(86);
         Label nameLabel = new Label(contact.getName());
-        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 20; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #007f2f;");
+        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 20; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;");
         Label relationLabel = new Label(contact.getRelation());
         relationLabel.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
         nameBox.getChildren().addAll(nameLabel, relationLabel);

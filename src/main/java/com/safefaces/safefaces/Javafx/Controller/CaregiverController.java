@@ -330,7 +330,7 @@ public class CaregiverController {
         Medication med = new Medication();
         med.name      = name;
         med.dose      = dose;
-        med.timeOfDay = time;
+        med.timeOfDay = toMedicationDbTime(time);
 
         medicationRepo.save(selectedPatient.id, med);
 
@@ -369,7 +369,7 @@ public class CaregiverController {
         name.setStyle("-fx-font-size: 16; -fx-font-family: 'Helvetica Neue'; " +
                       "-fx-font-weight: 600; -fx-text-fill: #1a3d2e;");
 
-        Label sub = new Label(m.dose + (m.timeOfDay != null ? "  •  " + m.timeOfDay : ""));
+        Label sub = new Label(m.dose + (m.timeOfDay != null ? "  •  " + toMedicationDisplayTime(m.timeOfDay) : ""));
         sub.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
 
         text.getChildren().addAll(name, sub);
@@ -397,6 +397,27 @@ public class CaregiverController {
         fi.setIconColor(javafx.scene.paint.Color.web("#1a6b3d"));
         b.getChildren().add(fi);
         return b;
+    }
+
+    private String toMedicationDbTime(String time) {
+        if (time == null) return null;
+        return switch (time.toLowerCase()) {
+            case "morgon" -> "MORNING";
+            case "middag" -> "NOON";
+            case "kvall", "kväll" -> "EVENING";
+            default -> time;
+        };
+    }
+
+    private String toMedicationDisplayTime(String time) {
+        return switch (time) {
+            case "MORNING" -> "morgon";
+            case "NOON" -> "middag";
+            case "EVENING" -> "kväll";
+            case "NIGHT" -> "natt";
+            case "AS_NEEDED" -> "vid behov";
+            default -> time;
+        };
     }
 
     private Button deleteButton() {

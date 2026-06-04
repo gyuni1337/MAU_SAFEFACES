@@ -47,7 +47,7 @@ public class MedicineController {
             if (time.contains("morgon") || time.contains("morning")) {
                 morningBox.getChildren().add(buildRow(med, pillBg, pillColor));
                 show(morningSection);
-            } else if (time.contains("lunch") || time.contains("middag")) {
+            } else if (time.contains("lunch") || time.contains("middag") || time.contains("noon")) {
                 lunchBox.getChildren().add(buildRow(med, pillBg, pillColor));
                 show(lunchSection);
             } else if (time.contains("kväll") || time.contains("kvall") || time.contains("evening")) {

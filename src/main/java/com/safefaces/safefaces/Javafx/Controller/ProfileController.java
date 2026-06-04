@@ -98,9 +98,21 @@ public class ProfileController {
         }
 
         for (Medication med : meds) {
-            String text = med.name + " — " + med.dose + "  (" + med.timeOfDay + ")";
+            String text = med.name + " — " + med.dose + "  (" + toMedicationDisplayTime(med.timeOfDay) + ")";
             medsBox.getChildren().add(styledLabel(text, "#333", 16));
         }
+    }
+
+    private String toMedicationDisplayTime(String time) {
+        if (time == null) return "";
+        return switch (time) {
+            case "MORNING" -> "morgon";
+            case "NOON" -> "middag";
+            case "EVENING" -> "kväll";
+            case "NIGHT" -> "natt";
+            case "AS_NEEDED" -> "vid behov";
+            default -> time;
+        };
     }
 
     private Label styledLabel(String text, String color, int size) {

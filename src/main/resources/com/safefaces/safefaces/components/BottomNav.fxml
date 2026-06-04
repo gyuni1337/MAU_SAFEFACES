@@ -16,8 +16,6 @@
              -fx-background-radius: 35;
              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 16, 0, 0, -2);">
     <padding><Insets left="10" right="10"/></padding>
-
-    <!-- Påminnelser -->
     <VBox fx:id="remindersTab"
           onMouseClicked="#goReminders"
           alignment="CENTER"
@@ -35,8 +33,6 @@
                mouseTransparent="true"
                style="-fx-font-size: 11; -fx-text-fill: #8a8a8a;"/>
     </VBox>
-
-    <!-- Person / Kontakter -->
     <VBox fx:id="homeTab"
           onMouseClicked="#goHome"
           alignment="CENTER"
@@ -50,12 +46,10 @@
                   iconSize="24"
                   iconColor="#8a8a8a"/>
         <Label fx:id="homeLabel"
-               text="Person"
+               text="Kontakter"
                mouseTransparent="true"
                style="-fx-font-size: 11; -fx-text-fill: #8a8a8a;"/>
     </VBox>
-
-    <!-- Profil -->
     <VBox fx:id="journalTab"
           onMouseClicked="#goJournal"
           alignment="CENTER"

@@ -20,24 +20,21 @@
             fx:controller="com.safefaces.safefaces.Javafx.Controller.LoginController">
     <children>
 
-        <!-- Startscreen background -->
         <ImageView fitWidth="400" fitHeight="640" preserveRatio="false">
             <image><Image url="@images/startscreen.png"/></image>
         </ImageView>
 
-        <!-- Transparent button: open Face ID scan -->
+        <!-- The start screen is a flat mockup, so these buttons sit over the drawn areas. -->
         <Button layoutX="100" layoutY="300"
                 prefWidth="200" prefHeight="200"
                 onAction="#handleShowFaceId"
                 style="-fx-background-color: transparent;"/>
 
-        <!-- Transparent button: caregiver login -->
         <Button layoutX="45" layoutY="590"
                 prefWidth="190" prefHeight="75"
                 onAction="#handleShowCaregiverLogin"
                 style="-fx-background-color: transparent;"/>
 
-        <!-- Transparent button: support -->
         <Button layoutX="210" layoutY="585"
                 prefWidth="165" prefHeight="85"
                 onAction="#handleShowSupport"
@@ -47,20 +44,17 @@
                        -fx-background-insets: 0;
                        -fx-padding: 0;"/>
 
-        <!-- ── Face ID overlay ── -->
         <AnchorPane fx:id="faceIdOverlay"
                     visible="false" managed="false"
                     style="-fx-background-color: #f5f0e8;"
                     AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
                     AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
-            <!-- Background image (wave / leaves) -->
             <ImageView fitWidth="400" fitHeight="700" preserveRatio="false"
                        AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
                 <image><Image url="@images/background.png"/></image>
             </ImageView>
 
-            <!-- X close button -->
             <Button text="✕"
                     AnchorPane.topAnchor="27" AnchorPane.rightAnchor="22"
                     onAction="#closeFaceIdOverlay"
@@ -76,14 +70,12 @@
                   AnchorPane.topAnchor="80" AnchorPane.bottomAnchor="0"
                   AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
-                <!-- Title -->
                 <Label text="Scanna ditt ansikte"
                        style="-fx-font-size: 26; -fx-font-weight: bold; -fx-text-fill: #1a3d2e;"/>
                 <Label text="Placera ditt ansikte i ramen&#10;och håll still."
                        style="-fx-font-size: 15; -fx-text-fill: #5a7060; -fx-text-alignment: center;"
                        wrapText="true"/>
 
-                <!-- Face ID image in dotted circle -->
                 <VBox alignment="CENTER"
                       style="-fx-background-color: transparent;
                              -fx-border-color: #b0c8a0;
@@ -102,18 +94,9 @@
                        wrapText="true"
                        style="-fx-text-fill: #c62828; -fx-font-size: 13;"/>
 
-                <!-- Scan button -->
-                <Button text="Logga in"
-                        onAction="#handleUserLogin"
-                        prefWidth="260"
-                        style="-fx-background-color: linear-gradient(to right, #2f7d46, #1f8a3a);
-                               -fx-text-fill: white;
-                               -fx-font-size: 17; -fx-font-weight: bold;
-                               -fx-padding: 14; -fx-background-radius: 14; -fx-cursor: hand;"/>
             </VBox>
         </AnchorPane>
 
-        <!-- ── Caregiver login overlay ── -->
         <AnchorPane fx:id="loginOverlay"
                     visible="false" managed="false"
                     style="-fx-background-color: rgba(0,0,0,0.35);"
@@ -189,7 +172,6 @@
             </VBox>
         </AnchorPane>
 
-        <!-- ── Support overlay ── -->
         <AnchorPane fx:id="supportOverlay"
                     visible="false" managed="false"
                     style="-fx-background-color: rgba(0,0,0,0.35);"

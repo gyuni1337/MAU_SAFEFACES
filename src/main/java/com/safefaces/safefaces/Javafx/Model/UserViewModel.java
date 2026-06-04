@@ -1,14 +1,4 @@
 package com.safefaces.safefaces.Javafx.Model;
-
-/**
- * Abstract base class for UI-specific user representations.
- * Defines common properties and a hook for role-specific view setup.
- *
- * Subclasses (e.g. {@link RelativeUser}, {@link CareGiverUser}) implement
- * {@link #setupView()} to provide role-specific UI behaviour.
- *
- * @author Emma Yousif
- */
 public abstract class UserViewModel {
 
     private int userID;
@@ -38,7 +28,5 @@ public abstract class UserViewModel {
     public void setImagePath(String imagePath) { this.imagePath = imagePath; }
     public void setUsername(String username)   { this.username = username; }
     public void setPassword(String password)   { this.password = password; }
-
-    /** Override to configure role-specific UI elements after login. */
     public abstract void setupView();
 }

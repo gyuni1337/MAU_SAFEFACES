@@ -15,8 +15,6 @@
       style="-fx-background-color: transparent;">
 
     <padding><Insets top="16" left="16" right="16"/></padding>
-
-    <!-- Title row -->
     <HBox alignment="CENTER_LEFT" spacing="10">
         <VBox HBox.hgrow="ALWAYS" spacing="4">
             <Label fx:id="sectionLabel"
@@ -26,15 +24,14 @@
                    wrapText="true"
                    style="-fx-font-size: 13; -fx-text-fill: #5a7060;"/>
         </VBox>
-        <!-- Add button -->
-        <VBox onMouseClicked="#handleAddContact"
+        <VBox onMouseClicked="#openSos"
               alignment="CENTER"
               style="-fx-background-color: #eeeeee;
                      -fx-background-radius: 50;
                      -fx-min-width: 52; -fx-min-height: 52;
                      -fx-pref-width: 52; -fx-pref-height: 52;
                      -fx-cursor: hand;">
-            <FontIcon iconLiteral="fas-plus" iconSize="22" iconColor="#e53935"
+            <FontIcon iconLiteral="fas-phone" iconSize="22" iconColor="#e53935"
                       mouseTransparent="true"/>
         </VBox>
     </HBox>

@@ -7,33 +7,25 @@ import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 
-/**
- * Main controller responsible for managing the primary application layout.
- * Handles dynamic view loading and coordinates navigation between different
- * sections such as Home, Reminders, and Profile.
- *
- * This controller acts as a central hub for switching views inside the content area
- * and initializing shared UI components like the bottom navigation bar.
- *
- * @author Gyundyuz Sadulov
- */
 public class MainController {
 
     public static MainController instance;
 
-    /** Container where views are dynamically loaded. */
     @FXML private AnchorPane contentArea;
 
-    /** Container for the bottom navigation bar. */
     @FXML private AnchorPane bottomContainer;
 
-    /**
-     * Loads a specified FXML view into the content area.
-     *
-     * @param fxml the path to the FXML file to be loaded
-     */
+    @FXML private AnchorPane topBar;
+
     public void loadView(String fxml) {
         try {
+            // SOS screens are full-screen mockups, so they should not inherit the normal header.
+            boolean isSosView = fxml.endsWith("SosConfirmView.fxml") || fxml.endsWith("SosCallView.fxml");
+            if (topBar != null) {
+                topBar.setVisible(!isSosView);
+                topBar.setManaged(!isSosView);
+            }
+
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource(fxml)
             );
@@ -50,17 +42,10 @@ public class MainController {
         }
     }
 
-    /**
-     * Displays the home view.
-     */
     public void showHome() {
         loadView("/com/safefaces/safefaces/components/Contact.fxml");
     }
 
-    /**
-     * Displays the reminders view for regular users,
-     * or the caregiver view for users with the CAREGIVER role.
-     */
     public void showReminders() {
         var user = AppState.getInstance().getCurrentUser();
         if (user != null && user.role == RoleType.CAREGIVER) {
@@ -70,9 +55,6 @@ public class MainController {
         }
     }
 
-    /**
-     * Displays the profile view.
-     */
     public void showJournal() {
         loadView("/com/safefaces/safefaces/components/Journal.fxml");
     }
@@ -105,12 +87,6 @@ public class MainController {
         loadView("/com/safefaces/safefaces/components/SosCallView.fxml");
     }
 
-    /**
-     * Initializes the main layout after the FXML has been loaded.
-     * Loads the bottom navigation bar and sets up communication
-     * between this controller and the {@link BottomNavController}.
-     * Also loads the default view (home).
-     */
     @FXML
     public void initialize() {
         try {
@@ -125,16 +101,12 @@ public class MainController {
             BottomNavController navController = loader.getController();
             navController.setMainController(this);
 
-            // Float the nav: fixed height, 10px from bottom, 12px side margins
+            // Keep the nav floating above the background instead of flush with the window edge.
             AnchorPane.setBottomAnchor(nav, 10.0);
             AnchorPane.setLeftAnchor(nav, 12.0);
             AnchorPane.setRightAnchor(nav, 12.0);
-            // No topAnchor — prefHeight/maxHeight drive the height
 
             bottomContainer.getChildren().setAll(nav);
-
-//            System.out.println(nav.getPrefHeight());
-//            System.out.println(bottomContainer.getHeight());
         } catch (Exception e) {
             e.printStackTrace();
         }

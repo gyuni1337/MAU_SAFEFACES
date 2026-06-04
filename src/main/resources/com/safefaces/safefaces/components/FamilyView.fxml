@@ -15,8 +15,6 @@
             style="-fx-background-color: transparent; -fx-background: transparent;">
     <content>
         <VBox spacing="0" style="-fx-background-color: transparent;">
-
-            <!-- Header bar -->
             <HBox alignment="CENTER_LEFT" spacing="0"
                   style="-fx-background-color: transparent; -fx-padding: 10 12 6 12;">
                 <VBox onMouseClicked="#goBack" alignment="CENTER"
@@ -44,8 +42,6 @@
                               mouseTransparent="true"/>
                 </VBox>
             </HBox>
-
-            <!-- Empty content -->
             <VBox spacing="16" style="-fx-background-color: transparent;">
                 <padding><Insets top="10" left="16" right="16" bottom="100"/></padding>
             </VBox>

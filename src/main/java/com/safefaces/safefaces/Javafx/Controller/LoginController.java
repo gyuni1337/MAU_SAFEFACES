@@ -4,6 +4,7 @@ import com.safefaces.safefaces.Core.Model.User;
 import com.safefaces.safefaces.Core.Service.AuthService;
 import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,35 +16,42 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class LoginController {
 
-    // Face ID overlay
     @FXML private AnchorPane faceIdOverlay;
     @FXML private Label statusLabel;
 
-    // Caregiver overlay
     @FXML private AnchorPane loginOverlay;
     @FXML private TextField usernameField;
     @FXML private PasswordField pinField;
     @FXML private Label caregiverStatusLabel;
 
-    // Support overlay
     @FXML private AnchorPane supportOverlay;
     @FXML private TextField supportEmailField;
     @FXML private TextArea supportMessageField;
 
     private final AuthService authService = new AuthService();
+    private PauseTransition autoFaceIdLogin;
+    private boolean loginInProgress;
 
     @FXML
     public void initialize() {
         System.out.println("Hashed Password: " + AuthService.hashPin("1234"));
-    }
 
-    // ── Face ID ──────────────────────────────────────────────────────────────
+        // If nobody chooses caregiver/support login, continue with the face scan flow.
+        autoFaceIdLogin = new PauseTransition(Duration.seconds(2));
+        autoFaceIdLogin.setOnFinished(e -> {
+            show(faceIdOverlay);
+            handleUserLogin();
+        });
+        autoFaceIdLogin.play();
+    }
 
     @FXML
     private void handleShowFaceId() {
+        stopAutoFaceIdLogin();
         show(faceIdOverlay);
     }
 
@@ -55,11 +63,17 @@ public class LoginController {
 
     @FXML
     private void handleUserLogin() {
+        stopAutoFaceIdLogin();
+        if (loginInProgress) return;
+
+        // Avoid starting two DB login requests if the auto-login and tap land together.
+        loginInProgress = true;
         setStatus("Loggar in...");
         Thread thread = new Thread(() -> {
             User user = authService.faceIdLogin();
             Platform.runLater(() -> {
                 if (user == null) {
+                    loginInProgress = false;
                     setStatus("Kunde inte hämta användare från databasen.");
                 } else {
                     loginSuccessful(user);
@@ -70,10 +84,9 @@ public class LoginController {
         thread.start();
     }
 
-    // ── Caregiver ────────────────────────────────────────────────────────────
-
     @FXML
     private void handleShowCaregiverLogin() {
+        stopAutoFaceIdLogin();
         show(loginOverlay);
         setCaregiverStatus("");
     }
@@ -111,10 +124,9 @@ public class LoginController {
         thread.start();
     }
 
-    // ── Support ──────────────────────────────────────────────────────────────
-
     @FXML
     private void handleShowSupport() {
+        stopAutoFaceIdLogin();
         show(supportOverlay);
     }
 
@@ -129,8 +141,6 @@ public class LoginController {
                 + " / " + supportMessageField.getText());
         hide(supportOverlay);
     }
-
-    // ── Helpers ──────────────────────────────────────────────────────────────
 
     private void show(AnchorPane pane) {
         if (pane == null) return;
@@ -152,7 +162,14 @@ public class LoginController {
         if (caregiverStatusLabel != null) caregiverStatusLabel.setText(msg);
     }
 
+    private void stopAutoFaceIdLogin() {
+        if (autoFaceIdLogin != null) {
+            autoFaceIdLogin.stop();
+        }
+    }
+
     private void loginSuccessful(User user) {
+        stopAutoFaceIdLogin();
         AppState.getInstance().setCurrentUser(user);
         navigateToHome();
     }

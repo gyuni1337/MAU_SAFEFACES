@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="700.0"
-            prefWidth="400.0"
-            style="-fx-background-color: #f4f4f4;"
+<AnchorPane prefHeight="700.0" prefWidth="400.0"
+            style="-fx-background-color: #f5f0e8;"
             xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.safefaces.safefaces.Javafx.Controller.MainController">
-
     <children>
-        <BorderPane prefHeight="700.0"
-                    prefWidth="400.0"
-                    AnchorPane.topAnchor="0.0"
-                    AnchorPane.bottomAnchor="0.0"
-                    AnchorPane.leftAnchor="0.0"
-                    AnchorPane.rightAnchor="0.0">
+
+        <ImageView fitWidth="400" fitHeight="700" preserveRatio="false"
+                   AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+            <image><Image url="@images/background.png"/></image>
+        </ImageView>
+
+        <BorderPane prefHeight="700.0" prefWidth="400.0"
+                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"
+                    style="-fx-background-color: transparent;">
+
+            <top>
+                <fx:include fx:id="topBar" source="components/TopBar.fxml"/>
+            </top>
 
             <center>
                 <AnchorPane fx:id="contentArea"
-                            prefWidth="400.0"
-                            prefHeight="700.0"/>
+                            style="-fx-background-color: transparent;"/>
             </center>
 
             <bottom>
                 <AnchorPane fx:id="bottomContainer"
-                            prefHeight="0.0"
-                            minHeight="0.0"
-                            maxHeight="0.0"
-                            visible="false"
-                            managed="false"/>
+                            prefHeight="90.0"
+                            minHeight="90.0"
+                            style="-fx-background-color: transparent;"/>
             </bottom>
-
         </BorderPane>
+
     </children>
 </AnchorPane>

@@ -29,7 +29,9 @@ public class BottomNavController {
     public void initialize() {
         var user = AppState.getInstance().getCurrentUser();
         if (user != null && user.role == RoleType.CAREGIVER) {
-            remindersIcon.setIconLiteral("fas-user-injured");
+            remindersIcon.setIconLiteral("fas-user-cog");
+            remindersLabel.setText("Admin");
+            homeLabel.setText("Patienter");
         }
         setActive(1);
     }

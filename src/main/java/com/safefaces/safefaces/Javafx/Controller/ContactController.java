@@ -1,4 +1,6 @@
 package com.safefaces.safefaces.Javafx.Controller;
+import com.safefaces.safefaces.Core.Model.User;
+import com.safefaces.safefaces.Core.Repository.CaregiverPatientRepository;
 import com.safefaces.safefaces.Javafx.App.AppState;
 import com.safefaces.safefaces.Javafx.App.SessionManager;
 import com.safefaces.safefaces.Core.Model.Contact;
@@ -29,10 +31,76 @@ public class ContactController {
     @FXML
     public void initialize() {
         var user = AppState.getInstance().getCurrentUser();
-        if (user != null && user.role == RoleType.CAREGIVER && sectionLabel != null) {
-            sectionLabel.setText("Dina patienter");
+        if (user != null && user.role == RoleType.CAREGIVER) {
+            if (sectionLabel != null) sectionLabel.setText("Dina patienter");
+            buildPatientList(user.id);
+        } else {
+            buildContactList();
         }
-        buildContactList();
+    }
+
+    private void buildPatientList(int caregiverId) {
+        if (contactListBox == null) return;
+        contactListBox.getChildren().clear();
+
+        List<User> patients = new CaregiverPatientRepository().findPatientsByCaregiver(caregiverId);
+
+        if (patients.isEmpty()) {
+            Label empty = new Label("Inga patienter tilldelade.");
+            empty.setStyle("-fx-font-size:16; -fx-text-fill:#888; -fx-padding:20;");
+            contactListBox.getChildren().add(empty);
+            return;
+        }
+
+        for (User patient : patients) {
+            VBox card = buildPatientRow(patient);
+            VBox.setMargin(card, new javafx.geometry.Insets(4, 0, 4, 0));
+            contactListBox.getChildren().add(card);
+        }
+    }
+
+    private VBox buildPatientRow(User patient) {
+        VBox card = new VBox();
+        card.setStyle("-fx-background-color: white; -fx-background-radius: 18;"
+                + " -fx-padding: 14 16 14 16;"
+                + " -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);");
+
+        HBox row = new HBox(14);
+        row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+
+        ImageView imageView = new ImageView();
+        imageView.setFitWidth(80);
+        imageView.setFitHeight(80);
+        imageView.setPreserveRatio(true);
+        imageView.setClip(new Circle(40, 40, 40));
+
+        String imageName = patient.imagePath != null ? patient.imagePath : "emptyavatar.jpg";
+        try {
+            Image img = new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + imageName)));
+            imageView.setImage(img);
+        } catch (Exception e) {
+            try {
+                imageView.setImage(new Image(Objects.requireNonNull(
+                        getClass().getResourceAsStream("/com/safefaces/safefaces/images/emptyavatar.jpg"))));
+            } catch (Exception ignored) {}
+        }
+
+        VBox nameBox = new VBox(4);
+        HBox.setHgrow(nameBox, Priority.ALWAYS);
+        String fullName = patient.lastName != null
+                ? patient.firstName + " " + patient.lastName
+                : patient.firstName;
+        Label nameLabel = new Label(fullName);
+        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 22; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;");
+        Label ageLabel = new Label("Ålder: " + patient.age
+                + (patient.location != null && !patient.location.isBlank() ? "  •  " + patient.location : ""));
+        ageLabel.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
+        nameBox.getChildren().addAll(nameLabel, ageLabel);
+
+        row.getChildren().addAll(imageView, nameBox);
+        card.getChildren().add(row);
+        return card;
     }
 
     private void buildContactList() {

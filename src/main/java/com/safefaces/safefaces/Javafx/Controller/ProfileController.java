@@ -87,8 +87,10 @@ public class ProfileController {
     }
 
     private void loadCaregiverStats(int caregiverId) {
-        roleBadge.setVisible(true);
-        roleBadge.setManaged(true);
+        if (roleBadge != null) {
+            roleBadge.setVisible(true);
+            roleBadge.setManaged(true);
+        }
 
         List<User> patients = caregiverPatientRepo.findPatientsByCaregiver(caregiverId);
         int patientCount = patients.size();

@@ -100,7 +100,8 @@
                 </VBox>
 
                 <!-- Empty state -->
-                <Label text="Ingen hälsoinformation registrerad ännu."
+                <Label fx:id="emptyLabel" text="Ingen hälsoinformation registrerad ännu."
+                       visible="false" managed="false"
                        style="-fx-font-size: 15; -fx-text-fill: #8aab90; -fx-padding: 8;"/>
 
             </VBox>

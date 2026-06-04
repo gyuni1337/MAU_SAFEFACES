@@ -7,6 +7,7 @@ import com.safefaces.safefaces.Core.Model.Contact;
 import com.safefaces.safefaces.Core.Model.Enums.RoleType;
 import com.safefaces.safefaces.Core.Service.ContactService;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,7 @@ public class ContactController {
 
     private final ContactService contactService = new ContactService();
     private MediaPlayer currentPlayer;
+    private static final double AVATAR_SIZE = 88;
     @FXML
     public void initialize() {
         var user = AppState.getInstance().getCurrentUser();
@@ -62,37 +64,23 @@ public class ContactController {
     private VBox buildPatientRow(User patient) {
         VBox card = new VBox();
         card.setStyle("-fx-background-color: white; -fx-background-radius: 18;"
-                + " -fx-padding: 14 16 14 16;"
+                + " -fx-padding: 14 14 14 14;"
                 + " -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);");
 
-        HBox row = new HBox(14);
+        HBox row = new HBox(10);
         row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
-        ImageView imageView = new ImageView();
-        imageView.setFitWidth(80);
-        imageView.setFitHeight(80);
-        imageView.setPreserveRatio(true);
-        imageView.setClip(new Circle(40, 40, 40));
-
         String imageName = patient.imagePath != null ? patient.imagePath : "emptyavatar.jpg";
-        try {
-            Image img = new Image(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + imageName)));
-            imageView.setImage(img);
-        } catch (Exception e) {
-            try {
-                imageView.setImage(new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream("/com/safefaces/safefaces/images/emptyavatar.jpg"))));
-            } catch (Exception ignored) {}
-        }
+        ImageView imageView = buildAvatar(imageName);
 
         VBox nameBox = new VBox(4);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
+        nameBox.setMinWidth(86);
         String fullName = patient.lastName != null
                 ? patient.firstName + " " + patient.lastName
                 : patient.firstName;
         Label nameLabel = new Label(fullName);
-        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 22; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;");
+        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 20; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #007f2f;");
         Label ageLabel = new Label("Ålder: " + patient.age
                 + (patient.location != null && !patient.location.isBlank() ? "  •  " + patient.location : ""));
         ageLabel.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
@@ -129,40 +117,23 @@ public class ContactController {
         // Outer card
         VBox card = new VBox();
         card.setStyle("-fx-background-color: white; -fx-background-radius: 18;"
-                + " -fx-padding: 14 16 14 16;"
+                + " -fx-padding: 14 14 14 14;"
                 + " -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 8, 0, 0, 2);");
         card.setMargin(card, new javafx.geometry.Insets(4, 0, 4, 0));
 
-        HBox row = new HBox(14);
+        HBox row = new HBox(10);
         row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
         // Profile photo
-        ImageView imageView = new ImageView();
-        imageView.setFitWidth(80);
-        imageView.setFitHeight(80);
-        imageView.setPreserveRatio(true);
-
-        Circle clip = new Circle(40, 40, 40);
-        imageView.setClip(clip);
-
         String imageName = contact.getImagePath() != null ? contact.getImagePath() : "emptyavatar.jpg";
-        try {
-            Image img = new Image(Objects.requireNonNull(
-                    getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + imageName)));
-            imageView.setImage(img);
-        } catch (Exception e) {
-            try {
-                Image fallback = new Image(Objects.requireNonNull(
-                        getClass().getResourceAsStream("/com/safefaces/safefaces/images/emptyavatar.jpg")));
-                imageView.setImage(fallback);
-            } catch (Exception ignored) {}
-        }
+        ImageView imageView = buildAvatar(imageName);
 
         // Name + relation
         VBox nameBox = new VBox(4);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
+        nameBox.setMinWidth(86);
         Label nameLabel = new Label(contact.getName());
-        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 22; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #1a3d2e;");
+        nameLabel.setStyle("-fx-font-family: 'Helvetica Neue'; -fx-font-size: 20; -fx-font-weight: 600; -fx-letter-spacing: 0.5; -fx-text-fill: #007f2f;");
         Label relationLabel = new Label(contact.getRelation());
         relationLabel.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
         nameBox.getChildren().addAll(nameLabel, relationLabel);
@@ -170,6 +141,7 @@ public class ContactController {
         // Call button (light green circle)
         VBox callBox = new VBox(4);
         callBox.setAlignment(javafx.geometry.Pos.CENTER);
+        callBox.setMinWidth(52);
         Label callLabel = new Label("Ring");
         callLabel.setStyle("-fx-font-size: 11; -fx-text-fill: #8aab90;");
         VBox callCircle = new VBox();
@@ -195,6 +167,7 @@ public class ContactController {
         // Voice memo button (light green circle)
         VBox voiceBox = new VBox(4);
         voiceBox.setAlignment(javafx.geometry.Pos.CENTER);
+        voiceBox.setMinWidth(64);
         Label voiceLabel = new Label("Röstmemo");
         voiceLabel.setStyle("-fx-font-size: 11; -fx-text-fill: #8aab90;");
         VBox voiceCircle = new VBox();
@@ -213,6 +186,34 @@ public class ContactController {
         row.getChildren().addAll(imageView, nameBox, callBox, voiceBox);
         card.getChildren().add(row);
         return card;
+    }
+
+    private ImageView buildAvatar(String imageName) {
+        ImageView imageView = new ImageView(loadContactImage(imageName));
+        imageView.setFitWidth(AVATAR_SIZE);
+        imageView.setFitHeight(AVATAR_SIZE);
+        imageView.setPreserveRatio(false);
+        imageView.setSmooth(true);
+        imageView.setViewport(centerSquareViewport(imageView.getImage()));
+        imageView.setClip(new Circle(AVATAR_SIZE / 2, AVATAR_SIZE / 2, AVATAR_SIZE / 2));
+        return imageView;
+    }
+
+    private Image loadContactImage(String imageName) {
+        try {
+            return new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream("/com/safefaces/safefaces/images/" + imageName)));
+        } catch (Exception e) {
+            return new Image(Objects.requireNonNull(
+                    getClass().getResourceAsStream("/com/safefaces/safefaces/images/emptyavatar.jpg")));
+        }
+    }
+
+    private Rectangle2D centerSquareViewport(Image image) {
+        double size = Math.min(image.getWidth(), image.getHeight());
+        double x = (image.getWidth() - size) / 2;
+        double y = (image.getHeight() - size) / 2;
+        return new Rectangle2D(x, y, size, size);
     }
 
     @FXML

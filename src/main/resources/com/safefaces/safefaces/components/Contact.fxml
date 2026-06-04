@@ -15,8 +15,6 @@
       style="-fx-background-color: transparent;">
 
     <padding><Insets top="16" left="16" right="16"/></padding>
-
-    <!-- Title row -->
     <HBox alignment="CENTER_LEFT" spacing="10">
         <VBox HBox.hgrow="ALWAYS" spacing="4">
             <Label fx:id="sectionLabel"
@@ -26,7 +24,6 @@
                    wrapText="true"
                    style="-fx-font-size: 13; -fx-text-fill: #5a7060;"/>
         </VBox>
-        <!-- SOS button -->
         <VBox onMouseClicked="#openSos"
               alignment="CENTER"
               style="-fx-background-color: #eeeeee;

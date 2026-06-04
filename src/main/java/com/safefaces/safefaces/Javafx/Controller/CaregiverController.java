@@ -22,35 +22,29 @@ import java.util.List;
 
 public class CaregiverController {
 
-    // patient picker + outer tab container
     @FXML private ComboBox<String> patientPicker;
     @FXML private VBox tabPane;
 
-    // custom tab bar buttons
     @FXML private HBox tabReminders;
     @FXML private HBox tabContacts;
     @FXML private HBox tabMeds;
 
-    // content panes
     @FXML private VBox reminderPane;
     @FXML private VBox contactPane;
     @FXML private VBox medPane;
 
-    // reminder form
     @FXML private VBox reminderListBox;
     @FXML private TextField titleField;
     @FXML private TextField descField;
     @FXML private TextField timeField;
     @FXML private Label formStatus;
 
-    // contact form
     @FXML private TextField contactNameField;
     @FXML private TextField contactRelationField;
     @FXML private TextField contactPhoneField;
     @FXML private Label contactStatus;
     @FXML private VBox contactListBox;
 
-    // med form
     @FXML private TextField medNameField;
     @FXML private TextField medDoseField;
     @FXML private ComboBox<String> medTimePicker;
@@ -90,6 +84,7 @@ public class CaregiverController {
         patientPicker.setOnAction(e -> {
             int idx = patientPicker.getSelectionModel().getSelectedIndex();
             if (idx >= 0) {
+                // Load every tab at selection time so switching tabs feels instant.
                 selectedPatient = patients.get(idx);
                 tabPane.setVisible(true);
                 tabPane.setManaged(true);
@@ -100,8 +95,6 @@ public class CaregiverController {
             }
         });
     }
-
-    // ── Tab switching ──
 
     @FXML private void showReminders() { switchTab(0); }
     @FXML private void showContacts()  { switchTab(1); }
@@ -118,7 +111,7 @@ public class CaregiverController {
             "-fx-font-size: 13; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #6a9070;";
 
     private void switchTab(int index) {
-        // reset all
+        // The tab bar is handmade, so both panes and labels need to be reset together.
         tabReminders.setStyle(INACTIVE_TAB);
         tabContacts.setStyle(INACTIVE_TAB);
         tabMeds.setStyle(INACTIVE_TAB);
@@ -152,8 +145,6 @@ public class CaregiverController {
     private Label labelOf(HBox tab) {
         return (Label) tab.getChildren().get(0);
     }
-
-    // ── Påminnelser ──
 
     @FXML
     private void handleAddReminder() {
@@ -210,7 +201,6 @@ public class CaregiverController {
         row.setStyle("-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 14;" +
                      "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);");
 
-        // green icon badge
         VBox badge = badge("far-bell");
 
         VBox text = new VBox(4);
@@ -240,8 +230,6 @@ public class CaregiverController {
         row.getChildren().addAll(badge, text, del);
         return row;
     }
-
-    // ── Kontakter ──
 
     @FXML
     private void handleAddContact() {
@@ -308,8 +296,6 @@ public class CaregiverController {
         row.getChildren().addAll(badge, text, del);
         return row;
     }
-
-    // ── Mediciner ──
 
     @FXML
     private void handleAddMedication() {
@@ -381,8 +367,6 @@ public class CaregiverController {
         return row;
     }
 
-    // ── Helpers ──
-
     private VBox badge(String icon) {
         VBox b = new VBox();
         b.setAlignment(Pos.CENTER);
@@ -398,6 +382,8 @@ public class CaregiverController {
 
     private String toMedicationDbTime(String time) {
         if (time == null) return null;
+
+        // The UI is Swedish, but the database check constraint expects these constants.
         return switch (time.toLowerCase()) {
             case "morgon" -> "MORNING";
             case "middag" -> "NOON";

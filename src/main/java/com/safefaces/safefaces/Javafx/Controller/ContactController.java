@@ -114,7 +114,6 @@ public class ContactController {
     }
 
     private VBox buildRow(Contact contact) {
-        // Outer card
         VBox card = new VBox();
         card.setStyle("-fx-background-color: white; -fx-background-radius: 18;"
                 + " -fx-padding: 14 14 14 14;"
@@ -124,11 +123,9 @@ public class ContactController {
         HBox row = new HBox(10);
         row.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
-        // Profile photo
         String imageName = contact.getImagePath() != null ? contact.getImagePath() : "emptyavatar.jpg";
         ImageView imageView = buildAvatar(imageName);
 
-        // Name + relation
         VBox nameBox = new VBox(4);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
         nameBox.setMinWidth(86);
@@ -138,7 +135,6 @@ public class ContactController {
         relationLabel.setStyle("-fx-font-size: 13; -fx-text-fill: #8aab90;");
         nameBox.getChildren().addAll(nameLabel, relationLabel);
 
-        // Call button (light green circle)
         VBox callBox = new VBox(4);
         callBox.setAlignment(javafx.geometry.Pos.CENTER);
         callBox.setMinWidth(52);
@@ -164,7 +160,6 @@ public class ContactController {
         });
         callBox.getChildren().addAll(callLabel, callCircle);
 
-        // Voice memo button (light green circle)
         VBox voiceBox = new VBox(4);
         voiceBox.setAlignment(javafx.geometry.Pos.CENTER);
         voiceBox.setMinWidth(64);
@@ -194,6 +189,8 @@ public class ContactController {
         imageView.setFitHeight(AVATAR_SIZE);
         imageView.setPreserveRatio(false);
         imageView.setSmooth(true);
+
+        // Crop from the middle so uploaded portraits stay circular instead of oval.
         imageView.setViewport(centerSquareViewport(imageView.getImage()));
         imageView.setClip(new Circle(AVATAR_SIZE / 2, AVATAR_SIZE / 2, AVATAR_SIZE / 2));
         return imageView;
@@ -237,6 +234,8 @@ public class ContactController {
             return;
         }
         System.out.println("Hittar filen spelar upp ");
+
+        // Only one memo should be audible at a time.
         stopCurrentPlayer();
 
         currentPlayer = new MediaPlayer(new Media(url.toExternalForm()));

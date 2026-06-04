@@ -25,7 +25,7 @@ public class MedicineController {
 
     private final MedicationRepository repo = new MedicationRepository();
 
-    // pill colours cycling: blue, orange, purple
+    // Reused across sections so the medicine rows do not all look identical.
     private static final String[] BG   = {"#dbeafe", "#fff3cd", "#ede9fe"};
     private static final Color[]  CLR  = {Color.web("#2563eb"), Color.web("#d97706"), Color.web("#7c3aed")};
 
@@ -54,7 +54,7 @@ public class MedicineController {
                 eveningBox.getChildren().add(buildRow(med, pillBg, pillColor));
                 show(eveningSection);
             } else {
-                // fallback: show in morning
+                // Unknown values are still shown instead of disappearing from the patient's view.
                 morningBox.getChildren().add(buildRow(med, pillBg, pillColor));
                 show(morningSection);
             }

@@ -15,6 +15,7 @@
         <image><Image url="@../images/sos_call.png"/></image>
     </ImageView>
 
+    <!-- Matches the red end-call button in the background image. -->
     <Button layoutX="68" layoutY="520"
             prefWidth="264" prefHeight="58"
             onAction="#endCall"

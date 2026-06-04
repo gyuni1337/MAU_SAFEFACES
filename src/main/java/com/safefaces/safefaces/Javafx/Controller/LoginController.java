@@ -20,17 +20,14 @@ import javafx.util.Duration;
 
 public class LoginController {
 
-    // Face ID overlay
     @FXML private AnchorPane faceIdOverlay;
     @FXML private Label statusLabel;
 
-    // Caregiver overlay
     @FXML private AnchorPane loginOverlay;
     @FXML private TextField usernameField;
     @FXML private PasswordField pinField;
     @FXML private Label caregiverStatusLabel;
 
-    // Support overlay
     @FXML private AnchorPane supportOverlay;
     @FXML private TextField supportEmailField;
     @FXML private TextArea supportMessageField;
@@ -42,6 +39,8 @@ public class LoginController {
     @FXML
     public void initialize() {
         System.out.println("Hashed Password: " + AuthService.hashPin("1234"));
+
+        // If nobody chooses caregiver/support login, continue with the face scan flow.
         autoFaceIdLogin = new PauseTransition(Duration.seconds(2));
         autoFaceIdLogin.setOnFinished(e -> {
             show(faceIdOverlay);
@@ -49,8 +48,6 @@ public class LoginController {
         });
         autoFaceIdLogin.play();
     }
-
-    // ── Face ID ──────────────────────────────────────────────────────────────
 
     @FXML
     private void handleShowFaceId() {
@@ -68,6 +65,8 @@ public class LoginController {
     private void handleUserLogin() {
         stopAutoFaceIdLogin();
         if (loginInProgress) return;
+
+        // Avoid starting two DB login requests if the auto-login and tap land together.
         loginInProgress = true;
         setStatus("Loggar in...");
         Thread thread = new Thread(() -> {
@@ -84,8 +83,6 @@ public class LoginController {
         thread.setDaemon(true);
         thread.start();
     }
-
-    // ── Caregiver ────────────────────────────────────────────────────────────
 
     @FXML
     private void handleShowCaregiverLogin() {
@@ -127,8 +124,6 @@ public class LoginController {
         thread.start();
     }
 
-    // ── Support ──────────────────────────────────────────────────────────────
-
     @FXML
     private void handleShowSupport() {
         stopAutoFaceIdLogin();
@@ -146,8 +141,6 @@ public class LoginController {
                 + " / " + supportMessageField.getText());
         hide(supportOverlay);
     }
-
-    // ── Helpers ──────────────────────────────────────────────────────────────
 
     private void show(AnchorPane pane) {
         if (pane == null) return;

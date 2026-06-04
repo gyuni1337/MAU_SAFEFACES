@@ -29,9 +29,7 @@ public class InformationController {
         ageInfoLabel.setText(user.age + " år");
         locationInfoLabel.setText(user.location != null ? user.location : "–");
 
-        // Placeholder education entries
         addEntry(educationBox, "fas-graduation-cap", "Skola / Utbildning", "");
-        // Placeholder work entries
         addEntry(workBox, "fas-briefcase", "Arbetsplats", "");
     }
 

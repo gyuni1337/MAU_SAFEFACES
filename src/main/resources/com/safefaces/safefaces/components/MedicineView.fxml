@@ -15,11 +15,8 @@
             style="-fx-background-color: transparent; -fx-background: transparent;">
     <content>
         <VBox spacing="0" style="-fx-background-color: transparent;">
-
-            <!-- Header bar -->
             <HBox alignment="CENTER_LEFT" spacing="0"
                   style="-fx-background-color: transparent; -fx-padding: 10 12 6 12;">
-                <!-- Back button -->
                 <VBox onMouseClicked="#goBack" alignment="CENTER"
                       style="-fx-background-color: rgba(255,255,255,0.75);
                              -fx-background-radius: 50;
@@ -29,12 +26,10 @@
                     <Label text="←" mouseTransparent="true"
                            style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;"/>
                 </VBox>
-                <!-- Title (centered via equal spacers) -->
                 <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
                 <Label text="Mediciner"
                        style="-fx-font-size: 22; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                 <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
-                <!-- Sound button -->
                 <VBox onMouseClicked="#readMedicines" alignment="CENTER"
                       style="-fx-background-color: rgba(255,255,255,0.75);
                              -fx-background-radius: 50;
@@ -45,12 +40,8 @@
                               mouseTransparent="true"/>
                 </VBox>
             </HBox>
-
-            <!-- Content -->
             <VBox spacing="16" style="-fx-background-color: transparent;">
                 <padding><Insets top="10" left="16" right="16" bottom="100"/></padding>
-
-                <!-- Info banner -->
                 <HBox spacing="12" alignment="CENTER_LEFT"
                       style="-fx-background-color: #e8f5e9; -fx-background-radius: 14;
                              -fx-padding: 14;">
@@ -59,8 +50,6 @@
                            wrapText="true"
                            style="-fx-font-size: 14; -fx-text-fill: #1a3d2e;"/>
                 </HBox>
-
-                <!-- ── Morgon ── -->
                 <VBox fx:id="morningSection" spacing="0" visible="false" managed="false">
                     <HBox spacing="10" alignment="CENTER_LEFT"
                           style="-fx-padding: 4 0 8 0;">
@@ -75,8 +64,6 @@
                           style="-fx-background-color: white; -fx-background-radius: 16;
                                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);"/>
                 </VBox>
-
-                <!-- ── Lunch ── -->
                 <VBox fx:id="lunchSection" spacing="0" visible="false" managed="false">
                     <HBox spacing="10" alignment="CENTER_LEFT"
                           style="-fx-padding: 4 0 8 0;">
@@ -91,8 +78,6 @@
                           style="-fx-background-color: white; -fx-background-radius: 16;
                                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);"/>
                 </VBox>
-
-                <!-- ── Kväll ── -->
                 <VBox fx:id="eveningSection" spacing="0" visible="false" managed="false">
                     <HBox spacing="10" alignment="CENTER_LEFT"
                           style="-fx-padding: 4 0 8 0;">
@@ -107,13 +92,9 @@
                           style="-fx-background-color: white; -fx-background-radius: 16;
                                  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);"/>
                 </VBox>
-
-                <!-- Empty state -->
                 <Label fx:id="emptyLabel" text="Inga mediciner registrerade."
                        visible="false" managed="false"
                        style="-fx-font-size: 15; -fx-text-fill: #8aab90;"/>
-
-                <!-- Footer note -->
                 <HBox spacing="12" alignment="CENTER_LEFT"
                       style="-fx-background-color: #e8f5e9; -fx-background-radius: 14;
                              -fx-padding: 14;">

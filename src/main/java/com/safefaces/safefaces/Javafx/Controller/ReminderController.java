@@ -51,7 +51,6 @@ public class ReminderController {
         row.setStyle("-fx-background-color: white; -fx-background-radius: 18; -fx-padding: 14;" +
                      "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);");
 
-        // green icon badge
         VBox badge = new VBox();
         badge.setAlignment(Pos.CENTER);
         badge.setStyle("-fx-background-color: #e8f5e9; -fx-background-radius: 14;" +
@@ -62,7 +61,6 @@ public class ReminderController {
         bell.setIconColor(javafx.scene.paint.Color.web("#1a6b3d"));
         badge.getChildren().add(bell);
 
-        // text
         VBox textBox = new VBox(4);
         HBox.setHgrow(textBox, Priority.ALWAYS);
 
@@ -83,7 +81,6 @@ public class ReminderController {
             textBox.getChildren().add(desc);
         }
 
-        // delete button
         Button deleteBtn = new Button();
         FontIcon trash = new FontIcon("fas-trash-alt");
         trash.setIconSize(16);

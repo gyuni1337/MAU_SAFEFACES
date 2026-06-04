@@ -15,6 +15,7 @@
         <image><Image url="@../images/SosCallView.png"/></image>
     </ImageView>
 
+    <!-- Transparent hit areas keep the designed SOS image intact while still wiring actions. -->
     <Button layoutX="42" layoutY="455"
             prefWidth="316" prefHeight="76"
             onAction="#startCall"

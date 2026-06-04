@@ -15,14 +15,10 @@
         <VBox spacing="16"
               style="-fx-background-color: transparent;">
             <padding><Insets top="28" left="16" right="16" bottom="100"/></padding>
-
-            <!-- Header -->
             <Label text="Admin"
                    style="-fx-font-size: 28; -fx-font-family: 'Helvetica Neue';
                           -fx-font-weight: 600; -fx-letter-spacing: 0.5;
                           -fx-text-fill: #1a3d2e;"/>
-
-            <!-- Patient picker card -->
             <VBox spacing="10"
                   style="-fx-background-color: white; -fx-background-radius: 18;
                          -fx-padding: 16;
@@ -45,11 +41,7 @@
                                  -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
                                  -fx-border-radius: 12; -fx-padding: 6;"/>
             </VBox>
-
-            <!-- Custom tab bar + content — hidden until patient is picked -->
             <VBox fx:id="tabPane" visible="false" managed="false" spacing="12">
-
-                <!-- Pill tab bar -->
                 <HBox fx:id="tabBar" spacing="6"
                       style="-fx-background-color: #e8f5e9; -fx-background-radius: 16; -fx-padding: 5;">
                     <HBox fx:id="tabReminders" onMouseClicked="#showReminders"
@@ -78,8 +70,6 @@
                                       -fx-font-weight: 600; -fx-text-fill: #6a9070;"/>
                     </HBox>
                 </HBox>
-
-                <!-- ── Påminnelser pane ── -->
                 <VBox fx:id="reminderPane" spacing="12">
                     <VBox spacing="10"
                           style="-fx-background-color: white; -fx-background-radius: 18;
@@ -119,8 +109,6 @@
                     </VBox>
                     <VBox fx:id="reminderListBox" spacing="10"/>
                 </VBox>
-
-                <!-- ── Kontakter pane ── -->
                 <VBox fx:id="contactPane" visible="false" managed="false" spacing="12">
                     <VBox spacing="10"
                           style="-fx-background-color: white; -fx-background-radius: 18;
@@ -160,8 +148,6 @@
                     </VBox>
                     <VBox fx:id="contactListBox" spacing="10"/>
                 </VBox>
-
-                <!-- ── Mediciner pane ── -->
                 <VBox fx:id="medPane" visible="false" managed="false" spacing="12">
                     <VBox spacing="10"
                           style="-fx-background-color: white; -fx-background-radius: 18;

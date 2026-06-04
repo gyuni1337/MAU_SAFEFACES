@@ -15,8 +15,6 @@
             style="-fx-background-color: transparent; -fx-background: transparent;">
     <content>
         <VBox spacing="0" style="-fx-background-color: transparent;">
-
-            <!-- Header -->
             <HBox alignment="CENTER_LEFT" spacing="0"
                   style="-fx-background-color: transparent; -fx-padding: 10 12 6 12;">
                 <VBox onMouseClicked="#goBack" alignment="CENTER"
@@ -40,12 +38,8 @@
                               mouseTransparent="true"/>
                 </VBox>
             </HBox>
-
-            <!-- Content -->
             <VBox spacing="14" style="-fx-background-color: transparent;">
                 <padding><Insets top="10" left="16" right="16" bottom="100"/></padding>
-
-                <!-- ── Diagnoser ── -->
                 <VBox fx:id="diagnosSection" spacing="0" visible="false" managed="false"
                       style="-fx-background-color: white; -fx-background-radius: 18;
                              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
@@ -62,8 +56,6 @@
                     </HBox>
                     <VBox fx:id="diagnosBox" spacing="0"/>
                 </VBox>
-
-                <!-- ── Viktigt att komma ihåg ── -->
                 <VBox fx:id="noteringSection" spacing="0" visible="false" managed="false"
                       style="-fx-background-color: white; -fx-background-radius: 18;
                              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
@@ -80,8 +72,6 @@
                     </HBox>
                     <VBox fx:id="noteringBox" spacing="0"/>
                 </VBox>
-
-                <!-- ── Behandling ── -->
                 <VBox fx:id="behandlingSection" spacing="0" visible="false" managed="false"
                       style="-fx-background-color: white; -fx-background-radius: 18;
                              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
@@ -98,8 +88,6 @@
                     </HBox>
                     <VBox fx:id="behandlingBox" spacing="0"/>
                 </VBox>
-
-                <!-- Empty state -->
                 <Label fx:id="emptyLabel" text="Ingen hälsoinformation registrerad ännu."
                        visible="false" managed="false"
                        style="-fx-font-size: 15; -fx-text-fill: #8aab90; -fx-padding: 8;"/>

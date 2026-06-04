@@ -47,15 +47,6 @@
                        style="-fx-font-size: 15; -fx-text-fill: #5a7060;"/>
             </HBox>
 
-            <!-- Caregiver stats (only for caregivers) -->
-            <VBox fx:id="caregiverStatsBox"
-                  visible="false" managed="false" spacing="4" alignment="CENTER">
-                <Label fx:id="patientCountLabel"
-                       style="-fx-font-size: 15; -fx-text-fill: #333;"/>
-                <Label fx:id="reminderCountLabel"
-                       style="-fx-font-size: 15; -fx-text-fill: #333;"/>
-            </VBox>
-
             <!-- ── Menu cards ── -->
 
             <!-- Information -->

@@ -190,10 +190,11 @@
                                    style="-fx-font-size: 15; -fx-background-radius: 12;
                                           -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
                                           -fx-border-radius: 12; -fx-padding: 10;"/>
-                        <TextField fx:id="medTimeField" promptText="Tid (t.ex. Morgon)"
-                                   style="-fx-font-size: 15; -fx-background-radius: 12;
-                                          -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                          -fx-border-radius: 12; -fx-padding: 10;"/>
+                        <ComboBox fx:id="medTimePicker" promptText="Tid på dagen"
+                                  maxWidth="Infinity"
+                                  style="-fx-font-size: 15; -fx-background-radius: 12;
+                                         -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
+                                         -fx-border-radius: 12; -fx-padding: 6;"/>
                         <Button text="Lägg till medicin" onAction="#handleAddMedication"
                                 maxWidth="Infinity"
                                 style="-fx-background-color: #1a6b3d; -fx-text-fill: white;

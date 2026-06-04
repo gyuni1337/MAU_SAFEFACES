@@ -54,7 +54,7 @@ public class CaregiverController {
     // med form
     @FXML private TextField medNameField;
     @FXML private TextField medDoseField;
-    @FXML private TextField medTimeField;
+    @FXML private ComboBox<String> medTimePicker;
     @FXML private Label medStatus;
     @FXML private VBox medListBox;
 
@@ -73,6 +73,7 @@ public class CaregiverController {
     @FXML
     public void initialize() {
         typePicker.getItems().addAll("PERSONAL", "CAREGIVER", "MEDICATION");
+        medTimePicker.getItems().addAll("morgon", "middag", "kvall");
 
         int caregiverId = AppState.getInstance().getCurrentUser().getId();
         patients = caregiverPatientRepo.findPatientsByCaregiver(caregiverId);
@@ -319,7 +320,7 @@ public class CaregiverController {
 
         String name = medNameField.getText().trim();
         String dose = medDoseField.getText().trim();
-        String time = medTimeField.getText().trim();
+        String time = medTimePicker.getValue();
 
         if (name.isEmpty() || dose.isEmpty()) {
             medStatus.setText("Namn och dos är obligatoriska.");
@@ -329,11 +330,12 @@ public class CaregiverController {
         Medication med = new Medication();
         med.name      = name;
         med.dose      = dose;
-        med.timeOfDay = time.isEmpty() ? null : time;
+        med.timeOfDay = time;
 
         medicationRepo.save(selectedPatient.id, med);
 
-        medNameField.clear(); medDoseField.clear(); medTimeField.clear();
+        medNameField.clear(); medDoseField.clear();
+        medTimePicker.getSelectionModel().clearSelection();
         medStatus.setText("");
 
         loadMedications(selectedPatient.id);
@@ -398,9 +400,13 @@ public class CaregiverController {
     }
 
     private Button deleteButton() {
-        Button btn = new Button("🗑");
+        Button btn = new Button();
+        FontIcon trash = new FontIcon("fas-trash-alt");
+        trash.setIconSize(16);
+        trash.setIconColor(javafx.scene.paint.Color.web("#c0392b"));
+        btn.setGraphic(trash);
         btn.setStyle("-fx-background-color: #fdecea; -fx-background-radius: 50;" +
-                     "-fx-font-size: 16; -fx-min-width: 42; -fx-min-height: 42; -fx-cursor: hand;");
+                     "-fx-min-width: 42; -fx-min-height: 42; -fx-cursor: hand; -fx-border-width: 0;");
         return btn;
     }
 

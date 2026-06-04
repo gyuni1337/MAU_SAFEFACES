@@ -3,10 +3,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
@@ -18,31 +16,26 @@
     <content>
         <VBox spacing="0" style="-fx-background-color: transparent;">
 
-            <!-- Header bar -->
+            <!-- Header -->
             <HBox alignment="CENTER_LEFT" spacing="0"
                   style="-fx-background-color: transparent; -fx-padding: 10 12 6 12;">
-                <!-- Back button -->
                 <VBox onMouseClicked="#goBack" alignment="CENTER"
-                      style="-fx-background-color: rgba(255,255,255,0.75);
-                             -fx-background-radius: 50;
+                      style="-fx-background-color: rgba(255,255,255,0.75); -fx-background-radius: 50;
                              -fx-min-width: 38; -fx-min-height: 38;
-                             -fx-pref-width: 38; -fx-pref-height: 38;
-                             -fx-cursor: hand;">
+                             -fx-pref-width: 38; -fx-pref-height: 38; -fx-cursor: hand;">
                     <Label text="←" mouseTransparent="true"
-                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;"/>
+                           style="-fx-font-size: 18; -fx-text-fill: #1a6b3d;
+                                  -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600;"/>
                 </VBox>
-                <!-- Title (centered via equal spacers) -->
-                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
+                <Region HBox.hgrow="ALWAYS"/>
                 <Label text="Hälsa"
-                       style="-fx-font-size: 22; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
-                <javafx.scene.layout.Region HBox.hgrow="ALWAYS"/>
-                <!-- Sound button -->
+                       style="-fx-font-size: 22; -fx-font-family: 'Helvetica Neue';
+                              -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                <Region HBox.hgrow="ALWAYS"/>
                 <VBox onMouseClicked="#readHealth" alignment="CENTER"
-                      style="-fx-background-color: rgba(255,255,255,0.75);
-                             -fx-background-radius: 50;
+                      style="-fx-background-color: rgba(255,255,255,0.75); -fx-background-radius: 50;
                              -fx-min-width: 38; -fx-min-height: 38;
-                             -fx-pref-width: 38; -fx-pref-height: 38;
-                             -fx-cursor: hand;">
+                             -fx-pref-width: 38; -fx-pref-height: 38; -fx-cursor: hand;">
                     <FontIcon iconLiteral="fas-volume-up" iconSize="16" iconColor="#1a6b3d"
                               mouseTransparent="true"/>
                 </VBox>
@@ -50,10 +43,10 @@
 
             <!-- Content -->
             <VBox spacing="14" style="-fx-background-color: transparent;">
-                <padding><Insets left="16" right="16" bottom="100"/></padding>
+                <padding><Insets top="10" left="16" right="16" bottom="100"/></padding>
 
-                <!-- Diagnoser -->
-                <VBox spacing="0"
+                <!-- ── Diagnoser ── -->
+                <VBox fx:id="diagnosSection" spacing="0" visible="false" managed="false"
                       style="-fx-background-color: white; -fx-background-radius: 18;
                              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
                     <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 14 16 10 16;">
@@ -64,36 +57,14 @@
                             <FontIcon iconLiteral="fas-heart" iconSize="18" iconColor="#1a6b3d"/>
                         </VBox>
                         <Label text="Diagnoser"
-                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue';
+                                      -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
-                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
-                        <VBox alignment="CENTER"
-                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 8;
-                                     -fx-min-width: 32; -fx-min-height: 32; -fx-pref-width: 32; -fx-pref-height: 32;">
-                            <FontIcon iconLiteral="fas-heartbeat" iconSize="16" iconColor="#1a6b3d"/>
-                        </VBox>
-                        <Label text="Diabetes typ 2" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
-                    </HBox>
-                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
-                        <VBox alignment="CENTER"
-                              style="-fx-background-color: #fde8e8; -fx-background-radius: 8;
-                                     -fx-min-width: 32; -fx-min-height: 32; -fx-pref-width: 32; -fx-pref-height: 32;">
-                            <FontIcon iconLiteral="fas-heartbeat" iconSize="16" iconColor="#e53935"/>
-                        </VBox>
-                        <Label text="Högt blodtryck" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
-                    </HBox>
-                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 14 16;">
-                        <VBox alignment="CENTER"
-                              style="-fx-background-color: #fde8e8; -fx-background-radius: 8;
-                                     -fx-min-width: 32; -fx-min-height: 32; -fx-pref-width: 32; -fx-pref-height: 32;">
-                            <FontIcon iconLiteral="fas-tint" iconSize="16" iconColor="#e53935"/>
-                        </VBox>
-                        <Label text="Förhöjda kolesterolvärden" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
-                    </HBox>
+                    <VBox fx:id="diagnosBox" spacing="0"/>
                 </VBox>
 
-                <!-- Viktigt att komma ihåg -->
-                <VBox spacing="0"
+                <!-- ── Viktigt att komma ihåg ── -->
+                <VBox fx:id="noteringSection" spacing="0" visible="false" managed="false"
                       style="-fx-background-color: white; -fx-background-radius: 18;
                              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
                     <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 14 16 10 16;">
@@ -104,36 +75,14 @@
                             <FontIcon iconLiteral="fas-clipboard-list" iconSize="18" iconColor="#1a6b3d"/>
                         </VBox>
                         <Label text="Viktigt att komma ihåg"
-                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue';
+                                      -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
-                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
-                        <VBox alignment="CENTER"
-                              style="-fx-background-color: #e3f0fc; -fx-background-radius: 8;
-                                     -fx-min-width: 32; -fx-min-height: 32; -fx-pref-width: 32; -fx-pref-height: 32;">
-                            <FontIcon iconLiteral="fas-tint" iconSize="16" iconColor="#1565c0"/>
-                        </VBox>
-                        <Label text="Kontrollera blodsocker varje morgon." style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
-                    </HBox>
-                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
-                        <VBox alignment="CENTER"
-                              style="-fx-background-color: #e3f0fc; -fx-background-radius: 8;
-                                     -fx-min-width: 32; -fx-min-height: 32; -fx-pref-width: 32; -fx-pref-height: 32;">
-                            <FontIcon iconLiteral="fas-fill-drip" iconSize="16" iconColor="#1565c0"/>
-                        </VBox>
-                        <Label text="Drick mycket vatten varje dag." style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
-                    </HBox>
-                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 14 16;">
-                        <VBox alignment="CENTER"
-                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 8;
-                                     -fx-min-width: 32; -fx-min-height: 32; -fx-pref-width: 32; -fx-pref-height: 32;">
-                            <FontIcon iconLiteral="fas-pills" iconSize="16" iconColor="#1a6b3d"/>
-                        </VBox>
-                        <Label text="Ta dina mediciner som ordinerat." style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
-                    </HBox>
+                    <VBox fx:id="noteringBox" spacing="0"/>
                 </VBox>
 
-                <!-- Behandling -->
-                <VBox spacing="0"
+                <!-- ── Behandling ── -->
+                <VBox fx:id="behandlingSection" spacing="0" visible="false" managed="false"
                       style="-fx-background-color: white; -fx-background-radius: 18;
                              -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.06), 10, 0, 0, 2);">
                     <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 14 16 10 16;">
@@ -144,33 +93,15 @@
                             <FontIcon iconLiteral="fas-plus" iconSize="18" iconColor="white"/>
                         </VBox>
                         <Label text="Behandling"
-                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue'; -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
+                               style="-fx-font-size: 17; -fx-font-family: 'Helvetica Neue';
+                                      -fx-font-weight: 600; -fx-text-fill: #1a3d2e;"/>
                     </HBox>
-                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
-                        <VBox alignment="CENTER"
-                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 8;
-                                     -fx-min-width: 32; -fx-min-height: 32; -fx-pref-width: 32; -fx-pref-height: 32;">
-                            <FontIcon iconLiteral="fas-capsules" iconSize="16" iconColor="#1a6b3d"/>
-                        </VBox>
-                        <Label text="Daglig medicinering" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
-                    </HBox>
-                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 10 16;">
-                        <VBox alignment="CENTER"
-                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 8;
-                                     -fx-min-width: 32; -fx-min-height: 32; -fx-pref-width: 32; -fx-pref-height: 32;">
-                            <FontIcon iconLiteral="fas-walking" iconSize="16" iconColor="#1a6b3d"/>
-                        </VBox>
-                        <Label text="Promenad minst 30 minuter varje dag" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
-                    </HBox>
-                    <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 16 14 16;">
-                        <VBox alignment="CENTER"
-                              style="-fx-background-color: #e8f5e9; -fx-background-radius: 8;
-                                     -fx-min-width: 32; -fx-min-height: 32; -fx-pref-width: 32; -fx-pref-height: 32;">
-                            <FontIcon iconLiteral="fas-apple-alt" iconSize="16" iconColor="#1a6b3d"/>
-                        </VBox>
-                        <Label text="Ät hälsosamt och balanserat" style="-fx-font-size: 15; -fx-text-fill: #1a3d2e;"/>
-                    </HBox>
+                    <VBox fx:id="behandlingBox" spacing="0"/>
                 </VBox>
+
+                <!-- Empty state -->
+                <Label text="Ingen hälsoinformation registrerad ännu."
+                       style="-fx-font-size: 15; -fx-text-fill: #8aab90; -fx-padding: 8;"/>
 
             </VBox>
         </VBox>

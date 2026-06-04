@@ -37,7 +37,6 @@ public class CaregiverController {
     @FXML private VBox medPane;
 
     // reminder form
-    @FXML private ComboBox<String> typePicker;
     @FXML private VBox reminderListBox;
     @FXML private TextField titleField;
     @FXML private TextField descField;
@@ -72,7 +71,6 @@ public class CaregiverController {
 
     @FXML
     public void initialize() {
-        typePicker.getItems().addAll("PERSONAL", "CAREGIVER", "MEDICATION");
         medTimePicker.getItems().addAll("morgon", "middag", "kvall");
 
         int caregiverId = AppState.getInstance().getCurrentUser().getId();
@@ -182,12 +180,11 @@ public class CaregiverController {
         reminder.title        = title;
         reminder.description  = descField.getText().trim();
         reminder.startTime    = startTime;
-        reminder.reminderType = typePicker.getValue() != null ? typePicker.getValue() : "PERSONAL";
+        reminder.reminderType = "PERSONAL";
 
         reminderRepo.save(selectedPatient.id, reminder);
 
         titleField.clear(); descField.clear(); timeField.clear();
-        typePicker.getSelectionModel().clearSelection();
         formStatus.setText("");
 
         loadReminders(selectedPatient.id);

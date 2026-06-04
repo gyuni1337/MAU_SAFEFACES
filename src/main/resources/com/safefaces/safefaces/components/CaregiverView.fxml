@@ -108,10 +108,6 @@
                                    style="-fx-font-size: 15; -fx-background-radius: 12;
                                           -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
                                           -fx-border-radius: 12; -fx-padding: 10;"/>
-                        <ComboBox fx:id="typePicker" promptText="Typ" maxWidth="Infinity"
-                                  style="-fx-font-size: 15; -fx-background-radius: 12;
-                                         -fx-background-color: #f4f9f6; -fx-border-color: #cde4d4;
-                                         -fx-border-radius: 12; -fx-padding: 6;"/>
                         <Button text="Lägg till påminnelse" onAction="#handleAddReminder"
                                 maxWidth="Infinity"
                                 style="-fx-background-color: #1a6b3d; -fx-text-fill: white;

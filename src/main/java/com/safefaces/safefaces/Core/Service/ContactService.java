@@ -81,11 +81,11 @@ public class ContactService {
 
     private List<Contact> getDemoContacts() {
         List<Contact> demo = new ArrayList<>();
-        demo.add(new Contact("Aisha",  "070-111 22 33", "Vårdgivare",    "aisha.jpg",  null));
-        demo.add(new Contact("Lisa",   "070-222 33 44", "Syster",        "lisa.jpg",   null));
-        demo.add(new Contact("Hanna",  "070-333 44 55", "Dotter",        "hanna.jpg",  null));
-        demo.add(new Contact("Maria",  "070-444 55 66", "Sjuksköterska", "maria.jpg",  null));
-        demo.add(new Contact("Bert",   "070-555 66 77", "Make",          "bert.jpg",   null));
+        demo.add(new Contact("Aisha",  "070-111 22 33", "Vårdgivare",    "aisha.jpg",  "nurse.mp3"));
+        demo.add(new Contact("Lisa",   "070-222 33 44", "Syster",        "lisa.jpg",   "syster.mp3"));
+        demo.add(new Contact("Hanna",  "070-333 44 55", "Dotter",        "hanna.jpg",  "dotter.mp3"));
+        demo.add(new Contact("Maria",  "070-444 55 66", "Sjuksköterska", "maria.jpg",  "nurse.mp3"));
+        demo.add(new Contact("Bert",   "070-555 66 77", "Bror",          "bert.jpg",   "bror.mp3"));
         return demo;
     }
 }

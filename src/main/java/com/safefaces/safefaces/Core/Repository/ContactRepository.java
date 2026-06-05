@@ -54,8 +54,8 @@ public class ContactRepository {
      * @param contact the contact to insert
      */
     public void save(int userId, Contact contact) {
-        String sql = "INSERT INTO contacts (user_id, name, relation, phone_number, image_path) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO contacts (user_id, name, relation, phone_number, image_path, voice_note_path) " +
+                "VALUES (?, ?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, userId);
@@ -63,6 +63,7 @@ public class ContactRepository {
             stmt.setString(3, contact.getRelation() != null ? contact.getRelation() : "Okänd");
             stmt.setString(4, contact.getPhoneNumber());
             stmt.setString(5, contact.getImagePath() != null ? contact.getImagePath() : "emptyavatar.jpg");
+            stmt.setString(6, contact.getVoicePath());
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println("ContactRepository.save failed: " + e.getMessage());

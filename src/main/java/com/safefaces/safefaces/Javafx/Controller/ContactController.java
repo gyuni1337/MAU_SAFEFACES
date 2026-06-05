@@ -20,6 +20,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class ContactController {
@@ -227,13 +228,13 @@ public class ContactController {
     private void handleVoiceMessage(Contact contact, Object ignored) {
         SessionManager.beginSession();
 
-       String audioPath ="/com/safefaces/safefaces/audio/Audio1.mp3";
-        var url =getClass().getResource(audioPath);
-        if(url == null){
-            System.out.println("Hittar inte ljudfilden: " +audioPath);
+        String audioPath = resolveAudioPath(contact);
+        var url = getClass().getResource(audioPath);
+        if (url == null) {
+            System.out.println("Hittar inte ljudfilen: " + audioPath);
             return;
         }
-        System.out.println("Hittar filen spelar upp ");
+        System.out.println("Spelar upp röstmemo: " + audioPath);
 
         // Only one memo should be audible at a time.
         stopCurrentPlayer();
@@ -243,6 +244,37 @@ public class ContactController {
         currentPlayer.play();
 
     }
+
+    private String resolveAudioPath(Contact contact) {
+        String voicePath = contact.getVoicePath();
+        if (voicePath != null && !voicePath.isBlank()) {
+            return toAudioResourcePath(voicePath);
+        }
+
+        String key = ((contact.getName() == null ? "" : contact.getName()) + " "
+                + (contact.getRelation() == null ? "" : contact.getRelation()))
+                .toLowerCase(Locale.ROOT);
+
+        if (key.contains("bror") || key.contains("bert")) return toAudioResourcePath("bror.mp3");
+        if (key.contains("dotter") || key.contains("hanna")) return toAudioResourcePath("dotter.mp3");
+        if (key.contains("syster") || key.contains("lisa")) return toAudioResourcePath("syster.mp3");
+        if (key.contains("vårdgivare") || key.contains("vardgivare")
+                || key.contains("sjuksköterska") || key.contains("sjukskoterska")
+                || key.contains("aisha") || key.contains("maria")) {
+            return toAudioResourcePath("nurse.mp3");
+        }
+
+        return toAudioResourcePath("Audio1.mp3");
+    }
+
+    private String toAudioResourcePath(String fileName) {
+        String path = fileName.trim();
+        if (path.startsWith("/com/safefaces/safefaces/audio/")) return path;
+        if (path.startsWith("audio/")) path = path.substring("audio/".length());
+        if (!path.endsWith(".mp3")) path += ".mp3";
+        return "/com/safefaces/safefaces/audio/" + path;
+    }
+
     private void stopCurrentPlayer(){
         if(currentPlayer !=null){
             currentPlayer.stop();

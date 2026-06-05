@@ -30,6 +30,7 @@ public class ContactController {
 
     private final ContactService contactService = new ContactService();
     private MediaPlayer currentPlayer;
+    private String currentAudioPath;
     private static final double AVATAR_SIZE = 88;
     @FXML
     public void initialize() {
@@ -236,10 +237,16 @@ public class ContactController {
         }
         System.out.println("Spelar upp röstmemo: " + audioPath);
 
+        if (currentPlayer != null && audioPath.equals(currentAudioPath)) {
+            stopCurrentPlayer();
+            return;
+        }
+
         // Only one memo should be audible at a time.
         stopCurrentPlayer();
 
         currentPlayer = new MediaPlayer(new Media(url.toExternalForm()));
+        currentAudioPath = audioPath;
         currentPlayer.setOnEndOfMedia(this::stopCurrentPlayer);
         currentPlayer.play();
 
@@ -280,6 +287,7 @@ public class ContactController {
             currentPlayer.stop();
             currentPlayer.dispose();
             currentPlayer =null;
+            currentAudioPath = null;
         }
     }
 

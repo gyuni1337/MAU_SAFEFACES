@@ -1,6 +1,6 @@
-# SafeFaces – README för granskning
+# SafeFaces – README
 
-Detta dokument innehåller instruktioner för den grupp som ska granska koden för projektet **SafeFaces**.
+Detta dokument innehåller instruktioner för hur man kör projektet **SafeFaces**.
 
 ---
 
@@ -16,9 +16,24 @@ Den version som ska granskas är:
 **Förutsättningar:**
 
 - Java JDK 11 eller senare
-- Ingen extern databas eller backend krävs i dagsläget
+- Maven
+- PostgreSQL
 
-Applikationen är just nu en demo där all data (användare, kontakter och information) är hårdkodad.
+---
+**Databas:**
+
+Projektet använder PostgreSQL som databas. Anslutningsinställningar hanteras via filen:
+src/main/resources/dbdata/config.properties
+
+Se till att:
+- PostgreSQL är igång
+- databasen är tillgänglig (t.ex. via localhost om tunnel används)
+- användarnamn och lösenord i config.properties är korrekta
+
+---
+**Externa bibliotek:**
+
+Projektet använder Maven för att hantera externa bibliotek och beroenden. Dessa laddas ner automatiskt när projektet öppnas eller byggs i en IDE med Maven-stöd.
 
 ---
 

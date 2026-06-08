@@ -15,8 +15,6 @@ module com.safefaces.safefaces {
     requires jbcrypt;
 
     opens com.safefaces.safefaces to javafx.fxml;
-    exports com.safefaces.safefaces.Javafx.Model;
-    opens com.safefaces.safefaces.Javafx.Model to javafx.fxml;
     exports com.safefaces.safefaces.Javafx.Controller;
     opens com.safefaces.safefaces.Javafx.Controller to javafx.fxml;
     exports com.safefaces.safefaces.Javafx.View;
